@@ -1,0 +1,26 @@
+="Yeah! Another Backup Utility"
+Copyright 2010 Xavier Nayrac
+
+==OVERVIEW
+"Yeah! Another Backup Utility" (Yabu in short) is a backup and recovery utility for linux.
+It maybe works for other systems but I don't know.
+
+==INSTALL
+Put all the files somewhere in your PATH.
+
+==BEFORE RUNNING
+Yabu is in it's development stage. Try it, hack it, learn from
+it, but DON'T USE IT right now in a production environment.
+To try Yabu, just edit directories.conf and yabu.conf.
+But you really should check the user's guide before...
+
+==RUNNING
+Type yabu.rb from a terminal to start saving your data.
+Type yabu.rb --help to view a list of options.
+Recovery is not yet implemented.
+
+==HACKING
+Begin by reading the Yabu class.
+
+==CONTACT
+xavier.nayrac@gmail.com

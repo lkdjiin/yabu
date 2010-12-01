@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta name="Content-Type" content="text/html; charset=utf-8" />
+<title>Class: Yabu</title>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index (Y)</a> &raquo; 
+    
+    
+    <span class="title">Yabu</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  <a id="class_list_link" href="#">Class List</a>
+  <a id="method_list_link" href="#">Method List</a>
+  <a id ="file_list_link" href="#">File List</a>
+</div>
+
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Class: Yabu
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+    <dt class="r1">Inherits:</dt>
+    <dd class="r1">
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Yabu</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+      </dd>
+    
+  
+  
+    
+  
+    
+  
+  
+  
+    <dt class="r2 last">Defined in:</dt>
+    <dd class="r2 last">yabu.rb</dd>
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+&quot;Yeah! Another Backup Utility&quot; is in it&#8217;s development
+stage. Try it, hack it, learn from it, but DON&#8217;T USE IT right now in
+a production environment.
+</p>
+</div>
+  </div>
+
+<h1>&quot;Yeah! Another Backup Utility&quot;</h1>
+<table>
+<tr><td valign="top">Author:</td><td>Xavier Nayrac (mailto:xavier.nayrac@gmail.com)
+
+</td></tr>
+<tr><td valign="top">Copyright:</td><td>Copyright 2010 Xavier Nayrac
+
+</td></tr>
+<tr><td valign="top">License:</td><td>GNU General Public License version 3
+
+</td></tr>
+</table>
+<h2>Overview</h2>
+<p>
+&quot;Yeah! Another Backup Utility&quot; is a command line utility to make
+daily backup of your data. See the user&#8217;s guide at ???????????? to
+know how to configure it and how to use it.
+</p>
+<h2>Running</h2>
+<p>
+Create an instance of the Backup class and call it&#8217;s run method.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+Start the backup
+</p>
+</div></h4>
+      <pre class="example code"><span class='bk identifier id'>bk</span> <span class='assign token'>=</span> <span class='Backup constant id'>Backup</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+<span class='bk identifier id'>bk</span><span class='dot token'>.</span><span class='run identifier id'>run</span>
+</pre>
+    
+  </div>
+
+</div>
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Yabu) <strong>initialize</strong> </a>
+    
+
+    
+  </span>
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+A new instance of Yabu.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+<div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <p class="signature first" id="initialize-instance_method">
+  
+    - (<tt><span class='object_link'><a href="" title="Yabu (class)">Yabu</a></span></tt>) <strong>initialize</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+A new instance of Yabu
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+31
+32
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'yabu.rb', line 31</span>
+
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span>
+  <span class='opt identifier id'>opt</span> <span class='assign token'>=</span> <span class='Options constant id'>Options</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='backup identifier id'>backup</span> <span class='assign token'>=</span> <span class='Backup constant id'>Backup</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='backup identifier id'>backup</span><span class='dot token'>.</span><span class='run identifier id'>run</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+
+</div>
+    
+    <div id="footer">
+  Generated on Wed Dec  1 20:15:05 2010 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.6.3 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

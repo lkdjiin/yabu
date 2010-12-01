@@ -1,0 +1,23 @@
+Create repository GitHub
+
+Documents privates methods
+
+User's guide in french
+
+Allow several backups per day
+
+Secure parsing of directories.conf
+	If a dir/file to exclude doesn't exist, do not take it in account in DirConf#@filesToExclude
+	and log it level ERROR. Same for the dir/file to add.
+
+Catch the unknow options from command line.
+
+Allow automatic remove of old backups (more than X days)
+	But always keep a minimum of X backups
+
+Recovery
+
+Argument for log on the command line ('daily', 'weekly' or 'monthly')
+
+Log file should only show us ERROR and FATAL in a production environment. That must be the default
+beahviour. So we need an option to log all levels during tests/developpment.
