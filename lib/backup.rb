@@ -61,8 +61,7 @@ private
 	def copy
 		copier = Copier.new @dirConfig.filesToExclude
 		@dirConfig.files.each do |source| 
-			dest = @savingPath + File.dirname(source)
-			copier.copy source, dest
+			copier.copy(source, File.join(@savingPath, source))
 		end
 		@log.info "Saving done"
 	end

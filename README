@@ -2,8 +2,10 @@
 Copyright 2010 Xavier Nayrac
 
 ==OVERVIEW
-"Yeah! Another Backup Utility" (Yabu in short) is a backup and recovery utility for linux.
+"Yeah! Another Backup Utility" (Yabu in short) is a backup and recovery utility
+for linux.
 It maybe works for other systems but I don't know.
+Yabu is written in ruby, so you need a ruby interpreter to run it.
 
 ==INSTALL
 Put all the files somewhere in your PATH.
@@ -20,6 +22,9 @@ Type yabu.rb --help to view a list of options.
 Recovery is not yet implemented.
 
 ==HACKING
+You can found developper's documentation in doc/.
+If the YARD gem is installed on your computer, run makedoc.sh to be sure the doc
+is up to date.
 Begin by reading the Yabu class.
 
 ==CONTACT

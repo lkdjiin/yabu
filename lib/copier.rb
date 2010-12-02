@@ -13,10 +13,10 @@ class Copier
 
 	# I try to recursively copy src to dest.
 	# @param [String] src the source file or directory
-	# @param [String] dest the destination directory
+	# @param [String] dest the destination file or directory
 	# @todo heavy refactoring
   def copy src, dest
-    createIfNeeded dest
+    createIfNeeded dest if File.directory? src
     if not File.directory? src
     	begin
 				FileUtils.cp(src, dest)
