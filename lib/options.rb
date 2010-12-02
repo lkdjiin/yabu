@@ -2,9 +2,18 @@
 require 'optparse'
 
 # I parse the command line.
+# Currently, there's only options that display messages and exit. So you can instanciate me before
+# dealing with class Backup and the like.
+# @example
+#		opt = Options.new # Exit if there are an option
+#		bk = Backup.new # But do this if there are not.
 class Options
 
-	# Currently, there's only options that display messages and exit.
+	# Here is a list of command line options :
+	# * version
+	# * license
+	# * help
+	# @todo refactoring
 	def initialize
 		options = {}
 		optparse = OptionParser.new do|opts|

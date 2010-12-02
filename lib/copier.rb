@@ -14,6 +14,7 @@ class Copier
 	# I try to recursively copy src to dest.
 	# @param [String] src the source file or directory
 	# @param [String] dest the destination directory
+	# @todo heavy refactoring
   def copy src, dest
     createIfNeeded dest
     if not File.directory? src
@@ -60,6 +61,8 @@ class Copier
 
 private
 
+	# I am trying to create the dest directory, along with its parent's directories if they doesn't
+	# exist.
   def createIfNeeded dest
     if not File.exist?(dest)
 			begin
@@ -71,6 +74,8 @@ private
 		end
   end
 
+	# @param [String] file filename to check against the exclude list.
+	# @return [true | false]
   def exclude? file
     @exclude.each do |s|
       if file.match(/#{s}/)

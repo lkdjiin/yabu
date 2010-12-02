@@ -1,7 +1,7 @@
 
 # I hold information on the program version.
 # I have only one class method.
-# You have nothing to gain to instanciate me.
+# You have nothing to gain with instanciating me.
 class Version
 	@@shortName = 'yabu'
 	@@major = '0'
