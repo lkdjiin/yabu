@@ -1,5 +1,3 @@
-Change comments in config files.
-
 User's guide in french
 
 Allow several backups per day
@@ -7,6 +5,10 @@ Allow several backups per day
 Secure parsing of directories.conf
 If a dir/file to exclude doesn't exist, do not take it in account in 
 DirConf#@filesToExclude and log it level ERROR. Same for the dir/file to add.
+Si on oublie le +/- le chemin est ignoré dans la sauvegarde et log de niveau ERROR.
+Si le chemin ne comporte pas le / initial, celui-ci sera ajouté automatiquement,
+et sera loggé au niveau ERROR.
+Et si le chemin comporte un / final ?
 
 Catch the unknow options from command line.
 
