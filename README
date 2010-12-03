@@ -15,6 +15,7 @@ Yabu is in it's development stage. Try it, hack it, learn from
 it, but DON'T USE IT right now in a production environment.
 To try Yabu, just edit directories.conf and yabu.conf.
 But you really should check the user's guide before...
+You can find user's guide here : http://sources.xavier.free.fr/ruby.php#yabu
 
 ==RUNNING
 Type yabu.rb from a terminal to start saving your data.
