@@ -16,7 +16,7 @@ END_OF_LICENSE
 
 	# Call me when the hard work is over.	
 	def Message.printEnd
-		puts "Saving done."
+		puts "Done."
 	end
 	
 end

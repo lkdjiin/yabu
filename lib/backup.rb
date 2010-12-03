@@ -15,17 +15,20 @@ class Backup
 	# and what to backup.
 	def initialize
 		Message.printLicense
-		@generalConfig = YabuConfig.new 'configuration/yabu.conf'
 		@log = Log.instance
+		@log.level = Log::INFO
+		@generalConfig = YabuConfig.new 'configuration/yabu.conf'
 		@savingPath = getSavingPath		
 		@dirConfig = DirConfig.new 'configuration/directories.conf'
 	end
 	
 	# I start the backup.
 	def run
+		@log.info "Backup started with " + Version.get
 		createSavingDirectory
 		copy
 		Message.printEnd
+		@log.info "Backup is in #{@savingPath}"
 	end
 	
 private
@@ -66,7 +69,6 @@ private
 		@dirConfig.files.each do |source| 
 			copier.copy(source, File.join(@savingPath, source))
 		end
-		@log.info "Saving done"
 	end
 	
 end

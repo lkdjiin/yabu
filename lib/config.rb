@@ -96,8 +96,20 @@ private
 	def parse line
 		action, filename = line.split(' ', 2)
 		action.strip!
+		if filename == nil # could be nil if user forgot to write + or -.
+			@log.error "file name missing when parsing #{@name}"
+			return false
+		end
+		return false if not legal? filename
 		filename.strip!
 		dispatch action, filename
+	end
+	
+	# Be sure that filename begin by a slash
+	def legal? filename
+		return true if filename[0, 1] == "/"
+		@log.error "Bad file name <#{filename}> in #{@name}. Not archived"
+		false
 	end
 	
 	# Decide if this is a file to include or to exclude.
@@ -109,7 +121,7 @@ private
 		elsif action == "-"
 			excludeFile filename
 		else
-			@log.error "when parsing #{@name} action is <#{action}> and file is <#{filename}>"
+			@log.error "bad action in #{@name}. Not archived. action is <#{action}> and file is <#{filename}>"
 		end
 	end
 	

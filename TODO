@@ -1,16 +1,4 @@
-(done)Allow several backups per day
-
-(done)change most of INFO level into DEBUG level
-
-Faire un directories.conf.examples
-
-Secure parsing of directories.conf
-* If a dir/file to exclude doesn't exist, do not take it into account in 
-	DirConf#@filesToExclude and log it level ERROR. Same for the dir/file to add.
-* Si on oublie le +/- le chemin est ignoré dans la sauvegarde et log de niveau ERROR.
-* Si le chemin ne comporte pas le / initial, celui-ci sera ajouté automatiquement,
-	et sera loggé au niveau ERROR.
-* Et si le chemin comporte un / final ?
+(done)Secure parsing of directories.conf
 
 Catch the unknow options from command line.
 
@@ -21,6 +9,6 @@ Recovery
 
 Argument for log on the command line ('daily', 'weekly' or 'monthly')
 
-Log file should only show us ERROR and FATAL in a production environment.
-That must be the default beahviour. So we need an option to log all levels
+Log file should only show us INFO, WARN, ERROR and FATAL in a production environment.
+That is the default beahviour. So we need an option to log all levels
 during tests/developpment.
