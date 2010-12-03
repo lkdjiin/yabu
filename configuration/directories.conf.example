@@ -1,0 +1,15 @@
+# Add the following directory and all its content to the backup
++ /home/myuser/local
+
+# Exclude the following directory or file from the backup
+- /home/myuser/local/wallpaper
+
+# Add a simple file
++ /home/myuser/.bash_history
+
+# You can put name with spaces
++ /home/myuser/dir name with spaces
+
+# You must have the read right on the directory or file to add
+# The next line will log an error if you don't run Yabu as root.
++ /root/.config
