@@ -83,7 +83,8 @@
   <div class="discussion">
     <p>
 I know how to do backups of your data ! I initialize all the stuff on
-instanciation and start the backup with my run method.
+instanciation and start the backup with my run method. It&#8217;s really
+simple to doing backup :
 </p>
 
 
@@ -91,6 +92,19 @@ instanciation and start the backup with my run method.
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+How to backup ?
+</p>
+</div></h4>
+      <pre class="example code"><span class='backup identifier id'>backup</span> <span class='assign token'>=</span> <span class='Backup constant id'>Backup</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+<span class='backup identifier id'>backup</span><span class='dot token'>.</span><span class='run identifier id'>run</span>
+</pre>
+    
+  </div>
+
 </div>
 
 
@@ -185,21 +199,23 @@ files I know where and what to backup.
       <pre class="lines">
 
 
-12
-13
-14
-15
 16
 17
-18</pre>
+18
+19
+20
+21
+22
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/backup.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/backup.rb', line 16</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span>
   <span class='Message constant id'>Message</span><span class='dot token'>.</span><span class='printLicense identifier id'>printLicense</span>
+  <span class='@log ivar id'>@log</span> <span class='assign token'>=</span> <span class='Log constant id'>Log</span><span class='dot token'>.</span><span class='instance identifier id'>instance</span>
+  <span class='@log ivar id'>@log</span><span class='dot token'>.</span><span class='level identifier id'>level</span> <span class='assign token'>=</span> <span class='Log constant id'>Log</span><span class='colon2 op'>::</span><span class='INFO constant id'>INFO</span>
   <span class='@generalConfig ivar id'>@generalConfig</span> <span class='assign token'>=</span> <span class='YabuConfig constant id'>YabuConfig</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='string val'>'configuration/yabu.conf'</span>
-  <span class='@log ivar id'>@log</span> <span class='assign token'>=</span> <span class='Log constant id'>Log</span><span class='dot token'>.</span><span class='getInstance identifier id'>getInstance</span>
   <span class='@savingPath ivar id'>@savingPath</span> <span class='assign token'>=</span> <span class='getSavingPath identifier id'>getSavingPath</span>   
   <span class='@dirConfig ivar id'>@dirConfig</span> <span class='assign token'>=</span> <span class='DirConfig constant id'>DirConfig</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='string val'>'configuration/directories.conf'</span>
 <span class='end end kw'>end</span>
@@ -240,19 +256,23 @@ I start the backup.
       <pre class="lines">
 
 
-21
-22
-23
-24
-25</pre>
+26
+27
+28
+29
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/backup.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/backup.rb', line 26</span>
 
 <span class='def def kw'>def</span> <span class='run identifier id'>run</span>
+  <span class='@log ivar id'>@log</span><span class='dot token'>.</span><span class='info identifier id'>info</span> <span class='string val'>&quot;Backup started with &quot;</span> <span class='plus op'>+</span> <span class='Version constant id'>Version</span><span class='dot token'>.</span><span class='get identifier id'>get</span>
   <span class='createSavingDirectory identifier id'>createSavingDirectory</span>
   <span class='copy identifier id'>copy</span>
   <span class='Message constant id'>Message</span><span class='dot token'>.</span><span class='printEnd identifier id'>printEnd</span>
+  <span class='@log ivar id'>@log</span><span class='dot token'>.</span><span class='info identifier id'>info</span> <span class='dstring node'>&quot;Backup is in #{@savingPath}&quot;</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -265,7 +285,7 @@ I start the backup.
 </div>
     
     <div id="footer">
-  Generated on Wed Dec  1 20:15:04 2010 by 
+  Generated on Fri Dec  3 16:34:23 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.8.7).
 </div>

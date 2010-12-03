@@ -83,14 +83,37 @@
   <div class="discussion">
     <p>
 I&#8217;m parsing the &#8216;configuration/directories.conf&#8217; which
-contains files and directories to add (or remove) to the backups.
+contains files and directories to add (or remove) to the backups. From me
+you can get two lists :
 </p>
+<ol>
+<li>files/directories to include to the backup
+
+</li>
+<li>files/directories to exclude from the backup
+
+</li>
+</ol>
 
 
   </div>
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'><p>
+:
+</p>
+</div></h4>
+      <pre class="example code"><span class='c identifier id'>c</span> <span class='assign token'>=</span> <span class='DirConfig constant id'>DirConfig</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='string val'>'configuration/directories.conf'</span>
+<span class='includeList identifier id'>includeList</span> <span class='assign token'>=</span> <span class='c identifier id'>c</span><span class='dot token'>.</span><span class='files identifier id'>files</span>
+<span class='excludeList identifier id'>excludeList</span> <span class='assign token'>=</span> <span class='c identifier id'>c</span><span class='dot token'>.</span><span class='filesToExclude identifier id'>filesToExclude</span>
+</pre>
+    
+  </div>
+
 </div>
 
   <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
@@ -238,23 +261,25 @@ the name of the configuration&#8217;s file
       <pre class="lines">
 
 
-49
-50
-51
-52
-53
-54
-55</pre>
+64
+65
+66
+67
+68
+69
+70
+71</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/config.rb', line 49</span>
+      <pre class="code"><span class="info file"># File 'lib/config.rb', line 64</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span> <span class='name identifier id'>name</span>
-  <span class='@log ivar id'>@log</span> <span class='assign token'>=</span> <span class='Log constant id'>Log</span><span class='dot token'>.</span><span class='getInstance identifier id'>getInstance</span>
+  <span class='@name ivar id'>@name</span> <span class='assign token'>=</span> <span class='name identifier id'>name</span>
+  <span class='@log ivar id'>@log</span> <span class='assign token'>=</span> <span class='Log constant id'>Log</span><span class='dot token'>.</span><span class='instance identifier id'>instance</span>
   <span class='@files ivar id'>@files</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
   <span class='@filesToExclude ivar id'>@filesToExclude</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
-  <span class='fillArrays identifier id'>fillArrays</span> <span class='name identifier id'>name</span>
-  <span class='@log ivar id'>@log</span><span class='dot token'>.</span><span class='info identifier id'>info</span> <span class='dstring node'>&quot;Parsed #{name}&quot;</span>
+  <span class='fillArrays identifier id'>fillArrays</span>
+  <span class='@log ivar id'>@log</span><span class='dot token'>.</span><span class='debug identifier id'>debug</span> <span class='dstring node'>&quot;Parsed #{@name}&quot;</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -294,12 +319,12 @@ Returns the value of attribute files
       <pre class="lines">
 
 
-46
-47
-48</pre>
+61
+62
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/config.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/config.rb', line 61</span>
 
 <span class='def def kw'>def</span> <span class='files identifier id'>files</span>
   <span class='@files ivar id'>@files</span>
@@ -337,12 +362,12 @@ Returns the value of attribute filesToExclude
       <pre class="lines">
 
 
-46
-47
-48</pre>
+61
+62
+63</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/config.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/config.rb', line 61</span>
 
 <span class='def def kw'>def</span> <span class='filesToExclude identifier id'>filesToExclude</span>
   <span class='@filesToExclude ivar id'>@filesToExclude</span>
@@ -359,7 +384,7 @@ Returns the value of attribute filesToExclude
 </div>
     
     <div id="footer">
-  Generated on Wed Dec  1 20:15:04 2010 by 
+  Generated on Fri Dec  3 16:34:24 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.8.7).
 </div>

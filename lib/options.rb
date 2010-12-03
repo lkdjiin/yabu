@@ -32,7 +32,12 @@ class Options
      		exit
    		end
 		end
-		optparse.parse!
+		begin
+			optparse.parse!
+		rescue OptionParser::InvalidOption => e
+			puts e.to_s
+			exit 1
+		end
 		printVersion if options[:version]
 		printLicense if options[:license]
 	end

@@ -82,7 +82,9 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>
-I parse the command line.
+I parse the command line. Currently, there&#8217;s only options that
+display messages and exit. So you can instanciate me before dealing with
+class Backup and the like.
 </p>
 
 
@@ -90,6 +92,16 @@ I parse the command line.
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'></div></h4>
+      <pre class="example code"><span class='opt identifier id'>opt</span> <span class='assign token'>=</span> <span class='Options constant id'>Options</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='comment val'># Exit if there are an option</span>
+<span class='bk identifier id'>bk</span> <span class='assign token'>=</span> <span class='Backup constant id'>Backup</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='comment val'># But do this if there are not.</span>
+</pre>
+    
+  </div>
+
 </div>
 
 
@@ -120,8 +132,19 @@ I parse the command line.
 
   
     <span class="summary_desc"><div class='inline'><p>
-Currently, there&#8217;s only options that display messages and exit.
+Here is a list of command line options :
 </p>
+<ul>
+<li>version
+
+</li>
+<li>license
+
+</li>
+<li>help.
+
+</li>
+</ul>
 </div></span>
   
 </li>
@@ -142,9 +165,29 @@ Currently, there&#8217;s only options that display messages and exit.
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
-Currently, there&#8217;s only options that display messages and exit.
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+refactoring
 </p>
+</div>
+  </div>
+
+<p>
+Here is a list of command line options :
+</p>
+<ul>
+<li>version
+
+</li>
+<li>license
+
+</li>
+<li>help
+
+</li>
+</ul>
 
 
   </div>
@@ -157,15 +200,6 @@ Currently, there&#8217;s only options that display messages and exit.
       <pre class="lines">
 
 
-8
-9
-10
-11
-12
-13
-14
-15
-16
 17
 18
 19
@@ -178,10 +212,19 @@ Currently, there&#8217;s only options that display messages and exit.
 26
 27
 28
-29</pre>
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/options.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'lib/options.rb', line 17</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span>
   <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
@@ -217,7 +260,7 @@ Currently, there&#8217;s only options that display messages and exit.
 </div>
     
     <div id="footer">
-  Generated on Wed Dec  1 20:15:02 2010 by 
+  Generated on Fri Dec  3 16:34:23 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.8.7).
 </div>

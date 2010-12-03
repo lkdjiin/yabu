@@ -82,8 +82,9 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     <p>
-I&#8217;m parsing a the general configuration file of Yabu :
-&#8216;configuration/yabu.conf&#8217;.
+I&#8217;m parsing a the general &#8216;ini like) configuration file of Yabu
+: &#8216;configuration/yabu.conf&#8217;. From version 0.1, there is only
+one used key :
 </p>
 
 
@@ -91,6 +92,16 @@ I&#8217;m parsing a the general configuration file of Yabu :
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <h3>Examples:</h3>
+    
+      <h4><div class='inline'></div></h4>
+      <pre class="example code"><span class='c identifier id'>c</span> <span class='assign token'>=</span> <span class='YabuConfig constant id'>YabuConfig</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='configuration identifier id'>configuration</span><span class='div op'>/</span><span class='yabu identifier id'>yabu</span><span class='dot token'>.</span><span class='conf identifier id'>conf</span><span class='string val'>'
+pathToBackupDir = c.get '</span><span class='path identifier id'>path</span><span class='string val'>'
+</span></pre>
+    
+  </div>
+
 </div>
 
 
@@ -227,21 +238,21 @@ the name of the configuration&#8217;s file
       <pre class="lines">
 
 
-11
-12
-13
-14
 15
-16</pre>
+16
+17
+18
+19
+20</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/config.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/config.rb', line 15</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span> <span class='name identifier id'>name</span>
-  <span class='@log ivar id'>@log</span> <span class='assign token'>=</span> <span class='Log constant id'>Log</span><span class='dot token'>.</span><span class='getInstance identifier id'>getInstance</span>
+  <span class='@log ivar id'>@log</span> <span class='assign token'>=</span> <span class='Log constant id'>Log</span><span class='dot token'>.</span><span class='instance identifier id'>instance</span>
   <span class='@dico ivar id'>@dico</span> <span class='assign token'>=</span> <span class='Hash constant id'>Hash</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-  <span class='fillArray identifier id'>fillArray</span> <span class='name identifier id'>name</span>
-  <span class='@log ivar id'>@log</span><span class='dot token'>.</span><span class='info identifier id'>info</span> <span class='dstring node'>&quot;Parsed #{name}&quot;</span>
+  <span class='fillHash identifier id'>fillHash</span> <span class='name identifier id'>name</span>
+  <span class='@log ivar id'>@log</span><span class='dot token'>.</span><span class='debug identifier id'>debug</span> <span class='dstring node'>&quot;Parsed #{name}&quot;</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -320,12 +331,12 @@ the value for the given key
       <pre class="lines">
 
 
-20
-21
-22</pre>
+24
+25
+26</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/config.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/config.rb', line 24</span>
 
 <span class='def def kw'>def</span> <span class='get identifier id'>get</span> <span class='key identifier id'>key</span>
   <span class='@dico ivar id'>@dico</span><span class='lbrack token'>[</span><span class='key identifier id'>key</span><span class='rbrack token'>]</span>
@@ -400,12 +411,12 @@ the value for the given key
       <pre class="lines">
 
 
-26
-27
-28</pre>
+30
+31
+32</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/config.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/config.rb', line 30</span>
 
 <span class='def def kw'>def</span> <span class='getInt identifier id'>getInt</span> <span class='key identifier id'>key</span>
   <span class='@dico ivar id'>@dico</span><span class='lbrack token'>[</span><span class='key identifier id'>key</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='to_i identifier id'>to_i</span>
@@ -421,7 +432,7 @@ the value for the given key
 </div>
     
     <div id="footer">
-  Generated on Wed Dec  1 20:15:03 2010 by 
+  Generated on Fri Dec  3 16:34:26 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.8.7).
 </div>

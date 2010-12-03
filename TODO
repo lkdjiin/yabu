@@ -1,6 +1,4 @@
-(done)Secure parsing of directories.conf
-
-Catch the unknow options from command line.
+rewrite doc for version 0.2
 
 Allow automatic remove of old backups (more than X days)
 But always keep a minimum of X backups

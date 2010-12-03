@@ -141,7 +141,10 @@ Call me when the hard work is over.
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'><p>
+I print a little banner that state I&#8217;m a free software.
+</p>
+</div></span>
   
 </li>
 
@@ -179,15 +182,15 @@ Call me when the hard work is over.
       <pre class="lines">
 
 
-18
 19
-20</pre>
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/message.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/message.rb', line 19</span>
 
 <span class='def def kw'>def</span> <span class='Message constant id'>Message</span><span class='dot token'>.</span><span class='printEnd identifier id'>printEnd</span>
-  <span class='puts identifier id'>puts</span> <span class='string val'>&quot;Saving done.&quot;</span>
+  <span class='puts identifier id'>puts</span> <span class='string val'>&quot;Done.&quot;</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -202,22 +205,33 @@ Call me when the hard work is over.
   
 
   
-</p><table class="source_code">
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+I print a little banner that state I&#8217;m a free software.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-4
 5
 6
-7</pre>
+7
+8</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/message.rb', line 4</span>
+      <pre class="code"><span class="info file"># File 'lib/message.rb', line 5</span>
 
 <span class='def def kw'>def</span> <span class='Message constant id'>Message</span><span class='dot token'>.</span><span class='printLicense identifier id'>printLicense</span>
-  <span class='license identifier id'>license</span> <span class='assign token'>=</span> <span class='string val'>&quot;    \n\&quot;Yeah! Another Backup Utility\&quot; Copyright (C) 2010 Xavier Nayrac\nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you\nare welcome to redistribute it under certain conditions.\nSee COPYING for details.\n    \n&quot;</span>
+  <span class='license identifier id'>license</span> <span class='assign token'>=</span> <span class='string val'>&quot;    \n\&quot;Yeah! Another Backup Utility\&quot; Copyright (C) 2010 Xavier Nayrac\nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you\nare welcome to redistribute it under certain conditions.\nSee COPYING for license details.\n    \n&quot;</span>
   <span class='puts identifier id'>puts</span> <span class='license identifier id'>license</span>
 <span class='end end kw'>end</span>
 </pre>
@@ -231,7 +245,7 @@ Call me when the hard work is over.
 </div>
     
     <div id="footer">
-  Generated on Wed Dec  1 20:15:03 2010 by 
+  Generated on Fri Dec  3 16:34:23 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.8.7).
 </div>

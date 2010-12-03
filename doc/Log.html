@@ -129,7 +129,7 @@ and exit.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#getInstance-class_method" title="getInstance (class method)">+ (Log) <strong>getInstance</strong>(fileName = 'yabu.log', frequencyRotation = 'monthly') </a>
+      <a href="#instance-class_method" title="instance (class method)">+ (Log) <strong>instance</strong>(fileName = 'yabu.log', frequencyRotation = 'monthly') </a>
     
 
     
@@ -194,9 +194,9 @@ First, I do like Logger#fatal.
     
     
       <div class="method_details first">
-  <p class="signature first" id="getInstance-class_method">
+  <p class="signature first" id="instance-class_method">
   
-    + (<tt><span class='object_link'><a href="" title="Log (class)">Log</a></span></tt>) <strong>getInstance</strong>(fileName = 'yabu.log', frequencyRotation = 'monthly') 
+    + (<tt><span class='object_link'><a href="" title="Log (class)">Log</a></span></tt>) <strong>instance</strong>(fileName = 'yabu.log', frequencyRotation = 'monthly') 
   
 
   
@@ -287,7 +287,7 @@ always the same instance.
     <td>
       <pre class="code"><span class="info file"># File 'lib/log.rb', line 16</span>
 
-<span class='def def kw'>def</span> <span class='Log constant id'>Log</span><span class='dot token'>.</span><span class='getInstance identifier id'>getInstance</span><span class='lparen token'>(</span><span class='fileName identifier id'>fileName</span> <span class='assign token'>=</span> <span class='string val'>'yabu.log'</span><span class='comma token'>,</span> <span class='frequencyRotation identifier id'>frequencyRotation</span> <span class='assign token'>=</span> <span class='string val'>'monthly'</span><span class='rparen token'>)</span>
+<span class='def def kw'>def</span> <span class='Log constant id'>Log</span><span class='dot token'>.</span><span class='instance identifier id'>instance</span><span class='lparen token'>(</span><span class='fileName identifier id'>fileName</span> <span class='assign token'>=</span> <span class='string val'>'yabu.log'</span><span class='comma token'>,</span> <span class='frequencyRotation identifier id'>frequencyRotation</span> <span class='assign token'>=</span> <span class='string val'>'monthly'</span><span class='rparen token'>)</span>
   <span class='@@logger ivar id'>@@logger</span> <span class='assign token'>=</span> <span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='fileName identifier id'>fileName</span><span class='comma token'>,</span> <span class='frequencyRotation identifier id'>frequencyRotation</span><span class='rparen token'>)</span> <span class='unless unless_mod kw'>unless</span> <span class='@@logger ivar id'>@@logger</span>
   <span class='@@logger ivar id'>@@logger</span>
 <span class='end end kw'>end</span>
@@ -375,7 +375,7 @@ The message to be logged.
 </div>
     
     <div id="footer">
-  Generated on Wed Dec  1 20:15:05 2010 by 
+  Generated on Fri Dec  3 16:34:25 2010 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.8.7).
 </div>
