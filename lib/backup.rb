@@ -30,7 +30,8 @@ class Backup
 	
 private
 	
-	# @return [String] the backup sub-directory full path. Example : '/media/usb-disk/20101231'
+	# @return [String] the backup sub-directory full path.
+	#		Example : '/media/usb-disk/20101231-1438'
 	def getSavingPath
 		baseSavingPath = @generalConfig.get 'path'
 		@log.fatal "#{baseSavingPath} doesnt exist" if not File.exist?(baseSavingPath)
@@ -40,10 +41,12 @@ private
 		@savingPath
 	end
 	
-	# @return [String] the backup sub-directory name. Example : '20101231'
+	# The backup sub-directory name is made by the concatenation of date and time.
+	# The pattern is 'YYYYmmdd-hhmm' : year, month, day, hours and minutes.
+	# @return [String] the backup sub-directory name. Example : '20101231-1438'
 	def getSavingName
 		t = Time.now
-		t.strftime("%Y%m%d")
+		t.strftime("%Y%m%d-%H%M")
 	end
 	
 	# I am trying to create the backup sub-directory.
@@ -54,7 +57,7 @@ private
 		rescue SystemCallError
 			@log.fatal "Cannot create #{@savingPath}"
 		end
-		@log.info "Created #{@savingPath}"
+		@log.debug "Created #{@savingPath}"
 	end
 	
 	# I do the effective backup.

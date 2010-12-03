@@ -23,14 +23,14 @@ class Copier
 			rescue
 				@log.fatal "Cannot copy #{src} to #{dest}"
 			end
-			@log.info "Copied #{src} to #{dest}"
+			@log.debug "Copied #{src} to #{dest}"
     	return
     end
     
     begin
 			Dir.foreach(src) do |file|
 				if exclude?(File.join(src, file))
-					@log.info("Exclude from saving : " + File.join(src, file))
+					@log.debug("Exclude from saving : " + File.join(src, file))
 					next
 				end
 				next if file == "."
@@ -43,7 +43,7 @@ class Copier
 					rescue SystemCallError
 						@log.fatal "Cannot create directory #{d}"
 					end
-					@log.info "Created " + d
+					@log.debug "Created " + d
 					copy s, d
 				else
 					begin
@@ -51,7 +51,7 @@ class Copier
 					rescue
 						@log.fatal "Cannot copy #{s} to #{d}"
 					end
-					@log.info "Copied #{s} to #{d}"
+					@log.debug "Copied #{s} to #{d}"
 				end
 			end
     rescue SystemCallError
@@ -70,7 +70,7 @@ private
 			rescue SystemCallError
 				@log.fatal "Cannot create #{dest}"
 			end
-			@log.info "Created #{dest}"
+			@log.debug "Created #{dest}"
 		end
   end
 

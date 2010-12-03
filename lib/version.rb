@@ -5,8 +5,8 @@
 class Version
 	@@shortName = 'yabu'
 	@@major = '0'
-	@@minor = '1'
-	@@revision = '1'
+	@@minor = '2'
+	@@revision = '0'
 	@@tag = 'development stage'
 	
 	# @return [String] the complete version

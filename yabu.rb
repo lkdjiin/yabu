@@ -15,8 +15,9 @@ require "lib/config"
 # License::   GNU General Public License version 3
 #
 # ==Overview
-# "Yeah! Another Backup Utility" is a command line utility to make daily backup of your data.
-# See the user's guide at ???????????? to know how to configure it and how to use it.
+# "Yeah! Another Backup Utility" is a command line utility to make daily backup.
+# See the user's guide at http://sources.xavier.free.fr/ruby.php#yabu to know
+# how to configure it and how to use it.
 #
 # @note "Yeah! Another Backup Utility" is in it's development stage. Try it, hack it, learn from
 # 	it, but DON'T USE IT right now in a production environment.
