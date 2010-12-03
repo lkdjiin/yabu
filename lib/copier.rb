@@ -7,7 +7,7 @@ class Copier
 	# @param [Array<String>] excludeFileList List of directories and files 
 	#		to exclude from the backups.
   def initialize(excludeFileList)
-  	@log = Log.getInstance
+  	@log = Log.instance
     @exclude = excludeFileList
   end
 

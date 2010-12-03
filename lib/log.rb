@@ -13,7 +13,7 @@ class Log < Logger
   # @param [String] fileName (Optional) log's file name
   # @param [String] frequencyRotation (Optional) 'daily', 'weekly' or 'monthly'
   # @return [Log] always the same instance.
-  def Log.getInstance(fileName = 'yabu.log', frequencyRotation = 'monthly')
+  def Log.instance(fileName = 'yabu.log', frequencyRotation = 'monthly')
     @@logger = new(fileName, frequencyRotation) unless @@logger
     @@logger
   end

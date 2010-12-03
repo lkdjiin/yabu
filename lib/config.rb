@@ -13,7 +13,7 @@ class YabuConfig
 
 	# @param [String] name the name of the configuration's file
 	def initialize name
-		@log = Log.getInstance
+		@log = Log.instance
 		@dico = Hash.new
 		fillHash name
 		@log.info "Parsed #{name}"
@@ -62,7 +62,7 @@ class DirConfig
 	
 	# @param [String] name the name of the configuration's file
 	def initialize name
-		@log = Log.getInstance
+		@log = Log.instance
 		@files = []
 		@filesToExclude = []
 		fillArrays name

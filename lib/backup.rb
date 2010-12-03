@@ -16,7 +16,7 @@ class Backup
 	def initialize
 		Message.printLicense
 		@generalConfig = YabuConfig.new 'configuration/yabu.conf'
-		@log = Log.getInstance
+		@log = Log.instance
 		@savingPath = getSavingPath		
 		@dirConfig = DirConfig.new 'configuration/directories.conf'
 	end
