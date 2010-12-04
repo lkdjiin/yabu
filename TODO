@@ -1,7 +1,7 @@
 (done)Allow automatic remove of old backups (older than X days)
 (done)But always keep a minimum of X backups
 
-Backup#deleteOldBackup in its own class BackupDeletor
+(done) Backup#deleteOldBackup in its own class BackupDeletor
 
 Look for unit testing
 

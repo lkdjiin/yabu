@@ -13,13 +13,12 @@ require "singleton"
 class YabuConfig
 	include Singleton
 	
-	@@NAME = 'configuration/yabu.conf'
-	
-	def initialize 
+	def initialize
+		@NAME = 'configuration/yabu.conf'
 		@log = Log.instance
 		@dico = Hash.new
 		fillHash
-		@log.debug "Parsed #{@@NAME}"
+		@log.debug "Parsed #{@NAME}"
 	end
 	
 	# @param [String] key a key of the 'configuration/yabu.conf'
@@ -39,7 +38,7 @@ private
 	# My job is to parse the configuration file to fill an Hash with the key/value pairs found
 	# in that file.
 	def fillHash
-		IO.foreach(@@NAME) { |line| 
+		IO.foreach(@NAME) { |line| 
 			next if line.strip! =~ /^#/
 			next if line =~ /^$/
 			a, b = line.split '='
