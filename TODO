@@ -1,12 +1,16 @@
-rewrite doc for version 0.2
-
-Allow automatic remove of old backups (more than X days)
+(done)Allow automatic remove of old backups (older than X days)
 But always keep a minimum of X backups
 
 Recovery
 
-Argument for log on the command line ('daily', 'weekly' or 'monthly')
+key/value for log ('daily', 'weekly' or 'monthly')
 
 Log file should only show us INFO, WARN, ERROR and FATAL in a production environment.
 That is the default beahviour. So we need an option to log all levels
 during tests/developpment.
+
+compression
+
+look if ~/xavier/ work
+
+include/exclude files AND directories with globbing/regex

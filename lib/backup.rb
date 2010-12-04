@@ -1,5 +1,6 @@
 
 require "fileutils"
+require "date"
 
 
 # I know how to do backups of your data !
@@ -14,24 +15,60 @@ class Backup
 	# 'configuration/directories.conf' by hand. With this two config files I know where
 	# and what to backup.
 	def initialize
-		Message.printLicense
 		@log = Log.instance
-		@log.level = Log::INFO
-		@generalConfig = YabuConfig.new 'configuration/yabu.conf'
+		@generalConfig = YabuConfig.new
 		@savingPath = getSavingPath		
 		@dirConfig = DirConfig.new 'configuration/directories.conf'
 	end
 	
 	# I start the backup.
 	def run
-		@log.info "Backup started with " + Version.get
-		createSavingDirectory
-		copy
-		Message.printEnd
-		@log.info "Backup is in #{@savingPath}"
+		doBackup
+		deleteOldBackup
 	end
 	
 private
+
+	def doBackup
+		@log.info "Backup started with " + Version.get
+		createSavingDirectory
+		copy
+		Message.printEndOfBackup
+		@log.info "Backup is in #{@savingPath}"
+	end
+	
+	# @todo This deserves its own class
+	def deleteOldBackup
+		backupToRemove = []
+		Message.searchingOldBackups
+		Dir.foreach(@generalConfig.get 'path') do |file|
+			next if file == "."
+			next if file == ".."
+			today = Date.today
+			filedate = Date.new file[0, 4].to_i, file[4, 2].to_i, file[6, 2].to_i
+			x = today - filedate
+			if x > @generalConfig.getInt('removeAfterXDays')
+				backupToRemove.push file
+			end
+		end
+		
+		if backupToRemove == []
+			Message.noBackupsToRemove
+			@log.debug "No old backup to remove"
+		else
+			backupToRemove.each do |file|
+				aDirectory = File.join(@generalConfig.get('path'), file)
+				@log.info "Removing backup #{aDirectory}"
+				begin
+					FileUtils.remove_dir aDirectory, true
+				rescue
+					@log.warn "Old backup <#{aDirectory}> maybe not removed"
+				end
+			end
+			Message.endOfRemovingOldBackups
+		end
+		
+	end
 	
 	# @return [String] the backup sub-directory full path.
 	#		Example : '/media/usb-disk/20101231-1438'

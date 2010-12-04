@@ -31,6 +31,9 @@ require "lib/config"
 class Yabu
 	def initialize
 		opt = Options.new
+		Message.printLicense
+		@log = Log.instance
+		@log.level = Log::INFO
 		backup = Backup.new
 		backup.run
 	end

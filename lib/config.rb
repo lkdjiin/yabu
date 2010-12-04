@@ -4,19 +4,20 @@
 # * DirConfig, for the "directories.conf" file
 
 
-# I'm parsing a the general 'ini like) configuration file of Yabu : 'configuration/yabu.conf'.
+# I'm parsing a the general (ini like) configuration file of Yabu : 'configuration/yabu.conf'.
 # From version 0.1, there is only one used key :
 # @example
-#		c = YabuConfig.new configuration/yabu.conf'
+#		c = YabuConfig.new
 #		pathToBackupDir = c.get 'path'
 class YabuConfig
 
-	# @param [String] name the name of the configuration's file
-	def initialize name
+	@@NAME = 'configuration/yabu.conf'
+	
+	def initialize 
 		@log = Log.instance
 		@dico = Hash.new
-		fillHash name
-		@log.debug "Parsed #{name}"
+		fillHash
+		@log.debug "Parsed #{@@NAME}"
 	end
 	
 	# @param [String] key a key of the 'configuration/yabu.conf'
@@ -35,9 +36,8 @@ private
 
 	# My job is to parse the configuration file to fill an Hash with the key/value pairs found
 	# in that file.
-	# @param [String] name the name of the configuration's file
-	def fillHash name
-		IO.foreach(name) { |line| 
+	def fillHash
+		IO.foreach(@@NAME) { |line| 
 			next if line.strip! =~ /^#/
 			next if line =~ /^$/
 			a, b = line.split '='

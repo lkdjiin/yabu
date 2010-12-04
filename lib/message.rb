@@ -14,9 +14,20 @@ END_OF_LICENSE
 		puts license
 	end
 
-	# Call me when the hard work is over.	
-	def Message.printEnd
-		puts "Done."
+	def Message.printEndOfBackup
+		puts "Backup is done."
+	end
+	
+	def Message.searchingOldBackups
+		puts "Searching for old backups to remove."
+	end
+	
+	def Message.endOfRemovingOldBackups
+		puts "Old backups removed."
+	end
+	
+	def Message.noBackupsToRemove
+		puts "No backup to remove."
 	end
 	
 end
