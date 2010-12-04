@@ -21,7 +21,8 @@ require "lib/version"
 require "lib/log"
 require "lib/message"
 require "lib/copier"
-require "lib/config"
+require "lib/yabu-config"
+require "lib/dir-config"
 
 # I am the main class of the Yabu application.
 # @example Start the application

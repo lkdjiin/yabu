@@ -1,4 +1,4 @@
-require "lib/config"
+require "lib/yabu-config"
 require "lib/log"
 require "test/unit"
 
