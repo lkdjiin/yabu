@@ -3,6 +3,7 @@
 # * YabuConfig, for the "yabu.conf" file
 # * DirConfig, for the "directories.conf" file
 
+require "singleton"
 
 # I'm parsing a the general (ini like) configuration file of Yabu : 'configuration/yabu.conf'.
 # From version 0.1, there is only one used key :
@@ -10,7 +11,8 @@
 #		c = YabuConfig.new
 #		pathToBackupDir = c.get 'path'
 class YabuConfig
-
+	include Singleton
+	
 	@@NAME = 'configuration/yabu.conf'
 	
 	def initialize 

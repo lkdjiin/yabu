@@ -2,11 +2,15 @@
 require "date"
 require "fileutils"
 
+# My job is to delete old backup giving some rules.
+# See the rules in the user's guide.
 class BackupDeletor
 
 	def initialize
 		@backupToRemove = []
 		@numberOfBackups = 0
+		@log = Log.instance
+		@generalConfig = YabuConfig.instance
 	end
 	
 	def run
@@ -16,42 +20,50 @@ class BackupDeletor
 
 private
 
+	# I look in the backup directory to find all the backups older than X days.
+	# X is given by the 'removeAfterXDays' key in the config file.
 	def searchOldBackup
 		Message.searchingOldBackups
 		Dir.foreach(@generalConfig.get 'path') do |file|
-			next if file == "."
-			next if file == ".."
+			next if (file == ".") or (file == "..")
 			@numberOfBackups += 1
-			today = Date.today
 			filedate = Date.new file[0, 4].to_i, file[4, 2].to_i, file[6, 2].to_i
-			x = today - filedate
-			if x > @generalConfig.getInt('removeAfterXDays')
-				@backupToRemove.push file
-			end
+			x = Date.today - filedate
+			@backupToRemove.push(file) if x > @generalConfig.getInt('removeAfterXDays')
 		end
 	end
 	
 	def removeOldBackup
 		if @backupToRemove == []
-			Message.noBackupsToRemove
-			@log.debug "No old backup to remove"
+			dontRemove
 		else
-			@backupToRemove.sort!
-			numberOfBackupToKeep = @generalConfig.getInt('savesToKeep')
-			@backupToRemove.each do |file|
-				if @numberOfBackups > numberOfBackupToKeep
-					aDirectory = File.join(@generalConfig.get('path'), file)
-					@log.info "Removing backup #{aDirectory}"
-					begin
-						FileUtils.remove_dir aDirectory, true
-					rescue
-						@log.warn "Old backup <#{aDirectory}> maybe not removed"
-					end
-					@numberOfBackups -= 1
-				end
-			end
-			Message.endOfRemovingOldBackups
+			tryToRemove
 		end
+	end
+	
+	def dontRemove
+		Message.noBackupsToRemove
+		@log.debug "No old backup to remove"
+	end
+	
+	def tryToRemove
+		@backupToRemove.sort!
+		numberOfBackupToKeep = @generalConfig.getInt('savesToKeep')
+		@backupToRemove.each do |file|
+			remove file if @numberOfBackups > numberOfBackupToKeep
+		end
+		Message.endOfRemovingOldBackups
+	end
+	
+	def remove file
+		aDirectory = File.join(@generalConfig.get('path'), file)
+		@log.info "Removing backup #{aDirectory}"
+		begin
+			FileUtils.remove_dir aDirectory, true
+		rescue
+			@log.warn "Old backup <#{aDirectory}> maybe not removed"
+		end
+		@numberOfBackups -= 1
 	end
 	
 end

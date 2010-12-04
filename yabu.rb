@@ -1,13 +1,5 @@
 #!/usr/bin/env ruby
 
-require "lib/options"
-require "lib/backup"
-require "lib/version"
-require "lib/log"
-require "lib/message"
-require "lib/copier"
-require "lib/config"
-
 # ="Yeah! Another Backup Utility"
 #
 # Author:: Xavier Nayrac (mailto:xavier.nayrac@gmail.com)
@@ -21,22 +13,46 @@ require "lib/config"
 #
 # @note "Yeah! Another Backup Utility" is in it's development stage. Try it, hack it, learn from
 # 	it, but DON'T USE IT right now in a production environment.
-#
-# ==Running
-# Create an instance of the Backup class and call it's run method.
-# 
-# @example Start the backup
-#		bk = Backup.new
-#		bk.run
+
+require "lib/options"
+require "lib/backup"
+require "lib/backup-deletor"
+require "lib/version"
+require "lib/log"
+require "lib/message"
+require "lib/copier"
+require "lib/config"
+
+# I am the main class of the Yabu application.
+# @example Start the application
+#		main = Yabu.new
+#		main.run
 class Yabu
+
 	def initialize
 		opt = Options.new
 		Message.printLicense
 		@log = Log.instance
 		@log.level = Log::INFO
+	end
+	
+	def run
+		backup
+		deleteOldBackup
+	end
+
+private
+
+	def backup
 		backup = Backup.new
 		backup.run
 	end
+	
+	def deleteOldBackup
+		bkDeletor = BackupDeletor.new
+		bkDeletor.run
+	end
 end
 
-Yabu.new
+main = Yabu.new
+main.run
