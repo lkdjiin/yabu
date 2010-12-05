@@ -5,9 +5,9 @@
 class Version
 	@@shortName = 'yabu'
 	@@major = '0'
-	@@minor = '3'
+	@@minor = '4'
 	@@revision = '0'
-	@@tag = ''
+	@@tag = 'unstable'
 	
 	# @return [String] the complete version
 	def Version.get
