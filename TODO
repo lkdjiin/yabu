@@ -1,8 +1,3 @@
-(done)Allow automatic remove of old backups (older than X days)
-(done)But always keep a minimum of X backups
-(done) Backup#deleteOldBackup in its own class BackupDeletor
-(done)Look for unit testing
-(done)refactor Copier
 
 YabuConfig should not be a singleton to ease test of BackupDeletor
 
