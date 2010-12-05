@@ -1,0 +1,12 @@
+# Add the following directory and all its content to the backup
++ /home/xavier/local/
+
+# Add a simple file
++ /home/tagada.txt
+
+# You must have the read right on the directory or file to add
++ /root/.conf
+
+# Exclude the following directory or file from the backup
+- /home/xavier/local/notinclude
+
