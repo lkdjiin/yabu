@@ -1,13 +1,14 @@
 (done)Allow automatic remove of old backups (older than X days)
 (done)But always keep a minimum of X backups
-
 (done) Backup#deleteOldBackup in its own class BackupDeletor
+(done)Look for unit testing
+(done)refactor Copier
 
-Look for unit testing
+YabuConfig should not be a singleton to ease test of BackupDeletor
 
-refactor Copier
+test BackupDeletor
 
-Recovery
+test Backup
 
 key/value for log ('daily', 'weekly' or 'monthly')
 
@@ -16,6 +17,8 @@ That is the default beahviour. So we need an option to log all levels
 during tests/developpment.
 
 compression
+
+Recovery
 
 look if ~/xavier/ work
 
