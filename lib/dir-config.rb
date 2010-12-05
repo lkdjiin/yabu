@@ -11,9 +11,11 @@
 class DirConfig
 	attr_reader :files, :filesToExclude
 	
-	# @param [String] name the name of the configuration's file
-	def initialize name
+	# @param [String] name The name of the configuration file
+	# @param [true|false] test Set to true when testing this class
+	def initialize(name, test = false)
 		@name = name
+		@test = test
 		@log = Log.instance
 		@files = []
 		@filesToExclude = []
@@ -77,7 +79,7 @@ private
 	end
 	
 	def includeFile filename
-		if File.exist? filename
+		if File.exist? filename or @test
 			@files.push filename
 		else
 			@log.error "when parsing #{@name} file <#{filename}> doesn't exist"
@@ -85,7 +87,7 @@ private
 	end
 	
 	def excludeFile filename
-		if File.exist? filename
+		if File.exist? filename or @test
 			@filesToExclude.push filename
 		else
 			@log.error "when parsing #{@name} file <#{filename}> doesn't exist"
