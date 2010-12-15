@@ -2,8 +2,7 @@
 ----- version 0.4 -----
 
 (done)YabuConfig should not be a singleton to ease test of BackupDeletor
-
-test BackupDeletor
+(done)test BackupDeletor
 
 test Backup
 

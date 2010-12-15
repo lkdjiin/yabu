@@ -1,0 +1,3 @@
+path = tests/temp
+removeAfterXDays = 10
+savesToKeep = 3

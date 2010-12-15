@@ -6,11 +6,16 @@ require "fileutils"
 # See the rules in the user's guide.
 class BackupDeletor
 
-	def initialize
+	# @param [String] Config The 'yabu.conf' file path. Only using during test.
+	def initialize config = ''
 		@backupToRemove = []
 		@numberOfBackups = 0
 		@log = Log.instance
-		@generalConfig = YabuConfig.new
+		if config == ''
+			@generalConfig = YabuConfig.new
+		else
+			@generalConfig = YabuConfig.new config
+		end
 	end
 	
 	def run
