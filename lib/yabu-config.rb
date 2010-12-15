@@ -1,19 +1,18 @@
-require "singleton"
 
-# I'm parsing a the general (ini like) configuration file of Yabu : 'configuration/yabu.conf'.
-# From version 0.1, there is only one used key :
+
+# I'm parsing the general (ini like) configuration file of Yabu : 'configuration/yabu.conf'.
 # @example
 #		c = YabuConfig.new
 #		pathToBackupDir = c.get 'path'
+# @see configuration/yabu.conf for a description of all keys
 class YabuConfig
-	include Singleton
 	
-	def initialize
-		@NAME = 'configuration/yabu.conf'
+	def initialize filename = 'configuration/yabu.conf'
+		@name = filename
 		@log = Log.instance
 		@dico = Hash.new
 		fillHash
-		@log.debug "Parsed #{@NAME}"
+		@log.debug "Parsed #{@name}"
 	end
 	
 	# @param [String] key a key of the 'configuration/yabu.conf'
@@ -33,7 +32,7 @@ private
 	# My job is to parse the configuration file to fill an Hash with the key/value pairs found
 	# in that file.
 	def fillHash
-		IO.foreach(@NAME) { |line| 
+		IO.foreach(@name) { |line| 
 			next if line.strip! =~ /^#/
 			next if line =~ /^$/
 			a, b = line.split '='

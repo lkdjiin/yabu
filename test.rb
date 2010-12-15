@@ -1,5 +1,5 @@
 # @example To test Yabu type :
-#		ruby test.rb
+#		ruby ./test.rb
 require "lib/yabu-config"
 require "lib/dir-config"
 require "lib/log"

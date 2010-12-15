@@ -16,7 +16,7 @@ class Backup
 	# and what to backup.
 	def initialize
 		@log = Log.instance
-		@generalConfig = YabuConfig.instance
+		@generalConfig = YabuConfig.new
 		@savingPath = getSavingPath		
 		@dirConfig = DirConfig.new 'configuration/directories.conf'
 	end

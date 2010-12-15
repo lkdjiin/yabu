@@ -10,7 +10,7 @@ class BackupDeletor
 		@backupToRemove = []
 		@numberOfBackups = 0
 		@log = Log.instance
-		@generalConfig = YabuConfig.instance
+		@generalConfig = YabuConfig.new
 	end
 	
 	def run

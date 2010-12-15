@@ -3,15 +3,11 @@
 class TC_YabuConfig < Test::Unit::TestCase
 
 	def setup
-    @config = YabuConfig.instance
+    @config = YabuConfig.new
   end
 
 	def testInstance
 		assert_instance_of(YabuConfig, @config)
-	end
-	
-	def testNew
-		assert_raise(NoMethodError) { YabuConfig.new }
 	end
 	
 	def testPath
