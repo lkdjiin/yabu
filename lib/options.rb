@@ -15,18 +15,25 @@ class Options
 	# * help
 	# @todo refactoring
 	def initialize
-		options = {}
+		@options = {}
 		optparse = OptionParser.new do|opts|
 		 	opts.banner = "Usage: ./saving.rb [options]"
 		 	# Define the options, and what they do
-   		options[:version] = false
+   		@options[:version] = false
    		opts.on( '-v', '--version', 'Print version number and exit' ) do
-     		options[:version] = true
+     		@options[:version] = true
    		end
-   		options[:license] = false
+   		
+   		@options[:license] = false
    		opts.on( '-l', '--license', 'Print program\'s license and exit' ) do
-     		options[:license] = true
+     		@options[:license] = true
    		end
+   		
+   		@options[:test] = false
+   		opts.on( '-t', '--test', 'Log all' ) do
+     		@options[:test] = true
+   		end
+   		
    		opts.on( '-h', '--help', 'Display this screen' ) do
      		puts opts
      		exit
@@ -38,8 +45,12 @@ class Options
 			puts e.to_s
 			exit 1
 		end
-		printVersion if options[:version]
-		printLicense if options[:license]
+		printVersion if @options[:version]
+		printLicense if @options[:license]
+	end
+	
+	def [](k)
+		@options[k]
 	end
 	
 private

@@ -33,8 +33,9 @@ class Yabu
 	def initialize
 		opt = Options.new
 		Message.printLicense
-		@log = Log.instance
-		@log.level = Log::INFO
+		generalConfig = YabuConfig.new
+		@log = Log.instance('yabu.log', generalConfig['logRotation'])
+		@log.level = Log::INFO unless opt[:test]
 	end
 	
 	def run

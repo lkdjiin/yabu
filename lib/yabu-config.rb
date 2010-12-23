@@ -10,7 +10,7 @@ class YabuConfig
 	def initialize filename = 'configuration/yabu.conf'
 		@log = Log.instance
 		@dico = YAML.load_file(filename)
-		@log.debug "Parsed #{filename}"
+		@log.info "Parsed #{filename}"
 	end
 	
 	def [](k)
