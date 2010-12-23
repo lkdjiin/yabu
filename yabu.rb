@@ -55,5 +55,12 @@ private
 	end
 end
 
+t1 = Time.now
+
 main = Yabu.new
 main.run
+
+seconds = Time.now.to_i - t1.to_i
+minutes = (seconds / 60).to_i
+seconds %= 60
+puts "Backed up in #{minutes} minutes #{seconds} seconds"
