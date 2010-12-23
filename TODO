@@ -3,8 +3,7 @@
 
 (done)YabuConfig should not be a singleton to ease test of BackupDeletor
 (done)test BackupDeletor
-
-test Backup
+(done)test Backup
 
 key/value for log ('daily', 'weekly' or 'monthly')
 
@@ -12,7 +11,11 @@ Log file should only show us INFO, WARN, ERROR and FATAL in a production environ
 That is the default beahviour. So we need an option to log all levels
 during tests/developpment.
 
-use IniFile class for *Config
+use of YAML instead of self-made ini like
+
+display duration of backup and # of elements backed up
+
+Ne pas se référer à /home/xavier/local pour les tests !
 
 ----- next -----
 

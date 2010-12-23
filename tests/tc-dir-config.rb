@@ -19,8 +19,8 @@ class TC_DirConfig < Test::Unit::TestCase
 	
 	def testFilesToExclude
 		assert_instance_of(Array, @config.filesToExclude)
-		assert_equal(1, @config.filesToExclude.length)
-		assert_equal('/home/xavier/local/notinclude', @config.filesToExclude[0])
+		assert_equal(2, @config.filesToExclude.length)
+		assert_equal('/home/xavier/local/netbeans-6.9.1', @config.filesToExclude[0])
 	end
 	
 end

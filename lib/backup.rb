@@ -14,11 +14,21 @@ class Backup
 	# I set the configuration. Remember you have to edit 'configuration/yabu.conf' and
 	# 'configuration/directories.conf' by hand. With this two config files I know where
 	# and what to backup.
-	def initialize
+	# @param [String] generalConfig The 'yabu.conf' file path. Only using during test.
+	# @param [String] dirConfig The 'directories.conf' file path. Only using during test.
+	def initialize generalConfig = '', dirConfig = ''
 		@log = Log.instance
-		@generalConfig = YabuConfig.new
+		if generalConfig == ''
+			@generalConfig = YabuConfig.new
+		else
+			@generalConfig = YabuConfig.new generalConfig
+		end
 		@savingPath = getSavingPath		
-		@dirConfig = DirConfig.new 'configuration/directories.conf'
+		if dirConfig == ''
+			@dirConfig = DirConfig.new 'configuration/directories.conf'
+		else
+			@dirConfig = DirConfig.new dirConfig
+		end
 	end
 	
 	# I start the backup.
