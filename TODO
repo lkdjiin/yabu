@@ -4,6 +4,7 @@
 (done)YabuConfig should not be a singleton to ease test of BackupDeletor
 (done)test BackupDeletor
 (done)test Backup
+(done)use of YAML instead of self-made ini like
 
 key/value for log ('daily', 'weekly' or 'monthly')
 
@@ -11,7 +12,7 @@ Log file should only show us INFO, WARN, ERROR and FATAL in a production environ
 That is the default beahviour. So we need an option to log all levels
 during tests/developpment.
 
-use of YAML instead of self-made ini like
+
 
 display duration of backup and # of elements backed up
 

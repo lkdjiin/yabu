@@ -11,18 +11,16 @@ class TC_YabuConfig < Test::Unit::TestCase
 	end
 	
 	def testPath
-		assert_instance_of(String, @config.get('path'))
+		assert_instance_of(String, @config['path'])
 	end
 	
 	def testRemoveAfterXDays
-		value = @config.get('removeAfterXDays')
-		assert_instance_of(String, value)
-		assert_match(/\d+/, value)
+		value = @config['removeAfterXDays']
+		assert_instance_of(Fixnum, value)
 	end
 	
 	def testSavesToKeep
-		value = @config.get('savesToKeep')
-		assert_instance_of(String, value)
-		assert_match(/\d+/, value)
+		value = @config['savesToKeep']
+		assert_instance_of(Fixnum, value)
 	end
 end

@@ -29,12 +29,12 @@ private
 	# X is given by the 'removeAfterXDays' key in the config file.
 	def searchOldBackup
 		Message.searchingOldBackups
-		Dir.foreach(@generalConfig.get 'path') do |file|
+		Dir.foreach(@generalConfig['path']) do |file|
 			next if (file == ".") or (file == "..")
 			@numberOfBackups += 1
 			filedate = Date.new file[0, 4].to_i, file[4, 2].to_i, file[6, 2].to_i
 			x = Date.today - filedate
-			@backupToRemove.push(file) if x > @generalConfig.getInt('removeAfterXDays')
+			@backupToRemove.push(file) if x > @generalConfig['removeAfterXDays']
 		end
 	end
 	
@@ -53,7 +53,7 @@ private
 	
 	def tryToRemove
 		@backupToRemove.sort!
-		numberOfBackupToKeep = @generalConfig.getInt('savesToKeep')
+		numberOfBackupToKeep = @generalConfig['savesToKeep']
 		@backupToRemove.each do |file|
 			remove file if @numberOfBackups > numberOfBackupToKeep
 		end
@@ -61,7 +61,7 @@ private
 	end
 	
 	def remove file
-		aDirectory = File.join(@generalConfig.get('path'), file)
+		aDirectory = File.join(@generalConfig['path'], file)
 		@log.info "Removing backup #{aDirectory}"
 		begin
 			FileUtils.remove_dir aDirectory, true

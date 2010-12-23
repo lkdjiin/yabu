@@ -45,7 +45,7 @@ private
 	# @return [String] the backup sub-directory full path.
 	#		Example : '/media/usb-disk/20101231-1438'
 	def getSavingPath
-		baseSavingPath = @generalConfig.get 'path'
+		baseSavingPath = @generalConfig['path']
 		@log.fatal "#{baseSavingPath} doesnt exist" if not File.exist?(baseSavingPath)
 		@log.fatal "#{baseSavingPath} is not writable" if not File.stat(baseSavingPath).writable?
 		@savingPath = File.join(baseSavingPath, getSavingName)
