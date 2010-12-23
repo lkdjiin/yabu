@@ -1,5 +1,18 @@
+version 0.4  2010-12-23
+
+  * Display duration of backup
+  
+  * New key in yabu.conf for log's rotation ('daily', 'weekly' or 'monthly')
+  
+  * Use of YAML for yabu.conf instead of self-made ini like
+  
+  * More tests
+  
+  * New command line option --test to log all levels during tests/developpment
+
+
 version 0.3  2010-12-05
 
-	* Automatic remove of old backups (older than X days).
+  * Automatic remove of old backups (older than X days).
 	
-	* But always keep a minimum of X backups in the backup repository.
+  * But always keep a minimum of X backups in the backup repository.

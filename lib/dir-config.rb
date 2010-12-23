@@ -58,7 +58,7 @@ private
 		dispatch action, filename
 	end
 	
-	# Be sure that filename begin by a slash
+	# Be sure that filename begins by a slash
 	def legal? filename
 		return true if filename[0, 1] == "/"
 		@log.error "Bad file name <#{filename}> in #{@name}. Not archived"

@@ -7,7 +7,7 @@ class Version
 	@@major = '0'
 	@@minor = '4'
 	@@revision = '0'
-	@@tag = 'unstable'
+	@@tag = ''
 	
 	# @return [String] the complete version
 	def Version.get
