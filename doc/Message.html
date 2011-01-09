@@ -104,7 +104,7 @@ I contain class methods that displays messages on the screen.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#printEnd-class_method" title="printEnd (class method)">+ (Object) <strong>printEnd</strong> </a>
+      <a href="#endOfRemovingOldBackups-class_method" title="endOfRemovingOldBackups (class method)">+ (Object) <strong>endOfRemovingOldBackups</strong> </a>
     
 
     
@@ -117,10 +117,49 @@ I contain class methods that displays messages on the screen.
   
 
   
-    <span class="summary_desc"><div class='inline'><p>
-Call me when the hard work is over.
-</p>
-</div></span>
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#noBackupsToRemove-class_method" title="noBackupsToRemove (class method)">+ (Object) <strong>noBackupsToRemove</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#printEndOfBackup-class_method" title="printEndOfBackup (class method)">+ (Object) <strong>printEndOfBackup</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -149,6 +188,27 @@ I print a little banner that state I&#8217;m a free software.
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#searchingOldBackups-class_method" title="searchingOldBackups (class method)">+ (Object) <strong>searchingOldBackups</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -159,38 +219,85 @@ I print a little banner that state I&#8217;m a free software.
     
     
       <div class="method_details first">
-  <p class="signature first" id="printEnd-class_method">
+  <p class="signature first" id="endOfRemovingOldBackups-class_method">
   
-    + (<tt>Object</tt>) <strong>printEnd</strong> 
+    + (<tt>Object</tt>) <strong>endOfRemovingOldBackups</strong> 
   
 
   
-</p><div class="docstring">
-  <div class="discussion">
-    <p>
-Call me when the hard work is over.
-</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-</div><table class="source_code">
+</p><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-19
-20
-21</pre>
+26
+27
+28</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/message.rb', line 19</span>
+      <pre class="code"><span class="info file"># File 'lib/message.rb', line 26</span>
 
-<span class='def def kw'>def</span> <span class='Message constant id'>Message</span><span class='dot token'>.</span><span class='printEnd identifier id'>printEnd</span>
-  <span class='puts identifier id'>puts</span> <span class='string val'>&quot;Done.&quot;</span>
+<span class='def def kw'>def</span> <span class='Message constant id'>Message</span><span class='dot token'>.</span><span class='endOfRemovingOldBackups identifier id'>endOfRemovingOldBackups</span>
+  <span class='puts identifier id'>puts</span> <span class='string val'>&quot;Old backups removed.&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="noBackupsToRemove-class_method">
+  
+    + (<tt>Object</tt>) <strong>noBackupsToRemove</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+30
+31
+32</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/message.rb', line 30</span>
+
+<span class='def def kw'>def</span> <span class='Message constant id'>Message</span><span class='dot token'>.</span><span class='noBackupsToRemove identifier id'>noBackupsToRemove</span>
+  <span class='puts identifier id'>puts</span> <span class='string val'>&quot;No backup to remove.&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="printEndOfBackup-class_method">
+  
+    + (<tt>Object</tt>) <strong>printEndOfBackup</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+18
+19
+20</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/message.rb', line 18</span>
+
+<span class='def def kw'>def</span> <span class='Message constant id'>Message</span><span class='dot token'>.</span><span class='printEndOfBackup identifier id'>printEndOfBackup</span>
+  <span class='puts identifier id'>puts</span> <span class='string val'>&quot;Backup is done.&quot;</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -240,12 +347,41 @@ I print a little banner that state I&#8217;m a free software.
 </table>
 </div>
     
+      <div class="method_details ">
+  <p class="signature " id="searchingOldBackups-class_method">
+  
+    + (<tt>Object</tt>) <strong>searchingOldBackups</strong> 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/message.rb', line 22</span>
+
+<span class='def def kw'>def</span> <span class='Message constant id'>Message</span><span class='dot token'>.</span><span class='searchingOldBackups identifier id'>searchingOldBackups</span>
+  <span class='puts identifier id'>puts</span> <span class='string val'>&quot;Searching for old backups to remove.&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
     
     <div id="footer">
-  Generated on Fri Dec  3 16:34:23 2010 by 
+  Generated on Sun Jan  9 12:03:48 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.8.7).
 </div>

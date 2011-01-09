@@ -1,8 +1,5 @@
-(done)look if ~/toto/ work
 
 ----- next -----
-
-include/exclude files AND directories with globbing/regex
 
 Recovery
 
@@ -23,3 +20,5 @@ encryption
 transaction
 
 GUI
+
+include/exclude files AND directories with globbing/regex ???

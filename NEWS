@@ -1,3 +1,10 @@
+version 0.5  2011-01-09
+
+  Very small improvement
+  
+  * You can now use the tilde character '~' to specify a path
+  
+  
 version 0.4  2010-12-23
 
   * Display duration of backup

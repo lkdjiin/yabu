@@ -81,39 +81,8 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    
-  <div class="note notetag">
-    <strong>Note:</strong> 
-    <div class='inline'><p>
-&quot;Yeah! Another Backup Utility&quot; is in it&#8217;s development
-stage. Try it, hack it, learn from it, but DON&#8217;T USE IT right now in
-a production environment.
-</p>
-</div>
-  </div>
-
-<h1>&quot;Yeah! Another Backup Utility&quot;</h1>
-<table>
-<tr><td valign="top">Author:</td><td>Xavier Nayrac (mailto:xavier.nayrac@gmail.com)
-
-</td></tr>
-<tr><td valign="top">Copyright:</td><td>Copyright 2010 Xavier Nayrac
-
-</td></tr>
-<tr><td valign="top">License:</td><td>GNU General Public License version 3
-
-</td></tr>
-</table>
-<h2>Overview</h2>
-<p>
-&quot;Yeah! Another Backup Utility&quot; is a command line utility to make
-daily backup. See the user&#8217;s guide at
-http://sources.xavier.free.fr/ruby.php#yabu to know how to configure it and
-how to use it.
-</p>
-<h2>Running</h2>
-<p>
-Create an instance of the Backup class and call it&#8217;s run method.
+    <p>
+I am the main class of the Yabu application.
 </p>
 
 
@@ -125,11 +94,11 @@ Create an instance of the Backup class and call it&#8217;s run method.
     <h3>Examples:</h3>
     
       <h4><div class='inline'><p>
-Start the backup
+Start the application
 </p>
 </div></h4>
-      <pre class="example code"><span class='bk identifier id'>bk</span> <span class='assign token'>=</span> <span class='Backup constant id'>Backup</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-<span class='bk identifier id'>bk</span><span class='dot token'>.</span><span class='run identifier id'>run</span>
+      <pre class="example code"><span class='main identifier id'>main</span> <span class='assign token'>=</span> <span class='Yabu constant id'>Yabu</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+<span class='main identifier id'>main</span><span class='dot token'>.</span><span class='run identifier id'>run</span>
 </pre>
     
   </div>
@@ -164,7 +133,31 @@ Start the backup
 
   
     <span class="summary_desc"><div class='inline'><p>
-A new instance of Yabu.
+Default constructor.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#run-instance_method" title="#run (instance method)">- (Object) <strong>run</strong> </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Start the backup process.
 </p>
 </div></span>
   
@@ -187,7 +180,7 @@ A new instance of Yabu.
 </p><div class="docstring">
   <div class="discussion">
     <p>
-A new instance of Yabu
+Default constructor
 </p>
 
 
@@ -201,19 +194,23 @@ A new instance of Yabu
       <pre class="lines">
 
 
-32
-33
 34
 35
-36</pre>
+36
+37
+38
+39
+40</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'yabu.rb', line 32</span>
+      <pre class="code"><span class="info file"># File 'yabu.rb', line 34</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span>
   <span class='opt identifier id'>opt</span> <span class='assign token'>=</span> <span class='Options constant id'>Options</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-  <span class='backup identifier id'>backup</span> <span class='assign token'>=</span> <span class='Backup constant id'>Backup</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-  <span class='backup identifier id'>backup</span><span class='dot token'>.</span><span class='run identifier id'>run</span>
+  <span class='Message constant id'>Message</span><span class='dot token'>.</span><span class='printLicense identifier id'>printLicense</span>
+  <span class='generalConfig identifier id'>generalConfig</span> <span class='assign token'>=</span> <span class='YabuConfig constant id'>YabuConfig</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='@log ivar id'>@log</span> <span class='assign token'>=</span> <span class='Log constant id'>Log</span><span class='dot token'>.</span><span class='instance identifier id'>instance</span><span class='lparen token'>(</span><span class='string val'>'yabu.log'</span><span class='comma token'>,</span> <span class='generalConfig identifier id'>generalConfig</span><span class='lbrack token'>[</span><span class='string val'>'logRotation'</span><span class='rbrack token'>]</span><span class='rparen token'>)</span>
+  <span class='@log ivar id'>@log</span><span class='dot token'>.</span><span class='level identifier id'>level</span> <span class='assign token'>=</span> <span class='Log constant id'>Log</span><span class='colon2 op'>::</span><span class='INFO constant id'>INFO</span> <span class='unless unless_mod kw'>unless</span> <span class='opt identifier id'>opt</span><span class='lbrack token'>[</span><span class='symbol val'>:test</span><span class='rbrack token'>]</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -224,10 +221,58 @@ A new instance of Yabu
 </div>
 
 
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="run-instance_method">
+  
+    - (<tt>Object</tt>) <strong>run</strong> 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Start the backup process.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+43
+44
+45
+46</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'yabu.rb', line 43</span>
+
+<span class='def def kw'>def</span> <span class='run identifier id'>run</span>
+  <span class='backup identifier id'>backup</span>
+  <span class='deleteOldBackup identifier id'>deleteOldBackup</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 </div>
     
     <div id="footer">
-  Generated on Fri Dec  3 16:34:25 2010 by 
+  Generated on Sun Jan  9 12:03:49 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.8.7).
 </div>

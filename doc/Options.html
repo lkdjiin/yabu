@@ -116,6 +116,27 @@ class Backup and the like.
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#%5B%5D-instance_method" title="#[] (instance method)">- (Object) <strong>[]</strong>(k) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#initialize-instance_method" title="#initialize (instance method)">- (Options) <strong>initialize</strong> </a>
     
 
@@ -221,32 +242,56 @@ Here is a list of command line options :
 35
 36
 37
-38</pre>
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/options.rb', line 17</span>
 
 <span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span>
-  <span class='options identifier id'>options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
+  <span class='@options ivar id'>@options</span> <span class='assign token'>=</span> <span class='lbrace token'>{</span><span class='rbrace token'>}</span>
   <span class='optparse identifier id'>optparse</span> <span class='assign token'>=</span> <span class='OptionParser constant id'>OptionParser</span><span class='dot token'>.</span><span class='new identifier id'>new</span> <span class='do do kw'>do</span><span class='bitor op'>|</span><span class='opts identifier id'>opts</span><span class='bitor op'>|</span>
     <span class='opts identifier id'>opts</span><span class='dot token'>.</span><span class='banner identifier id'>banner</span> <span class='assign token'>=</span> <span class='string val'>&quot;Usage: ./saving.rb [options]&quot;</span>
     <span class='comment val'># Define the options, and what they do</span>
-    <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:version</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='false false kw'>false</span>
+    <span class='@options ivar id'>@options</span><span class='lbrack token'>[</span><span class='symbol val'>:version</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='false false kw'>false</span>
     <span class='opts identifier id'>opts</span><span class='dot token'>.</span><span class='on identifier id'>on</span><span class='lparen token'>(</span> <span class='string val'>'-v'</span><span class='comma token'>,</span> <span class='string val'>'--version'</span><span class='comma token'>,</span> <span class='string val'>'Print version number and exit'</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span>
-      <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:version</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='true true kw'>true</span>
+      <span class='@options ivar id'>@options</span><span class='lbrack token'>[</span><span class='symbol val'>:version</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='true true kw'>true</span>
     <span class='end end kw'>end</span>
-    <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:license</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='false false kw'>false</span>
+    
+    <span class='@options ivar id'>@options</span><span class='lbrack token'>[</span><span class='symbol val'>:license</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='false false kw'>false</span>
     <span class='opts identifier id'>opts</span><span class='dot token'>.</span><span class='on identifier id'>on</span><span class='lparen token'>(</span> <span class='string val'>'-l'</span><span class='comma token'>,</span> <span class='string val'>'--license'</span><span class='comma token'>,</span> <span class='string val'>'Print program\'s license and exit'</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span>
-      <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:license</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='true true kw'>true</span>
+      <span class='@options ivar id'>@options</span><span class='lbrack token'>[</span><span class='symbol val'>:license</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='true true kw'>true</span>
     <span class='end end kw'>end</span>
+    
+    <span class='@options ivar id'>@options</span><span class='lbrack token'>[</span><span class='symbol val'>:test</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='false false kw'>false</span>
+    <span class='opts identifier id'>opts</span><span class='dot token'>.</span><span class='on identifier id'>on</span><span class='lparen token'>(</span> <span class='string val'>'-t'</span><span class='comma token'>,</span> <span class='string val'>'--test'</span><span class='comma token'>,</span> <span class='string val'>'Log all'</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span>
+      <span class='@options ivar id'>@options</span><span class='lbrack token'>[</span><span class='symbol val'>:test</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='true true kw'>true</span>
+    <span class='end end kw'>end</span>
+    
     <span class='opts identifier id'>opts</span><span class='dot token'>.</span><span class='on identifier id'>on</span><span class='lparen token'>(</span> <span class='string val'>'-h'</span><span class='comma token'>,</span> <span class='string val'>'--help'</span><span class='comma token'>,</span> <span class='string val'>'Display this screen'</span> <span class='rparen token'>)</span> <span class='do do kw'>do</span>
       <span class='puts identifier id'>puts</span> <span class='opts identifier id'>opts</span>
       <span class='exit identifier id'>exit</span>
     <span class='end end kw'>end</span>
   <span class='end end kw'>end</span>
-  <span class='optparse identifier id'>optparse</span><span class='dot token'>.</span><span class='parse! fid id'>parse!</span>
-  <span class='printVersion identifier id'>printVersion</span> <span class='if if_mod kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:version</span><span class='rbrack token'>]</span>
-  <span class='printLicense identifier id'>printLicense</span> <span class='if if_mod kw'>if</span> <span class='options identifier id'>options</span><span class='lbrack token'>[</span><span class='symbol val'>:license</span><span class='rbrack token'>]</span>
+  <span class='begin begin kw'>begin</span>
+    <span class='optparse identifier id'>optparse</span><span class='dot token'>.</span><span class='parse! fid id'>parse!</span>
+  <span class='rescue rescue kw'>rescue</span> <span class='OptionParser constant id'>OptionParser</span><span class='colon2 op'>::</span><span class='InvalidOption constant id'>InvalidOption</span> <span class='assign token'>=</span><span class='gt op'>&gt;</span> <span class='e identifier id'>e</span>
+    <span class='puts identifier id'>puts</span> <span class='e identifier id'>e</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span>
+    <span class='exit identifier id'>exit</span> <span class='integer val'>1</span>
+  <span class='end end kw'>end</span>
+  <span class='printVersion identifier id'>printVersion</span> <span class='if if_mod kw'>if</span> <span class='@options ivar id'>@options</span><span class='lbrack token'>[</span><span class='symbol val'>:version</span><span class='rbrack token'>]</span>
+  <span class='printLicense identifier id'>printLicense</span> <span class='if if_mod kw'>if</span> <span class='@options ivar id'>@options</span><span class='lbrack token'>[</span><span class='symbol val'>:license</span><span class='rbrack token'>]</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -257,10 +302,45 @@ Here is a list of command line options :
 </div>
 
 
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="[]-instance_method">
+  
+    - (<tt>Object</tt>) <strong>[]</strong>(k) 
+  
+
+  
+</p><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+52
+53
+54</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/options.rb', line 52</span>
+
+<span class='def def kw'>def</span> <span class='aref op'>[]</span><span class='lparen token'>(</span><span class='k identifier id'>k</span><span class='rparen token'>)</span>
+  <span class='@options ivar id'>@options</span><span class='lbrack token'>[</span><span class='k identifier id'>k</span><span class='rbrack token'>]</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 </div>
     
     <div id="footer">
-  Generated on Fri Dec  3 16:34:23 2010 by 
+  Generated on Sun Jan  9 12:03:48 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.8.7).
 </div>

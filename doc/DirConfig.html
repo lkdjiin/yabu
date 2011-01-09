@@ -74,7 +74,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/config.rb</dd>
+    <dd class="r2 last">lib/dir-config.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -187,7 +187,7 @@ Returns the value of attribute filesToExclude.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">- (DirConfig) <strong>initialize</strong>(name) </a>
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (DirConfig) <strong>initialize</strong>(name, test = false) </a>
     
 
     
@@ -219,7 +219,7 @@ A new instance of DirConfig.
     <div class="method_details first">
   <p class="signature first" id="initialize-instance_method">
   
-    - (<tt><span class='object_link'><a href="" title="DirConfig (class)">DirConfig</a></span></tt>) <strong>initialize</strong>(name) 
+    - (<tt><span class='object_link'><a href="" title="DirConfig (class)">DirConfig</a></span></tt>) <strong>initialize</strong>(name, test = false) 
   
 
   
@@ -247,7 +247,26 @@ A new instance of DirConfig
       
         &mdash;
         <div class='inline'><p>
-the name of the configuration&#8217;s file
+The name of the configuration file
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='type'>(<tt>true|false</tt>)</span>
+      
+      
+        <span class='name'>test</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Set to true when testing this class
 </p>
 </div>
       
@@ -261,20 +280,22 @@ the name of the configuration&#8217;s file
       <pre class="lines">
 
 
-64
-65
-66
-67
-68
-69
-70
-71</pre>
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/config.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'lib/dir-config.rb', line 16</span>
 
-<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span> <span class='name identifier id'>name</span>
+<span class='def def kw'>def</span> <span class='initialize identifier id'>initialize</span><span class='lparen token'>(</span><span class='name identifier id'>name</span><span class='comma token'>,</span> <span class='test identifier id'>test</span> <span class='assign token'>=</span> <span class='false false kw'>false</span><span class='rparen token'>)</span>
   <span class='@name ivar id'>@name</span> <span class='assign token'>=</span> <span class='name identifier id'>name</span>
+  <span class='@test ivar id'>@test</span> <span class='assign token'>=</span> <span class='test identifier id'>test</span>
   <span class='@log ivar id'>@log</span> <span class='assign token'>=</span> <span class='Log constant id'>Log</span><span class='dot token'>.</span><span class='instance identifier id'>instance</span>
   <span class='@files ivar id'>@files</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
   <span class='@filesToExclude ivar id'>@filesToExclude</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='rbrack token'>]</span>
@@ -319,12 +340,12 @@ Returns the value of attribute files
       <pre class="lines">
 
 
-61
-62
-63</pre>
+12
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/config.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/dir-config.rb', line 12</span>
 
 <span class='def def kw'>def</span> <span class='files identifier id'>files</span>
   <span class='@files ivar id'>@files</span>
@@ -362,12 +383,12 @@ Returns the value of attribute filesToExclude
       <pre class="lines">
 
 
-61
-62
-63</pre>
+12
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/config.rb', line 61</span>
+      <pre class="code"><span class="info file"># File 'lib/dir-config.rb', line 12</span>
 
 <span class='def def kw'>def</span> <span class='filesToExclude identifier id'>filesToExclude</span>
   <span class='@filesToExclude ivar id'>@filesToExclude</span>
@@ -384,7 +405,7 @@ Returns the value of attribute filesToExclude
 </div>
     
     <div id="footer">
-  Generated on Fri Dec  3 16:34:24 2010 by 
+  Generated on Sun Jan  9 12:03:50 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.3 (ruby-1.8.7).
 </div>
