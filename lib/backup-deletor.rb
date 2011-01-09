@@ -2,11 +2,11 @@
 require "date"
 require "fileutils"
 
-# My job is to delete old backup giving some rules.
-# See the rules in the user's guide.
+# My job is to delete old backups according to certain rules.
+# See the rules in the user guide.
 class BackupDeletor
 
-	# @param [String] Config The 'yabu.conf' file path. Only using during test.
+	# @param [String] Config The 'yabu.conf' file path. To use only during testing.
 	def initialize config = ''
 		@backupToRemove = []
 		@numberOfBackups = 0
@@ -51,6 +51,7 @@ private
 		@log.debug "No old backup to remove"
 	end
 	
+	# I try to remove the oldest backups. But I always keep a number of backup in the backup directory.
 	def tryToRemove
 		@backupToRemove.sort!
 		numberOfBackupToKeep = @generalConfig['savesToKeep']
@@ -60,8 +61,11 @@ private
 		Message.endOfRemovingOldBackups
 	end
 	
-	def remove file
-		aDirectory = File.join(@generalConfig['path'], file)
+	# Remove one backup.
+	#
+	# @param [String] aBackup the path of the backup to remove
+	def remove aBackup
+		aDirectory = File.join(@generalConfig['path'], aBackup)
 		@log.info "Removing backup #{aDirectory}"
 		begin
 			FileUtils.remove_dir aDirectory, true

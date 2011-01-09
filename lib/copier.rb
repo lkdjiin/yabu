@@ -37,7 +37,8 @@ private
 		end
   end
 
-	# @param [String] file filename to check against the exclude list.
+	# Find if a file is part of the list of files to exclude.
+	# @param [String] file a filename to check against the exclude list
 	# @return [true | false]
   def exclude? file
     @exclude.each do |element|
@@ -46,6 +47,9 @@ private
     false
   end
   
+  # Copy one file, not a directory.
+  # @param [String] source the source path
+  # @param [String] dest the destination path
   def copyFile source, dest
   	begin
 			FileUtils.cp(source, dest)
@@ -55,6 +59,9 @@ private
 		end
   end
   
+  # Copy a directory and its content (recursive).
+  # @param [String] source the source path
+  # @param [String] dest the destination path
   def copyDirectory source, dest
   	begin
 			loopCopy source, dest
@@ -63,6 +70,9 @@ private
     end
   end
   
+  # Copy a directory and its content (recursive). Compare the files to the list of exclusions.
+  # @param [String] source the source path
+  # @param [String] dest the destination path
   def loopCopy source, dest
   	Dir.foreach(source) do |file|
 			next if skip? source, file
@@ -70,6 +80,9 @@ private
 		end
   end
   
+  # If +source+ is a file, copy this file. If +source+ is a directory, copy this directory.
+  # @param [String] source the source path
+  # @param [String] dest the destination path
   def decideHowToCopy source, dest
   	if File.directory?(source)
 			mkdir dest
@@ -79,21 +92,27 @@ private
 		end
   end
   
-  def skip? source, file
-  	if exclude?(File.join(source, file))
-			@log.debug("Exclude from saving : " + File.join(source, file))
+  # Do we have to skip a file ?
+  # @param [String] dir path of the directory file
+  # @param [String] file the filename
+  # @return [true|false] true if the file is part of the exclude list
+  def skip? dir, file
+  	if exclude?(File.join(dir, file))
+			@log.debug("Exclude from saving : " + File.join(dir, file))
 			return true
 		end
 		return true if (file == ".") or (file == "..")
 		false
   end
   
-  def mkdir dest
+  # Create a directory.
+  # @param [String] dir the path
+  def mkdir dir
   	begin
-			FileUtils.mkdir(dest)
-			@log.debug "Created " + dest
+			FileUtils.mkdir(dir)
+			@log.debug "Created " + dir
 		rescue SystemCallError
-			@log.error "Cannot create directory #{dest}"
+			@log.error "Cannot create directory #{dir}"
 		end
   end
   

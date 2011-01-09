@@ -46,6 +46,7 @@ private
 		false
 	end
 	
+	# I parse a line of the config file.
 	def parse line
 		action, filename = line.split(' ', 2)
 		action.strip!
@@ -78,6 +79,7 @@ private
 		end
 	end
 	
+	# Add +filename+ to the list of files to include.
 	def includeFile filename
 		if File.exist? filename or @test
 			@files.push filename
@@ -86,6 +88,7 @@ private
 		end
 	end
 	
+	# Add +filename+ to the list of files to exclude.
 	def excludeFile filename
 		if File.exist? filename or @test
 			@filesToExclude.push filename

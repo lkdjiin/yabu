@@ -30,6 +30,7 @@ require "lib/dir-config"
 #		main.run
 class Yabu
 
+	# Default constructor
 	def initialize
 		opt = Options.new
 		Message.printLicense
@@ -38,6 +39,7 @@ class Yabu
 		@log.level = Log::INFO unless opt[:test]
 	end
 	
+	# Start the backup process.
 	def run
 		backup
 		deleteOldBackup
@@ -45,22 +47,27 @@ class Yabu
 
 private
 
+	# Do the backup.
 	def backup
 		backup = Backup.new
 		backup.run
 	end
 	
+	# Remove the oldest backups if they exist.
 	def deleteOldBackup
 		bkDeletor = BackupDeletor.new
 		bkDeletor.run
 	end
 end
 
+# time of program start
 t1 = Time.now
 
+# Do backup
 main = Yabu.new
 main.run
 
+# End of program, calculate and write elapsed time.
 seconds = Time.now.to_i - t1.to_i
 minutes = (seconds / 60).to_i
 seconds %= 60

@@ -31,7 +31,7 @@ class Backup
 		end
 	end
 	
-	# I start the backup.
+	# I start the backup process.
 	def run
 		@log.info "Backup started with " + Version.get
 		createSavingDirectory

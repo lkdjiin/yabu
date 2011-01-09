@@ -1,19 +1,19 @@
 
 ----- next -----
 
-compression
-
-Recovery
-
 look if ~/toto/ work
 
 include/exclude files AND directories with globbing/regex
+
+Recovery
 
 incremental backup
 
 Voir si il y a assez de place avant de commencer
 
-tâche en arrière-plan
+background task
+
+compression ?
 
 remote backup ?
 
