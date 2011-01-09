@@ -54,14 +54,15 @@ private
 			@log.error "file name missing when parsing #{@name}"
 			return false
 		end
-		return false if not legal? filename
 		filename.strip!
+		return false if not legal? filename
+		filename = File.expand_path(filename) if filename[0, 1] == '~'
 		dispatch action, filename
 	end
 	
 	# Be sure that filename begins by a slash
 	def legal? filename
-		return true if filename[0, 1] == "/"
+		return true if filename[0, 1] == "/" or filename[0, 1] == '~'
 		@log.error "Bad file name <#{filename}> in #{@name}. Not archived"
 		false
 	end

@@ -15,8 +15,8 @@ require "lib/version"
 
 require "test/unit"
 
-require "tests/tc-yabu-config"
-require "tests/tc-dir-config"
-require "tests/tc-copier"
-require "tests/tc-backup-deletor"
+#require "tests/tc-yabu-config"
+#require "tests/tc-dir-config"
+#require "tests/tc-copier"
+#require "tests/tc-backup-deletor"
 require "tests/tc-backup"
