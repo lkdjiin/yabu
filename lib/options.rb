@@ -10,9 +10,10 @@ require 'optparse'
 class Options
 
 	# Here is a list of command line options :
-	# * version
-	# * license
-	# * help
+	# * --version
+	# * --license
+	# * --help
+	# * --test
 	# @todo refactoring
 	def initialize
 		@options = {}

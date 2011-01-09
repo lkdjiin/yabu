@@ -2,14 +2,11 @@
 
 # ="Yeah! Another Backup Utility"
 #
-# Author:: Xavier Nayrac (mailto:xavier.nayrac@gmail.com)
-# Copyright:: Copyright 2010 Xavier Nayrac
-# License::   GNU General Public License version 3
+# Copyright 2010, 2011 Xavier Nayrac
+# GNU General Public License version 3
 #
 # ==Overview
 # "Yeah! Another Backup Utility" is a command line utility to make daily backup.
-# See the user's guide at http://sources.xavier.free.fr/ruby.php#yabu to know
-# how to configure it and how to use it.
 #
 # @note "Yeah! Another Backup Utility" is in it's development stage. Try it, hack it, learn from
 # 	it, but DON'T USE IT right now in a production environment.
@@ -23,6 +20,7 @@ require "lib/message"
 require "lib/copier"
 require "lib/yabu-config"
 require "lib/dir-config"
+require "lib/recovery"
 
 # I am the main class of the Yabu application.
 # @example Start the application
@@ -39,31 +37,43 @@ class Yabu
 		@log.level = Log::INFO unless opt[:test]
 	end
 	
-	# Start the backup process.
+	# Start the backup process or the recover process.
 	def run
-		backup
-		deleteOldBackup
+		if ARGV.size == 1 and ARGV[0] == 'recover'
+			startToRecover
+		else
+			startToBackup
+		end
 	end
 
 private
 
+	# Start the backup process.
+	def startToBackup
+		backup
+		deleteOldBackup
+	end
+	
+	# Start the recovery process.
+	def startToRecover
+		Recovery.new.run
+	end
+
 	# Do the backup.
 	def backup
-		backup = Backup.new
-		backup.run
+		Backup.new.run
 	end
 	
 	# Remove the oldest backups if they exist.
 	def deleteOldBackup
-		bkDeletor = BackupDeletor.new
-		bkDeletor.run
+		BackupDeletor.new.run
 	end
 end
 
 # time of program start
 t1 = Time.now
 
-# Do backup
+# Backup (or recover)
 main = Yabu.new
 main.run
 
@@ -71,4 +81,4 @@ main.run
 seconds = Time.now.to_i - t1.to_i
 minutes = (seconds / 60).to_i
 seconds %= 60
-puts "Backed up in #{minutes} minutes #{seconds} seconds"
+puts "Done in #{minutes} minutes #{seconds} seconds"
