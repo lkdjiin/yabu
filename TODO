@@ -1,7 +1,24 @@
+--- v0.6 ---
 
------ next -----
+namespace Yabu
 
-Recovery
+(done)recover from newest backup : missing files
+
+recover from newest backup : files with a modification time too old
+
+--- v0.7 ---
+
+command : yabu.rb recover --help
+
+recover from a given backup : missing files
+
+recover from a given backup : files with a modification time too old
+
+recover from newest backup : force to restore all files
+
+recover from a given backup : force to restore all files
+
+--- next ---
 
 incremental backup
 

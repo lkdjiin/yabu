@@ -1,5 +1,8 @@
 require "fileutils"
 
+# You cannot run these tests on your computer because they refer on some files
+# on my local computer.
+# Hack it, this is free software !
 class TC_Backup < Test::Unit::TestCase
 
 	CONF_TEST_1 = 'tests/configuration/yabu.conf.test1'

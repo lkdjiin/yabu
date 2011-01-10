@@ -1,6 +1,9 @@
 
+# I restore your data
+# @since 0.6
 class Recovery
 
+	# Default constructor.
 	# @param [String] Config The 'yabu.conf' file path. To use only during testing.
 	def initialize config = ''
 		@backup = ''
@@ -12,6 +15,8 @@ class Recovery
 		end
 	end
 	
+	# I start the recovery process
+	# @since 0.6
 	def run
 		findNewestBackup
 		restoreBackup
@@ -40,7 +45,7 @@ private
 			putc(?.)
 			unless File.exists?(toCheck)
 				if File.directory?(f)
-					mkdir toCheck
+					FileUtils.mkdir toCheck
 					@log.info "Create dir #{toCheck}"
 				else
 					FileUtils.cp(f, toCheck)
