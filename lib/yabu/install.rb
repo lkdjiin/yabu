@@ -1,6 +1,8 @@
 require 'fileutils'
 
 module Yabu
+	
+	# Install config files in user's home
 	module Install
 	
 		# Do we need to install some config files in the user's home folder ? 
