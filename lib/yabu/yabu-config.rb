@@ -10,7 +10,7 @@ module Yabu
 	class YabuConfig
 		
 		# @param [String] filename The 'yabu.conf' file path. To use only during testing.
-		def initialize filename = 'configuration/yabu.conf'
+		def initialize filename = File.join(ENV['HOME'], '.config/yabu/configuration/yabu.conf')
 			@log = Log.instance
 			@dico = YAML.load_file(filename)
 			@log.info "Parsed #{filename}"

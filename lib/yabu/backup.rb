@@ -26,7 +26,7 @@ module Yabu
 			end
 			@savingPath = getSavingPath		
 			if dirConfig == ''
-				@dirConfig = DirConfig.new 'configuration/directories.conf'
+				@dirConfig = DirConfig.new(File.join(ENV['HOME'], '.config/yabu/configuration/directories.conf'))
 			else
 				@dirConfig = DirConfig.new dirConfig
 			end

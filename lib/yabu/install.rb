@@ -23,7 +23,10 @@ module Yabu
 		end
 		
 		def Install.message
-			puts "Some files have been installed."
+			puts "This is your first installation of yabu."
+			puts "Some files have been copied in #{ENV['HOME']}/.config/yabu/"
+			puts "Please, look at the documentation to modify those files, in order to suit your needs."
+			puts "Restart yabu when you are ready."
 		end
 	
 	end
