@@ -1,41 +1,33 @@
 --- v0.6 ---
 
-namespace Yabu
-
-(done)recover from newest backup : missing files
-
-recover from newest backup : files with a modification time too old
+* reorganize folders
+* switch to ruby 1.9.2
+* use rake
+* gem installation
+* rewrite readme(.rdoc)
+* namespace Yabu
+* recover from newest backup
+(done)  + missing files
+  + files with a modification time too old
 
 --- v0.7 ---
-
-command : yabu.rb recover --help
-
-recover from a given backup : missing files
-
-recover from a given backup : files with a modification time too old
-
-recover from newest backup : force to restore all files
-
-recover from a given backup : force to restore all files
+* command : yabu.rb recover --help
+* recover from a given backup
+  + missing files
+  + files with a modification time too old
+  + force to restore all files
+* recover from newest backup
+  + force to restore all files
 
 --- next ---
 
-incremental backup
-
-Voir si il y a assez de place avant de commencer
-
-background task
-
-compression ?
-
-remote backup ?
-
-schedulding
-
-encryption
-
-transaction
-
-GUI
-
-include/exclude files AND directories with globbing/regex ???
+* incremental backup ?
+* Voir si il y a assez de place avant de commencer
+* background task
+* compression ?
+* remote backup ?
+* schedulding
+* encryption ?
+* transaction
+* GUI or curses ?
+* include/exclude files AND directories with globbing/regex ???

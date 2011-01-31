@@ -1,15 +1,25 @@
 #!/usr/bin/env ruby
 
-# ="Yeah! Another Backup Utility"
-#
+# This file is part of "Yeah! Another Backup Utility", a command line utility
+# to make daily backup.
 # Copyright 2010, 2011 Xavier Nayrac
-# GNU General Public License version 3
 #
-# ==Overview
-# "Yeah! Another Backup Utility" is a command line utility to make daily backup.
+# Yabu is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
-# @note "Yeah! Another Backup Utility" is in it's development stage. Try it, hack it, learn from
-# 	it, but DON'T USE IT right now in a production environment.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+$LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
+
+require 'yabu'
 
 require "lib/options"
 require "lib/backup"
