@@ -5,18 +5,18 @@ require "fileutils"
 # Hack it, this is free software !
 class TC_Backup < Test::Unit::TestCase
 
-	CONF_TEST_1 = 'tests/configuration/yabu.conf.test1'
-	DIR_TEST = 'tests/configuration/directories.conf.test'
-	DIR_TEST_2 = 'tests/configuration/directories.conf.test2'
+	CONF_TEST_1 = 'configuration/yabu.conf.test1'
+	DIR_TEST = 'configuration/directories.conf.test'
+	DIR_TEST_2 = 'configuration/directories.conf.test2'
 	
 	def testBackup
-		bk = Backup.new(CONF_TEST_1, DIR_TEST)
+		bk = Yabu::Backup.new(CONF_TEST_1, DIR_TEST)
 		bk.run
 		
 		# Find name of the just created repository and count # of dir/files
 		name = ''
 		number = 0
-		Dir.foreach('tests/temp') do |file|
+		Dir.foreach('temp') do |file|
 			next if (file == ".") or (file == "..")
 			name = file
 			number += 1
@@ -24,7 +24,7 @@ class TC_Backup < Test::Unit::TestCase
 		# There must be only one directory created
 		assert_equal(1, number)
 		
-		name = File.join('tests/temp', name)
+		name = File.join('temp', name)
 		
 		toCheck = File.join(name, 'home/xavier/local/test')
 		assert_equal(true, File.exist?(toCheck))
@@ -39,7 +39,7 @@ class TC_Backup < Test::Unit::TestCase
 		FileUtils.remove_dir name, true
 		
 		number = 0
-		Dir.foreach('tests/temp') do |file|
+		Dir.foreach('temp') do |file|
 			next if (file == ".") or (file == "..")
 			name = file
 			number += 1
@@ -51,13 +51,13 @@ class TC_Backup < Test::Unit::TestCase
 	
 	# Test of expand_path
 	def testBackup2
-		bk = Backup.new(CONF_TEST_1, DIR_TEST_2)
+		bk = Yabu::Backup.new(CONF_TEST_1, DIR_TEST_2)
 		bk.run
 		
 		# Find name of the just created repository and count # of dir/files
 		name = ''
 		number = 0
-		Dir.foreach('tests/temp') do |file|
+		Dir.foreach('temp') do |file|
 			next if (file == ".") or (file == "..")
 			name = file
 			number += 1
@@ -65,7 +65,7 @@ class TC_Backup < Test::Unit::TestCase
 		# There must be only one directory created
 		assert_equal(1, number)
 		
-		name = File.join('tests/temp', name)
+		name = File.join('temp', name)
 		
 		toCheck = File.join(name, 'home/xavier/local/wallpaper')
 		assert_equal(true, File.directory?(toCheck))
@@ -74,7 +74,7 @@ class TC_Backup < Test::Unit::TestCase
 		FileUtils.remove_dir name, true
 		
 		number = 0
-		Dir.foreach('tests/temp') do |file|
+		Dir.foreach('temp') do |file|
 			next if (file == ".") or (file == "..")
 			name = file
 			number += 1

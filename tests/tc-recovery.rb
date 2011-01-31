@@ -2,10 +2,9 @@ require "fileutils"
 
 class TC_Recovery < Test::Unit::TestCase
 
-	CONF_TEST_1 = 'tests/configuration/yabu.conf.test1'
+	CONF_TEST_1 = 'configuration/yabu.conf.test1'
 	
-	# One missing file
-	def testRecover1
+	def test_recover_one_missing_file
 		# We use the folder /tests. This folder should contains 2 files backed up :
 		# README and NEWS. README is the missing one.
 		FileUtils.cp('/home/xavier/devel/ruby/yabu/NEWS', '/home/xavier/devel/ruby/yabu/tests/')
@@ -20,20 +19,19 @@ class TC_Recovery < Test::Unit::TestCase
 		assert_equal(false, File.exist?('/home/xavier/devel/ruby/yabu/tests/README'))
 		
 		# Must restore the README file in '/home/xavier/devel/ruby/yabu/tests/'
-		rec = Recovery.new CONF_TEST_1
+		rec = Yabu::Recovery.new CONF_TEST_1
 		rec.run
 		
 		# Check if README has been restored
 		assert_equal(true, File.exist?('/home/xavier/devel/ruby/yabu/tests/README'))
 		
 		# Clean things
-		FileUtils.remove_dir 'tests/temp/20110101-1234'
-		FileUtils.remove_file 'tests/README'
-		FileUtils.remove_file 'tests/NEWS'
+		FileUtils.remove_dir 'temp/20110101-1234'
+		FileUtils.remove_file 'README'
+		FileUtils.remove_file 'NEWS'
 	end
 	
-	# One missing dir
-	def testRecover2
+	def test_recover_one_missing_dir
 		# Create a little backup by hand
 		bkDir = '/home/xavier/devel/ruby/yabu/tests/temp/20110101-1234/home/xavier/devel/ruby/yabu/tests/missingdir'
 		FileUtils.makedirs(bkDir)
@@ -44,7 +42,7 @@ class TC_Recovery < Test::Unit::TestCase
 		assert_equal(false, File.exist?('/home/xavier/devel/ruby/yabu/tests/missingdir'))
 		
 		# Must restore the README and NEWS files in '/home/xavier/devel/ruby/yabu/tests/missingdir'
-		rec = Recovery.new CONF_TEST_1
+		rec = Yabu::Recovery.new CONF_TEST_1
 		rec.run
 		
 		# Check
@@ -52,8 +50,8 @@ class TC_Recovery < Test::Unit::TestCase
 		assert_equal(true, File.exist?('/home/xavier/devel/ruby/yabu/tests/missingdir/NEWS'))
 		
 		# Clean things
-		FileUtils.remove_dir 'tests/temp/20110101-1234'
-		FileUtils.remove_dir 'tests/missingdir'
+		FileUtils.remove_dir 'temp/20110101-1234'
+		FileUtils.remove_dir 'missingdir'
 	end
 	
 end

@@ -2,11 +2,11 @@
 class TC_DirConfig < Test::Unit::TestCase
 
 	def setup
-    @config = DirConfig.new("tests/configuration/directories.conf.test", true)
+    @config = Yabu::DirConfig.new("configuration/directories.conf.test", true)
   end
 
 	def testNew
-		assert_instance_of(DirConfig, @config)
+		assert_instance_of(Yabu::DirConfig, @config)
 	end
 	
 	def testFiles

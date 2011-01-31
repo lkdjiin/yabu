@@ -10,12 +10,12 @@ require "fileutils"
 #		of 3 directories. So we have to delete the 7 oldest directories and keep the 3 newest.
 class TC_BackupDeletor < Test::Unit::TestCase
 
-	CONF_TEST_1 = 'tests/configuration/yabu.conf.test1'
-	TEST_REPOSITORY = 'tests/temp'
+	CONF_TEST_1 = 'configuration/yabu.conf.test1'
+	TEST_REPOSITORY = 'temp'
 	TIME_FORMAT = "%Y%m%d-%H%M"
 
 	def testNew
-		assert_instance_of(BackupDeletor, BackupDeletor.new(CONF_TEST_1))
+		assert_instance_of(Yabu::BackupDeletor, Yabu::BackupDeletor.new(CONF_TEST_1))
 	end
 	
 	# removeAfterXDays = 10
@@ -26,7 +26,7 @@ class TC_BackupDeletor < Test::Unit::TestCase
 		createOldDirectories(now, 11, 10)
 		
 		# run the deletor
-		bkDeletor = BackupDeletor.new(CONF_TEST_1)
+		bkDeletor = Yabu::BackupDeletor.new(CONF_TEST_1)
 		bkDeletor.run
 		
 		# Is the 3 newest dirs always exist ?

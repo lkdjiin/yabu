@@ -1,11 +1,12 @@
 --- v0.6 ---
 
-* reorganize folders
-* switch to ruby 1.9.2
+(done)reorganize folders
+(done)switch to ruby 1.9.2
 * use rake
+* move version to a file
 * gem installation
 * rewrite readme(.rdoc)
-* namespace Yabu
+(done)namespace Yabu
 * recover from newest backup
 (done)  + missing files
   + files with a modification time too old

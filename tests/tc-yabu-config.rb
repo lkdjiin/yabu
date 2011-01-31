@@ -3,23 +3,23 @@
 class TC_YabuConfig < Test::Unit::TestCase
 
 	def setup
-    @config = YabuConfig.new
+    @config = Yabu::YabuConfig.new
   end
 
-	def testInstance
-		assert_instance_of(YabuConfig, @config)
+	def test_instance
+		assert_instance_of(Yabu::YabuConfig, @config)
 	end
 	
-	def testPath
+	def test_path
 		assert_instance_of(String, @config['path'])
 	end
 	
-	def testRemoveAfterXDays
+	def test_remove_after_X_days
 		value = @config['removeAfterXDays']
 		assert_instance_of(Fixnum, value)
 	end
 	
-	def testSavesToKeep
+	def test_saves_to_teep
 		value = @config['savesToKeep']
 		assert_instance_of(Fixnum, value)
 	end
