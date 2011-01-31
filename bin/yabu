@@ -22,6 +22,12 @@ $YABU_PATH = File.expand_path(File.dirname(__FILE__)) + '/..'
 
 require 'yabu'
 
+if Yabu::Install.needed?
+	Yabu::Install.run
+	Yabu::Install.message
+	exit
+end
+
 # time of program start
 t1 = Time.now
 

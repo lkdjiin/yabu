@@ -8,7 +8,7 @@
 (done)* rewrite readme(.rdoc)
 (done)namespace Yabu
 (done)* recover missing files and dirs from newest backup
-* copy and use config files from /home/$USER/.config/yabu
+* copy and use config files from ENV['HOME']/.config/yabu
 
 --- v0.7 ---
 * command : yabu.rb recover --help
