@@ -11,3 +11,8 @@ desc 'Run Yabu'
 task :run do
   exec "./bin/yabu"
 end
+
+desc 'Generate yard documentation'
+task :doc do 
+	exec 'yardoc --title "Yeah! Another Backup Utility Documentation" - NEWS COPYING'
+end

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta name="Content-Type" content="text/html; charset=utf-8" />
-<title>Yeah! Another Backup Utility Documentation</title>
+<title>File: NEWS</title>
 <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
 
@@ -24,7 +24,7 @@
       <div id="menu">
   
     <a href="_index.html" title="Index">Index</a> &raquo; 
-    <span class="title">File: README</span>
+    <span class="title">File: NEWS</span>
   
   
   <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
@@ -41,47 +41,42 @@
     
     <iframe id="search_frame"></iframe>
     
-    <div id="content"><div id='filecontents'><h1>&#8220;Yeah! Another Backup Utility&#8220;</h1>
-<p>
-Copyright 2010, 2011 Xavier Nayrac
+    <div id="content"><div id='filecontents'><p>
+version 0.5  2011-01-09
 </p>
-<h2>OVERVIEW</h2>
+<pre class="code">
+  Very small improvement
+  
+  * You can now use the tilde character '~' to specify a path
+  
+  
+</pre>
 <p>
-&#8220;Yeah! Another Backup Utility&#8221; (Yabu in short) is a backup and
-recovery utility for linux. It maybe works for other systems but I
-don&#8217;t know. Yabu is written in ruby, so you need a ruby interpreter
-to run it.
+version 0.4  2010-12-23
 </p>
-<h2>INSTALL</h2>
+<pre class="code">
+  * Display duration of backup
+  
+  * New key in yabu.conf for log's rotation ('daily', 'weekly' or 'monthly')
+  
+  * Use of YAML for yabu.conf instead of self-made ini like
+  
+  * More tests
+  
+  * New command line option --test to log all levels during tests/developpment
+</pre>
 <p>
-Put all the files somewhere in your PATH.
+version 0.3  2010-12-05
 </p>
-<h2>BEFORE RUNNING</h2>
+<pre class="code">
+  * Automatic remove of old backups (older than X days).
+</pre>
 <p>
-Yabu is in it&#8217;s development stage. Try it, hack it, learn from it,
-but DON&#8217;T USE IT right now in a production environment. To try Yabu,
-just edit directories.conf and yabu.conf. But before doing that you really
-should check the documentation. See the wiki on GitHub : <a
-href="https://github.com/lkdjiin/yabu/wiki">github.com/lkdjiin/yabu/wiki</a>.
-You can find user guides (may be not up to date) in english and french at
-this address : <a
-href="http://sources.xavier.free.fr/ruby.php#yabu">sources.xavier.free.fr/ruby.php#yabu</a>
+	
 </p>
-<h2>RUNNING</h2>
-<p>
-Type yabu.rb from a terminal to start saving your data. Type yabu.rb
---help to view a list of options. Recovery is not yet implemented.
-</p>
-<h2>HACKING</h2>
-<p>
-You can found developper&#8217;s documentation in doc/. If the YARD gem is
-installed on your computer, run makedoc.sh to be sure the doc is up to
-date. Begin by reading the Yabu class.
-</p>
-<h2>CONTACT</h2>
-<p>
-xavier.nayrac@gmail.com
-</p>
+<pre class="code">
+  * But always keep a minimum of X backups in the backup repository.
+</pre>
 </div></div>
     
     <div id="footer">
