@@ -7,10 +7,9 @@
 (done)* gem installation
 (done)* rewrite readme(.rdoc)
 (done)namespace Yabu
-* recover from newest backup
-(done)  + missing files
-  + files with a modification time too old
+(done)* recover missing files and dirs from newest backup
 * copy and use config files from /home/$USER/.config/yabu
+
 --- v0.7 ---
 * command : yabu.rb recover --help
 * recover from a given backup
@@ -22,6 +21,8 @@
 
 --- next ---
 
+* record modification time of all backed-up files in a file along with the backup. That will
+  allow us to restore such files when strange things had happen.
 * incremental backup ?
 * Voir si il y a assez de place avant de commencer
 * background task

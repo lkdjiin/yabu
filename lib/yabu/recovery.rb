@@ -19,13 +19,14 @@ module Yabu
 		# I start the recovery process
 		# @since 0.6
 		def run
-			findNewestBackup
-			restoreBackup
+			find_newest_backup
+			restore_backup
 		end
 		
 	private
 
-		def findNewestBackup
+		# Find the newest backup in the repository.
+		def find_newest_backup
 			backups = []
 			Dir.foreach(@generalConfig['path']) do |file|
 				next if (file == ".") or (file == "..")
@@ -36,21 +37,22 @@ module Yabu
 			@backup = backups[0]
 		end
 		
-		def restoreBackup
+		def restore_backup
 			baseDir = File.join(@generalConfig['path'], @backup)
 			puts "Recovering from #{baseDir}"
 			@log.info "Recovering from #{baseDir}"
 			files = File.join(baseDir, "**", "*")
-			Dir.glob(files).each {|f|
-				toCheck = f.sub(Regexp.new(baseDir), '')
+			Dir.glob(files).each {|file_in_repo|
+				to_check = file_in_repo.sub(Regexp.new(baseDir), '')
 				putc(?.)
-				unless File.exists?(toCheck)
-					if File.directory?(f)
-						FileUtils.mkdir toCheck
-						@log.info "Create dir #{toCheck}"
+				# Let's restore this file if it doesn't exist on the computer.
+				unless File.exists?(to_check)
+					if File.directory?(file_in_repo)
+						FileUtils.mkdir to_check
+						@log.info "Create dir #{to_check}"
 					else
-						FileUtils.cp(f, toCheck)
-						@log.info "Restoring #{toCheck}"
+						FileUtils.cp(file_in_repo, to_check)
+						@log.info "Restoring #{to_check}"
 					end
 				end
 			}
