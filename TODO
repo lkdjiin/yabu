@@ -2,10 +2,10 @@
 
 (done)reorganize folders
 (done)switch to ruby 1.9.2
-* use rake
+(done)* use rake
 * move version to a file
 * gem installation
-* rewrite readme(.rdoc)
+(done)* rewrite readme(.rdoc)
 (done)namespace Yabu
 * recover from newest backup
 (done)  + missing files
