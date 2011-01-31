@@ -3,14 +3,14 @@
 (done)reorganize folders
 (done)switch to ruby 1.9.2
 (done)* use rake
-* move version to a file
-* gem installation
+(done)* move version to a file
+(done)* gem installation
 (done)* rewrite readme(.rdoc)
 (done)namespace Yabu
 * recover from newest backup
 (done)  + missing files
   + files with a modification time too old
-
+* copy and use config files from /home/$USER/.config/yabu
 --- v0.7 ---
 * command : yabu.rb recover --help
 * recover from a given backup

@@ -1,2 +1,3 @@
 .yardoc/
 yabu.log*
+*.gem

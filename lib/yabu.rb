@@ -11,4 +11,8 @@ require "yabu/main"
 
 module Yabu
 
+	def Yabu.version
+		File.read($YABU_PATH + '/VERSION').strip
+	end
+	
 end

@@ -34,7 +34,7 @@ module Yabu
 		
 		# I start the backup process.
 		def run
-			@log.info "Backup started with " + Version.get
+			@log.info "Backup started with " + Yabu.version
 			createSavingDirectory
 			copy
 			Message.printEndOfBackup

@@ -18,7 +18,7 @@ class Options
 	def initialize
 		@options = {}
 		optparse = OptionParser.new do|opts|
-		 	opts.banner = "Usage: ./saving.rb [options]"
+		 	opts.banner = "Usage: yabu [options]"
 		 	# Define the options, and what they do
    		@options[:version] = false
    		opts.on( '-v', '--version', 'Print version number and exit' ) do
@@ -57,7 +57,7 @@ class Options
 private
 
 	def printVersion
-		puts File.read($YABU_PATH + '/VERSION').strip
+		puts Yabu.version
 		exit
 	end
 	

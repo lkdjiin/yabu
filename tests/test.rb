@@ -4,6 +4,7 @@
 
 
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
+$YABU_PATH = File.expand_path(File.dirname(__FILE__)) + '/..'
 require "yabu"
 
 require "test/unit"
