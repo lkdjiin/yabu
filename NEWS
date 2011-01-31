@@ -1,3 +1,16 @@
+version 0.6  2011-
+
+  * Recover missing files and folders from the most recent backup
+	
+  * Installation procedure with gem
+	
+	* Place configuration files in the user's home folder
+ 
+  * Upgrade requierement to Ruby 1.9.2
+
+  * Misc: reorganize folders structure in the Ruby way
+
+
 version 0.5  2011-01-09
 
   Very small improvement

@@ -1,20 +1,8 @@
---- v0.6 ---
-
-(done)reorganize folders
-(done)switch to ruby 1.9.2
-(done)* use rake
-(done)* move version to a file
-(done)* gem installation
-(done)* rewrite readme(.rdoc)
-(done)namespace Yabu
-(done)* recover missing files and dirs from newest backup
-(done)* copy and use config files from ENV['HOME']/.config/yabu
-
 --- v0.7 ---
-* command : yabu.rb recover --help
+
+* command : yabu.rb help command
 * recover from a given backup
   + missing files
-  + files with a modification time too old
   + force to restore all files
 * recover from newest backup
   + force to restore all files
@@ -25,11 +13,11 @@
   allow us to restore such files when strange things had happen.
 * incremental backup ?
 * Voir si il y a assez de place avant de commencer
-* background task
+* background task ?
 * compression ?
 * remote backup ?
 * schedulding
 * encryption ?
 * transaction
-* GUI or curses ?
+* GUI or curses ? (for the restoring part ?)
 * include/exclude files AND directories with globbing/regex ???

@@ -18,7 +18,11 @@ class Options
 	def initialize
 		@options = {}
 		optparse = OptionParser.new do|opts|
-		 	opts.banner = "Usage: yabu [options]"
+		 	opts.banner = "Usage: yabu [options] [command]\n\n"
+			opts.banner += "Where command are\n"
+			opts.banner += "  backup : start the backup (default command)\n"
+			opts.banner += "  recover: restore missing files from the most recent backup\n\n"
+			opts.banner += "And options are\n"
 		 	# Define the options, and what they do
    		@options[:version] = false
    		opts.on( '-v', '--version', 'Print version number and exit' ) do

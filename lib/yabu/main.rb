@@ -9,7 +9,6 @@ module Yabu
 		# Default constructor
 		def initialize
 			opt = Options.new
-			Message.printLicense
 			generalConfig = YabuConfig.new
 			@log = Log.instance('yabu.log', generalConfig['logRotation'])
 			@log.level = Log::INFO unless opt[:test]
@@ -19,8 +18,13 @@ module Yabu
 		def run
 			if ARGV.size == 1 and ARGV[0] == 'recover'
 				startToRecover
-			else
+			elsif ARGV.size == 1 and ARGV[0] == 'backup'
 				startToBackup
+			elsif ARGV.size == 0
+				startToBackup
+			else
+				puts "Unknown command"
+				exit
 			end
 		end
 
