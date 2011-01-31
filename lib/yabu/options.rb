@@ -57,7 +57,7 @@ class Options
 private
 
 	def printVersion
-		puts Version.get
+		puts File.read($YABU_PATH + '/VERSION').strip
 		exit
 	end
 	
