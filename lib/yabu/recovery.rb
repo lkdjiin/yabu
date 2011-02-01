@@ -6,13 +6,13 @@ module Yabu
 
 		# Default constructor.
 		# @param [String] Config The 'yabu.conf' file path. To use only during testing.
-		def initialize config = ''
+		def initialize yabu_conf = ''
 			@backup = ''
 			@log = Log.instance
-			if config == ''
-				@generalConfig = YabuConfig.new
+			if yabu_conf.empty?
+				@yabu_config = YabuConfig.new
 			else
-				@generalConfig = YabuConfig.new config
+				@yabu_config = YabuConfig.new yabu_conf
 			end
 		end
 		
@@ -20,6 +20,7 @@ module Yabu
 		# @since 0.6
 		def run
 			find_newest_backup
+			# @todo diplay message and exit if there is no backup
 			restore_backup
 		end
 		
@@ -28,17 +29,17 @@ module Yabu
 		# Find the newest backup in the repository.
 		def find_newest_backup
 			backups = []
-			Dir.foreach(@generalConfig['path']) do |file|
+			Dir.foreach(@yabu_config['path']) do |file|
 				next if (file == ".") or (file == "..")
 				backups.push(file)
 			end
-			return false if backups.size == 0
+			return false if backups.empty?
 			backups.sort!.reverse!
 			@backup = backups[0]
 		end
 		
 		def restore_backup
-			baseDir = File.join(@generalConfig['path'], @backup)
+			baseDir = File.join(@yabu_config['path'], @backup)
 			puts "Recovering from #{baseDir}"
 			@log.info "Recovering from #{baseDir}"
 			files = File.join(baseDir, "**", "*")

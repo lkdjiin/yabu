@@ -1,12 +1,12 @@
 --- v0.7 ---
 
-* command : yabu.rb help command
+* command : help command
 * recover from a given backup
   + missing files
   + force to restore all files
 * recover from newest backup
   + force to restore all files
-
+* Where to put the log file ?
 --- next ---
 
 * record modification time of all backed-up files in a file along with the backup. That will

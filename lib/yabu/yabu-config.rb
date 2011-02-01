@@ -5,7 +5,7 @@ module Yabu
 	# I'm parsing the general (YAML) configuration file of Yabu : 'configuration/yabu.conf'.
 	# @example
 	#		c = YabuConfig.new
-	#		pathToBackupDir = c.['path']
+	#		pathToBackupDir = c['path']
 	# @see configuration/yabu.conf for a description of all keys
 	class YabuConfig
 		
@@ -18,6 +18,7 @@ module Yabu
 		
 		# Get a value from the config.
 		# @param [String] k the key in the config file
+		# @return [Object]
 		def [](k)
 			@dico[k]
 		end

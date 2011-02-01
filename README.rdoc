@@ -1,7 +1,9 @@
 = "Yeah! Another Backup Utility"
 
-"Yeah! Another Backup Utility" (Yabu in short) is a backup and recovery utility
-for linux. It maybe works for other systems but I don't know.
+"Yeah! Another Backup Utility" (Yabu in short) is a daily backup and recover
+command line utility for linux. It should run on other unixes as well.
+
+Yabu is distributed under the terms of the GPL-3.
 
 
 == Documentation
@@ -9,7 +11,7 @@ for linux. It maybe works for other systems but I don't know.
 Look at {the wiki}[https://github.com/lkdjiin/Yabu/wiki].
 
 
-== Dependancies
+== Dependencies
 
 Yabu is written in ruby, so you need a ruby interpreter to run it.
 

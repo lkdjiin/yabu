@@ -9,6 +9,7 @@ require "yabu/dir-config"
 require "yabu/recovery"
 require "yabu/main"
 require "yabu/install"
+require "yabu/help"
 
 module Yabu
 

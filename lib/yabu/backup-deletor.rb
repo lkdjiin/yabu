@@ -8,73 +8,74 @@ module Yabu
 	# See the rules in the user guide.
 	class BackupDeletor
 
-		# @param [String] Config The 'yabu.conf' file path. To use only during testing.
-		def initialize config = ''
-			@backupToRemove = []
-			@numberOfBackups = 0
+		# @param [String] yabu_conf The 'yabu.conf' file path. To use only during testing.
+		def initialize yabu_conf = ''
+			@backups_to_remove = []
+			@number_of_backups = 0
 			@log = Log.instance
-			if config == ''
-				@generalConfig = YabuConfig.new
+			if yabu_conf.empty?
+				@yabu_config = YabuConfig.new
 			else
-				@generalConfig = YabuConfig.new config
+				@yabu_config = YabuConfig.new yabu_conf
 			end
 		end
 		
+		# Start the process of deleting old backups
 		def run
-			searchOldBackup
-			removeOldBackup
+			search_old_backup
+			remove_old_backup
 		end
 
 	private
 
 		# I look in the backup directory to find all the backups older than X days.
 		# X is given by the 'removeAfterXDays' key in the config file.
-		def searchOldBackup
+		def search_old_backup
 			Message.searchingOldBackups
-			Dir.foreach(@generalConfig['path']) do |file|
+			Dir.foreach(@yabu_config['path']) do |file|
 				next if (file == ".") or (file == "..")
-				@numberOfBackups += 1
+				@number_of_backups += 1
 				filedate = Date.new file[0, 4].to_i, file[4, 2].to_i, file[6, 2].to_i
 				x = Date.today - filedate
-				@backupToRemove.push(file) if x > @generalConfig['removeAfterXDays']
+				@backups_to_remove.push(file) if x > @yabu_config['removeAfterXDays']
 			end
 		end
 		
-		def removeOldBackup
-			if @backupToRemove == []
-				dontRemove
+		def remove_old_backup
+			if @backups_to_remove == []
+				dont_remove
 			else
-				tryToRemove
+				try_to_remove
 			end
 		end
 		
-		def dontRemove
+		def dont_remove
 			Message.noBackupsToRemove
 			@log.debug "No old backup to remove"
 		end
 		
-		# I try to remove the oldest backups. But I always keep a number of backup in the backup directory.
-		def tryToRemove
-			@backupToRemove.sort!
-			numberOfBackupToKeep = @generalConfig['savesToKeep']
-			@backupToRemove.each do |file|
-				remove file if @numberOfBackups > numberOfBackupToKeep
+		# I try to remove the oldest backups. But I always keep a number of backup in the repository.
+		def try_to_remove
+			@backups_to_remove.sort!
+			numberOfBackupToKeep = @yabu_config['savesToKeep']
+			@backups_to_remove.each do |file|
+				remove file if @number_of_backups > numberOfBackupToKeep
 			end
 			Message.endOfRemovingOldBackups
 		end
 		
-		# Remove one backup.
+		# Remove one backup directory and its content.
 		#
-		# @param [String] aBackup the path of the backup to remove
-		def remove aBackup
-			aDirectory = File.join(@generalConfig['path'], aBackup)
-			@log.info "Removing backup #{aDirectory}"
+		# @param [String] a_backup Path of the backup to remove
+		def remove a_backup
+			a_directory = File.join(@yabu_config['path'], a_backup)
+			@log.info "Removing backup #{a_directory}"
 			begin
-				FileUtils.remove_dir aDirectory, true
+				FileUtils.remove_dir a_directory, true
 			rescue
-				@log.warn "Old backup <#{aDirectory}> maybe not removed"
+				@log.warn "Old backup <#{a_directory}> maybe not removed"
 			end
-			@numberOfBackups -= 1
+			@number_of_backups -= 1
 		end
 		
 	end
