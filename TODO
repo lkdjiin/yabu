@@ -4,11 +4,10 @@ ok* command : help command
 * recover from a given backup
   + missing files
   + force to restore all files
-* recover from newest backup
-  + force to restore all files
-* Where to put the log file ?
---- next ---
+* recover from newest backup: force to restore all files
 
+--- next ---
+* Where to put the log file ?
 * record modification time of all backed-up files in a file along with the backup. That will
   allow us to restore such files when strange things had happen.
 * incremental backup ?

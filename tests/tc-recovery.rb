@@ -11,9 +11,9 @@ class TC_Recovery < Test::Unit::TestCase
 		FileUtils.cp('/home/xavier/devel/ruby/yabu/README.rdoc', bkDir)
 	end
 	
-	def restore
+	def restore options={}
 		rec = Yabu::Recovery.new CONF_TEST_1
-		rec.run
+		rec.run options
 	end
 	
 	def test_recover_one_missing_file
@@ -54,6 +54,27 @@ class TC_Recovery < Test::Unit::TestCase
 		# Clean things
 		FileUtils.remove_dir 'temp/20110101-1234' if File.exist?('temp/20110101-1234')
 		FileUtils.remove_dir 'missingdir' if File.exist?('missingdir')
+	end
+	
+	def test_force_to_recover_all_files
+		# We use the folder /tests. Lets say this folder should contains 2 files :
+		# README.rdoc and NEWS. README.rdoc is missing. We create an empty NEWS to
+		# prove it will be replaced.
+		FileUtils.touch '/home/xavier/devel/ruby/yabu/tests/NEWS'
+		# Be sure NEWS is zero length
+		assert_equal(true, File.zero?('/home/xavier/devel/ruby/yabu/tests/README.rdoc'))
+		create_little_backup 
+		# Must restore README and NEWS
+		restore force: :yes
+		# Check
+		assert_equal(true, File.exist?('/home/xavier/devel/ruby/yabu/tests/missingdir/README.rdoc'))
+		assert_equal(true, File.exist?('/home/xavier/devel/ruby/yabu/tests/missingdir/NEWS'))
+		assert_equal(false, File.zero?('/home/xavier/devel/ruby/yabu/tests/missingdir/NEWS'))
+	ensure
+		# Clean things
+		FileUtils.remove_dir 'temp/20110101-1234' if File.exist?('temp/20110101-1234')
+		FileUtils.remove_file 'README.rdoc' if File.exist?('README.rdoc')
+		FileUtils.remove_file 'NEWS' if File.exist?('NEWS')
 	end
 	
 end
