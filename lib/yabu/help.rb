@@ -1,5 +1,6 @@
 module Yabu
 
+	# I deliver messages for the help command
 	class Help
 	
 		def Help.help

@@ -32,18 +32,17 @@ module Yabu
 	private
 	
 		def check_if_user_seeking_help
-			unless ARGV.empty?
-				if ARGV[0] == 'help'
-					case ARGV[1]
-						when nil then exit
-						when 'help' then puts Help.help
-						when 'recover' then puts Help.recover
-						when 'backup' then puts Help.backup
-						else
-							puts "Unknown command #{ARGV[1]}"
-					end
-					exit
+			return if ARGV.empty?
+			if ARGV[0] == 'help'
+				case ARGV[1]
+					when nil then exit
+					when 'help' then puts Help.help
+					when 'recover' then puts Help.recover
+					when 'backup' then puts Help.backup
+					else
+						puts "Unknown command #{ARGV[1]}"
 				end
+				exit
 			end
 		end
 
