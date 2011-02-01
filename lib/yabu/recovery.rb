@@ -17,12 +17,13 @@ module Yabu
 		end
 		
 		# I start the recovery process
-		# @since 0.6
+		# @param [Hash] options
+		# @option [Boolean] :force Force to recover all files
 		def run options={}
 			options = {force: false}.merge(options)
 			find_newest_backup
 			# @todo diplay message and exit if there is no backup
-			restore_backup options
+			restore options
 		end
 		
 	private
@@ -39,32 +40,42 @@ module Yabu
 			@backup = backups[0]
 		end
 		
-		def restore_backup options
-			baseDir = File.join(@yabu_config['path'], @backup)
-			puts "Recovering from #{baseDir}"
-			@log.info "Recovering from #{baseDir}"
-			files = File.join(baseDir, "**", "*")
+		def restore options
+			repository = File.join(@yabu_config['path'], @backup)
+			log_and_display "Recovering from #{repository}"
+			files = File.join(repository, "**", "*")
 			Dir.glob(files).each {|file_in_repo|
-				file_on_computer = file_in_repo.sub(Regexp.new(baseDir), '')
+				file_on_computer = file_in_repo.sub(Regexp.new(repository), '')
 				putc(?.)
-				# Let's restore this file if it doesn't exist on the computer
-				# or if user force the recovery
 				if options[:force]
-					if File.file?(file_in_repo)
-						FileUtils.cp(file_in_repo, file_on_computer)
-						@log.info "Forced restore #{file_on_computer}"
-					end
-				end
-				unless File.exists?(file_on_computer)
-					if File.directory?(file_in_repo)
-						FileUtils.mkdir file_on_computer
-						@log.info "Create dir #{file_on_computer}"
-					else
-						FileUtils.cp(file_in_repo, file_on_computer)
-						@log.info "Restoring #{file_on_computer}"
-					end
+					copy_file_to_computer(file_in_repo, file_on_computer) if File.file?(file_in_repo)
+				elsif (not File.exists?(file_on_computer))
+					copy_item_to_computer file_in_repo, file_on_computer
 				end
 			}
+		end
+		
+		def log_and_display message
+			puts message
+			@log.info message
+		end
+		
+		def copy_item_to_computer from, to
+			if File.directory?(from)
+				create_dir_on_computer to
+			else
+				copy_file_to_computer(from, to)
+			end
+		end
+		
+		def copy_file_to_computer from, to
+			FileUtils.cp from, to
+			@log.info "Restored #{to}"
+		end
+		
+		def create_dir_on_computer name
+			FileUtils.mkdir name
+			@log.info "Created dir #{name}"
 		end
 		
 	end
