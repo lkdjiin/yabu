@@ -3,7 +3,8 @@ module Yabu
 	class Help
 	
 		def Help.help
-			"Command: help
+			"----------------------------------------
+Command: help
 
 Description:
   Display some help about a Yabu command.
@@ -11,7 +12,7 @@ Description:
 Usage:
   yabu help command_name
   
-	where command_name is the command name for which you seek help.
+  where command_name is the command name for which you seek help.
 
 Example:
   yabu help recover
@@ -19,7 +20,8 @@ Example:
 		end
 		
 		def Help.recover
-			"Command: recover
+			"----------------------------------------
+Command: recover
 
 Description:
   Restore your data from the repository.
@@ -36,11 +38,12 @@ Example:
 		end
 		
 		def Help.backup
-			"Command: backup
+			"----------------------------------------
+Command: backup
 
 Description:
   Backup your data in the repository. This is the default command for Yabu, so
-	you don't need to type it explicitly.
+  you don't need to type it explicitly.
 	
 Usage:
   yabu backup

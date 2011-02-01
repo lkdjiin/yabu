@@ -1,6 +1,6 @@
 --- v0.7 ---
 
-* command : help command
+ok* command : help command
 * recover from a given backup
   + missing files
   + force to restore all files

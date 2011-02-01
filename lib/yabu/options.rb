@@ -21,7 +21,8 @@ class Options
 		 	opts.banner = "Usage: yabu [options] [command]\n\n"
 			opts.banner += "Where command are\n"
 			opts.banner += "  backup : start the backup (default command)\n"
-			opts.banner += "  recover: restore missing files from the most recent backup\n\n"
+			opts.banner += "  recover: restore missing files from the most recent backup\n"
+			opts.banner += "  help command_name: display help on command_name\n\n"
 			opts.banner += "And options are\n"
 		 	# Define the options, and what they do
    		@options[:version] = false

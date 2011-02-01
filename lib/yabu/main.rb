@@ -9,9 +9,10 @@ module Yabu
 		# Default constructor
 		def initialize
 			opt = Options.new
-			generalConfig = YabuConfig.new
-			@log = Log.instance('yabu.log', generalConfig['logRotation'])
+			yabu_config = YabuConfig.new
+			@log = Log.instance('yabu.log', yabu_config['logRotation'])
 			@log.level = Log::INFO unless opt[:test]
+			check_if_user_seeking_help
 		end
 		
 		# Start the backup process or the recover process.
@@ -29,6 +30,22 @@ module Yabu
 		end
 
 	private
+	
+		def check_if_user_seeking_help
+			unless ARGV.empty?
+				if ARGV[0] == 'help'
+					case ARGV[1]
+						when nil then exit
+						when 'help' then puts Help.help
+						when 'recover' then puts Help.recover
+						when 'backup' then puts Help.backup
+						else
+							puts "Unknown command #{ARGV[1]}"
+					end
+					exit
+				end
+			end
+		end
 
 		# Start the backup process.
 		def startToBackup
