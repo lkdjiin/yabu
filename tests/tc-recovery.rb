@@ -18,19 +18,20 @@ class TC_Recovery < Test::Unit::TestCase
 	
 	def test_recover_one_missing_file
 		# We use the folder /tests. Lets say this folder should contains 2 files backed up :
-		# README.rdoc and NEWS. README.rdoc is the missing one.
-		FileUtils.cp('/home/xavier/devel/ruby/yabu/NEWS', '/home/xavier/devel/ruby/yabu/tests/')
-		
+		# README.rdoc and NEWS. README.rdoc is the missing one. NEWS will be zero length to
+		# prove it has not been restored.
+		FileUtils.touch '/home/xavier/devel/ruby/yabu/tests/NEWS'
 		create_little_backup
-		
 		# Be sure README doesn't stand here from another test run
 		assert_equal(false, File.exist?('/home/xavier/devel/ruby/yabu/tests/README.rdoc'))
-		
+		# Be sure NEWS is zero length
+		assert_equal(true, File.zero?('/home/xavier/devel/ruby/yabu/tests/NEWS'))
 		# Must restore the README file in '/home/xavier/devel/ruby/yabu/tests/'
 		restore
-		
 		# Check if README has been restored
 		assert_equal(true, File.exist?('/home/xavier/devel/ruby/yabu/tests/README.rdoc'))
+		# Check NEWS had not been restored
+		assert_equal(true, File.zero?('/home/xavier/devel/ruby/yabu/tests/NEWS'))
 	ensure
 		# Clean things
 		FileUtils.remove_dir 'temp/20110101-1234' if File.exist?('temp/20110101-1234')
@@ -62,14 +63,14 @@ class TC_Recovery < Test::Unit::TestCase
 		# prove it will be replaced.
 		FileUtils.touch '/home/xavier/devel/ruby/yabu/tests/NEWS'
 		# Be sure NEWS is zero length
-		assert_equal(true, File.zero?('/home/xavier/devel/ruby/yabu/tests/README.rdoc'))
+		assert_equal(true, File.zero?('/home/xavier/devel/ruby/yabu/tests/NEWS'))
 		create_little_backup 
 		# Must restore README and NEWS
-		restore force: :yes
+		restore force: true
 		# Check
-		assert_equal(true, File.exist?('/home/xavier/devel/ruby/yabu/tests/missingdir/README.rdoc'))
-		assert_equal(true, File.exist?('/home/xavier/devel/ruby/yabu/tests/missingdir/NEWS'))
-		assert_equal(false, File.zero?('/home/xavier/devel/ruby/yabu/tests/missingdir/NEWS'))
+		assert_equal(true, File.exist?('/home/xavier/devel/ruby/yabu/tests/README.rdoc'))
+		assert_equal(true, File.exist?('/home/xavier/devel/ruby/yabu/tests/NEWS'))
+		assert_equal(false, File.zero?('/home/xavier/devel/ruby/yabu/tests/NEWS'))
 	ensure
 		# Clean things
 		FileUtils.remove_dir 'temp/20110101-1234' if File.exist?('temp/20110101-1234')

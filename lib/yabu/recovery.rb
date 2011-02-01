@@ -18,10 +18,11 @@ module Yabu
 		
 		# I start the recovery process
 		# @since 0.6
-		def run
+		def run options={}
+			options = {force: false}.merge(options)
 			find_newest_backup
 			# @todo diplay message and exit if there is no backup
-			restore_backup
+			restore_backup options
 		end
 		
 	private
@@ -38,22 +39,29 @@ module Yabu
 			@backup = backups[0]
 		end
 		
-		def restore_backup
+		def restore_backup options
 			baseDir = File.join(@yabu_config['path'], @backup)
 			puts "Recovering from #{baseDir}"
 			@log.info "Recovering from #{baseDir}"
 			files = File.join(baseDir, "**", "*")
 			Dir.glob(files).each {|file_in_repo|
-				to_check = file_in_repo.sub(Regexp.new(baseDir), '')
+				file_on_computer = file_in_repo.sub(Regexp.new(baseDir), '')
 				putc(?.)
-				# Let's restore this file if it doesn't exist on the computer.
-				unless File.exists?(to_check)
+				# Let's restore this file if it doesn't exist on the computer
+				# or if user force the recovery
+				if options[:force]
+					if File.file?(file_in_repo)
+						FileUtils.cp(file_in_repo, file_on_computer)
+						@log.info "Forced restore #{file_on_computer}"
+					end
+				end
+				unless File.exists?(file_on_computer)
 					if File.directory?(file_in_repo)
-						FileUtils.mkdir to_check
-						@log.info "Create dir #{to_check}"
+						FileUtils.mkdir file_on_computer
+						@log.info "Create dir #{file_on_computer}"
 					else
-						FileUtils.cp(file_in_repo, to_check)
-						@log.info "Restoring #{to_check}"
+						FileUtils.cp(file_in_repo, file_on_computer)
+						@log.info "Restoring #{file_on_computer}"
 					end
 				end
 			}
