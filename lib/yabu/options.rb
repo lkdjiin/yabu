@@ -8,8 +8,9 @@ require 'optparse'
 #		opt = Options.new # Exit if there are an option
 #		bk = Backup.new # But do this if there are not.
 class Options
-
+	attr_reader :options
 	# Here is a list of command line options :
+	# * --force
 	# * --version
 	# * --license
 	# * --help
@@ -19,12 +20,12 @@ class Options
 		@options = {}
 		optparse = OptionParser.new do|opts|
 		 	opts.banner = "Usage: yabu [options] [command]\n\n"
-			opts.banner += "Where command are\n"
+			opts.banner += "Where command is\n"
 			opts.banner += "  backup : start the backup (default command)\n"
 			opts.banner += "  recover: restore missing files from the most recent backup\n"
 			opts.banner += "  help command_name: display help on command_name\n\n"
 			opts.banner += "And options are\n"
-		 	# Define the options, and what they do
+
    		@options[:version] = false
    		opts.on( '-v', '--version', 'Print version number and exit' ) do
      		@options[:version] = true
@@ -38,6 +39,11 @@ class Options
    		@options[:test] = false
    		opts.on( '-t', '--test', 'Log all' ) do
      		@options[:test] = true
+   		end
+			
+			@options[:force] = false
+   		opts.on( '-f', '--force', 'Force to recover ALL files' ) do
+     		@options[:force] = true
    		end
    		
    		opts.on( '-h', '--help', 'Display this screen' ) do

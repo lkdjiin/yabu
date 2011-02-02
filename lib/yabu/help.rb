@@ -28,10 +28,11 @@ Description:
   Restore your data from the repository.
 	
 Usage:
-  yabu recover [option]
+  yabu [option] recover
 
 Options:
-  TODO
+  --force
+	  Force yabu to restore ALL files, even if they already exist.
 
 Example:
   yabu recover

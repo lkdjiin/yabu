@@ -4,9 +4,12 @@ ok* command : help command
 * recover from a given backup
   + missing files
   + force to restore all files
-* recover from newest backup: force to restore all files
+ok* recover from the most recent backup: force to restore all files
+* display number of copy errors
+* log recovery options
 
 --- next ---
+
 * Where to put the log file ?
 * record modification time of all backed-up files in a file along with the backup. That will
   allow us to restore such files when strange things had happen.
