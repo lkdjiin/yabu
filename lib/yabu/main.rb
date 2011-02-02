@@ -48,8 +48,11 @@ module Yabu
 
 		# Start the backup process.
 		def startToBackup
-			backup
+			errors = backup
 			deleteOldBackup
+			unless errors.zero?
+				puts "!!! #{errors} error(s) during copy process. See the log file !!!"
+			end
 		end
 		
 		# Start the recovery process.

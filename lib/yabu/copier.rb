@@ -5,12 +5,15 @@ module Yabu
 	# I'm doing the hard work of copying recursivly the files and directories to backup.
 	# I'm hacked from an article found on http://iamneato.com/2009/07/28/copy-folders-recursively
 	class Copier
+		# Get the number of non-fatal errors occured during copy
+		attr_reader :errors
 
 		# @param [Array<String>] excludeFileList List of directories and files 
 		#		to exclude from the backups.
 		def initialize(excludeFileList)
 			@log = Log.instance
 			@exclude = excludeFileList
+			@errors = 0
 		end
 
 		# I try to recursively copy src to dest.
@@ -57,7 +60,7 @@ module Yabu
 				FileUtils.cp(source, dest)
 				@log.debug "Copied #{source} to #{dest}"
 			rescue
-				@log.error "Cannot copy #{source} to #{dest}"
+				record_error "Cannot copy #{source} to #{dest}"
 			end
 		end
 		
@@ -68,7 +71,7 @@ module Yabu
 			begin
 				loopCopy source, dest
 			rescue SystemCallError
-				@log.error "Cannot read #{source}"
+				record_error "Cannot read #{source}"
 			end
 		end
 		
@@ -114,8 +117,13 @@ module Yabu
 				FileUtils.mkdir(dir)
 				@log.debug "Created " + dir
 			rescue SystemCallError
-				@log.error "Cannot create directory #{dir}"
+				record_error "Cannot create directory #{dir}"
 			end
+		end
+		
+		def record_error message
+			@log.error message
+			@errors += 1
 		end
 		
 	end

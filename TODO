@@ -5,7 +5,7 @@ ok* command : help command
   + missing files
   + force to restore all files
 ok* recover from the most recent backup: force to restore all files
-* display number of copy errors
+ok* display number of copy errors
 * log recovery options
 
 --- next ---

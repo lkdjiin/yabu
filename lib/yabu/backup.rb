@@ -33,13 +33,15 @@ module Yabu
 		end
 		
 		# I start the backup process.
+		# @return [Fixnum] Number of errors occured
 		def run
 			puts "Backup started"
 			@log.info "Backup started with " + Yabu.version
 			createSavingDirectory
-			copy
+			errors = copy
 			Message.printEndOfBackup
 			@log.info "Backup is in #{@savingPath}"
+			errors
 		end
 		
 	private
@@ -75,11 +77,13 @@ module Yabu
 		end
 		
 		# I do the effective backup.
+		# @return [Fixnum] Number of errors occured
 		def copy
 			copier = Copier.new @dirConfig.filesToExclude
 			@dirConfig.files.each do |source| 
 				copier.copy(source, File.join(@savingPath, source))
 			end
+			copier.errors
 		end
 		
 	end
