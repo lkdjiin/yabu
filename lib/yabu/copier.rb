@@ -8,11 +8,11 @@ module Yabu
 		# Get the number of non-fatal errors occured during copy
 		attr_reader :errors
 
-		# @param [Array<String>] excludeFileList List of directories and files 
+		# @param [Array<String>] exclude_files List of directories and files 
 		#		to exclude from the backups.
-		def initialize(excludeFileList)
+		def initialize(exclude_files)
 			@log = Log.instance
-			@exclude = excludeFileList
+			@exclude = exclude_files
 			@errors = 0
 		end
 
@@ -20,11 +20,11 @@ module Yabu
 		# @param [String] src the source file or directory
 		# @param [String] dest the destination file or directory
 		def copy src, dest
-			createIfNeeded dest if File.directory? src
+			create_if_needed dest if File.directory? src
 			if File.directory? src
-				copyDirectory src, dest
+				copy_directory src, dest
 			else
-				copyFile src, dest
+				copy_file src, dest
 			end
 		end
 
@@ -32,7 +32,7 @@ module Yabu
 
 		# I am trying to create the dest directory, along with its parent's directories if they doesn't
 		# exist.
-		def createIfNeeded dest
+		def create_if_needed dest
 			return if File.exist?(dest)
 			begin
 				FileUtils.makedirs dest
@@ -55,7 +55,7 @@ module Yabu
 		# Copy one file, not a directory.
 		# @param [String] source the source path
 		# @param [String] dest the destination path
-		def copyFile source, dest
+		def copy_file source, dest
 			begin
 				FileUtils.cp(source, dest)
 				@log.debug "Copied #{source} to #{dest}"
@@ -67,9 +67,9 @@ module Yabu
 		# Copy a directory and its content (recursive).
 		# @param [String] source the source path
 		# @param [String] dest the destination path
-		def copyDirectory source, dest
+		def copy_directory source, dest
 			begin
-				loopCopy source, dest
+				loop_copy source, dest
 			rescue SystemCallError
 				record_error "Cannot read #{source}"
 			end
@@ -78,22 +78,22 @@ module Yabu
 		# Copy a directory and its content (recursive). Compare the files to the list of exclusions.
 		# @param [String] source the source path
 		# @param [String] dest the destination path
-		def loopCopy source, dest
+		def loop_copy source, dest
 			Dir.foreach(source) do |file|
 				next if skip? source, file
-				decideHowToCopy(File.join(source, file), File.join(dest, file))
+				decide_how_to_copy(File.join(source, file), File.join(dest, file))
 			end
 		end
 		
 		# If +source+ is a file, copy this file. If +source+ is a directory, copy this directory.
 		# @param [String] source the source path
 		# @param [String] dest the destination path
-		def decideHowToCopy source, dest
+		def decide_how_to_copy source, dest
 			if File.directory?(source)
 				mkdir dest
 				copy source, dest
 			else
-				copyFile source, dest
+				copy_file source, dest
 			end
 		end
 		
