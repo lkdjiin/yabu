@@ -9,7 +9,7 @@ class TC_Backup < Test::Unit::TestCase
 	DIR_TEST = 'configuration/directories.conf.test'
 	DIR_TEST_2 = 'configuration/directories.conf.test2'
 	
-	def testBackup
+	def test_backup
 		bk = Yabu::Backup.new(CONF_TEST_1, DIR_TEST)
 		bk.run
 		
@@ -50,7 +50,7 @@ class TC_Backup < Test::Unit::TestCase
 	end
 	
 	# Test of expand_path
-	def testBackup2
+	def test_backup2
 		bk = Yabu::Backup.new(CONF_TEST_1, DIR_TEST_2)
 		bk.run
 		

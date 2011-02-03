@@ -16,15 +16,15 @@ module Yabu
 			@errors = 0
 		end
 
-		# I try to recursively copy src to dest.
-		# @param [String] src the source file or directory
-		# @param [String] dest the destination file or directory
-		def copy src, dest
-			create_if_needed dest if File.directory? src
-			if File.directory?(src)
-				copy_directory src, dest
+		# I try to recursively copy source to dest.
+		# @param [String] source Full path name of the file (or directory) on the computer
+		# @param [String] dest Full path name of the future file (or directory) in the repository
+		def copy source, dest
+			create_if_needed dest if File.directory? source
+			if File.directory?(source)
+				copy_directory source, dest
 			else
-				copy_file src, dest
+				copy_file source, dest
 			end
 		end
 
