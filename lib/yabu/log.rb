@@ -10,11 +10,16 @@ module Yabu
 		private_class_method :new
 		
 		@@logger = nil
+		# The default path to log file.
+		# @note It seems to me that an hidden file in
+		#   user's home folder is currently the best idea. Am I right ?
+		@@default_filename = File.join(ENV['HOME'], '.yabu.log')
 		
 		# @param [String] fileName (Optional) log's file name
 		# @param [String] frequencyRotation (Optional) 'daily', 'weekly' or 'monthly'
 		# @return [Log] always the same instance.
-		def Log.instance(fileName = 'yabu.log', frequencyRotation = 'monthly')
+		# @todo an options hash would be better than default arguments
+		def Log.instance(fileName = @@default_filename, frequencyRotation = 'monthly')
 			@@logger = new(fileName, frequencyRotation) unless @@logger
 			@@logger
 		end
