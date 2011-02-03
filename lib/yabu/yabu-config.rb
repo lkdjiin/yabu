@@ -5,8 +5,8 @@ module Yabu
 	# I'm parsing the general (YAML) configuration file of Yabu : 'configuration/yabu.conf'.
 	# @example
 	#		c = YabuConfig.new
-	#		pathToBackupDir = c['path']
-	# @see configuration/yabu.conf for a description of all keys
+	#		path_to_repository = c['path']
+	# See the file configuration/yabu.conf for a description of all keys.
 	class YabuConfig
 		
 		# @param [String] filename The 'yabu.conf' file path. To use only during testing.

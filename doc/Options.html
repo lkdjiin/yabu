@@ -103,6 +103,38 @@ class Backup and the like.
 
 </div>
 
+  <h2>Instance Attribute Summary <small>(<a href="#" class="summary_toggle">collapse</a>)</small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#options-instance_method" title="#options (instance method)">- (Object) <strong>options</strong> </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title readonly">readonly</span>
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Returns the value of attribute options.
+</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
 
   
     <h2>
@@ -156,6 +188,10 @@ Here is a list of command line options :
 </p>
 <ul>
 <li><p>
+--force
+</p>
+</li>
+<li><p>
 --version
 </p>
 </li>
@@ -206,6 +242,10 @@ Here is a list of command line options :
 </p>
 <ul>
 <li><p>
+--force
+</p>
+</li>
+<li><p>
 --version
 </p>
 </li>
@@ -234,7 +274,6 @@ Here is a list of command line options :
       <pre class="lines">
 
 
-18
 19
 20
 21
@@ -267,17 +306,33 @@ Here is a list of command line options :
 48
 49
 50
-51</pre>
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yabu/options.rb', line 18</span>
+      <pre class="code"><span class="info file"># File 'lib/yabu/options.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='id initialize'>initialize</span>
 	<span class='ivar'>@options</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span>
 	<span class='id optparse'>optparse</span> <span class='op'>=</span> <span class='const'>OptionParser</span><span class='period'>.</span><span class='id new'>new</span> <span class='kw'>do</span><span class='op'>|</span><span class='id opts'>opts</span><span class='op'>|</span>
-	 	<span class='id opts'>opts</span><span class='period'>.</span><span class='id banner'>banner</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Usage: ./saving.rb [options]</span><span class='tstring_end'>&quot;</span></span>
-	 	<span class='comment'># Define the options, and what they do
-</span>  		<span class='ivar'>@options</span><span class='lbracket'>[</span><span class='symbol'>:version</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+	 	<span class='id opts'>opts</span><span class='period'>.</span><span class='id banner'>banner</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Usage: yabu [options] [command]\n\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='id opts'>opts</span><span class='period'>.</span><span class='id banner'>banner</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Where command is\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='id opts'>opts</span><span class='period'>.</span><span class='id banner'>banner</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>  backup : start the backup (default command)\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='id opts'>opts</span><span class='period'>.</span><span class='id banner'>banner</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>  recover: restore missing files from the most recent backup\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='id opts'>opts</span><span class='period'>.</span><span class='id banner'>banner</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>  help command_name: display help on command_name\n\n</span><span class='tstring_end'>&quot;</span></span>
+		<span class='id opts'>opts</span><span class='period'>.</span><span class='id banner'>banner</span> <span class='op'>+=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>And options are\n</span><span class='tstring_end'>&quot;</span></span>
+
+  		<span class='ivar'>@options</span><span class='lbracket'>[</span><span class='symbol'>:version</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
   		<span class='id opts'>opts</span><span class='period'>.</span><span class='id on'>on</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-v</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>--version</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Print version number and exit</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span> <span class='kw'>do</span>
     		<span class='ivar'>@options</span><span class='lbracket'>[</span><span class='symbol'>:version</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>true</span>
   		<span class='kw'>end</span>
@@ -290,6 +345,11 @@ Here is a list of command line options :
   		<span class='ivar'>@options</span><span class='lbracket'>[</span><span class='symbol'>:test</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
   		<span class='id opts'>opts</span><span class='period'>.</span><span class='id on'>on</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-t</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>--test</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Log all</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span> <span class='kw'>do</span>
     		<span class='ivar'>@options</span><span class='lbracket'>[</span><span class='symbol'>:test</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>true</span>
+  		<span class='kw'>end</span>
+		
+		<span class='ivar'>@options</span><span class='lbracket'>[</span><span class='symbol'>:force</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>false</span>
+  		<span class='id opts'>opts</span><span class='period'>.</span><span class='id on'>on</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-f</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>--force</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Force to recover ALL files</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span> <span class='kw'>do</span>
+    		<span class='ivar'>@options</span><span class='lbracket'>[</span><span class='symbol'>:force</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='kw'>true</span>
   		<span class='kw'>end</span>
   		
   		<span class='id opts'>opts</span><span class='period'>.</span><span class='id on'>on</span><span class='lparen'>(</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>-h</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>--help</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>Display this screen</span><span class='tstring_end'>'</span></span> <span class='rparen'>)</span> <span class='kw'>do</span>
@@ -313,6 +373,53 @@ Here is a list of command line options :
   
 </div>
 
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <span id="options-instance_method"></span>
+      <div class="method_details first">
+  <p class="signature first" id="options-instance_method">
+  
+    - (<tt>Object</tt>) <strong>options</strong>  <span class="extras">(readonly)</span>
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Returns the value of attribute options
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+11
+12
+13</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/yabu/options.rb', line 11</span>
+
+<span class='kw'>def</span> <span class='id options'>options</span>
+  <span class='ivar'>@options</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
 
   <div id="instance_method_details" class="method_details_list">
     <h2>Instance Method Details</h2>
@@ -331,12 +438,12 @@ Here is a list of command line options :
       <pre class="lines">
 
 
-53
-54
-55</pre>
+64
+65
+66</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yabu/options.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/yabu/options.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id k'>k</span><span class='rparen'>)</span>
 	<span class='ivar'>@options</span><span class='lbracket'>[</span><span class='id k'>k</span><span class='rbracket'>]</span>
@@ -351,7 +458,7 @@ Here is a list of command line options :
 </div>
     
     <div id="footer">
-  Generated on Mon Jan 31 15:49:43 2011 by 
+  Generated on Thu Feb  3 14:32:34 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.4 (ruby-1.9.2).
 </div>

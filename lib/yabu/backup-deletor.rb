@@ -8,7 +8,7 @@ module Yabu
 	# See the rules in the user guide.
 	class BackupDeletor
 
-		# @param [String] yabu_conf The 'yabu.conf' file path. To use only during testing.
+		# @param [String] yabu_conf The 'yabu.conf' file path. Only used during testing.
 		def initialize yabu_conf = ''
 			@backups_to_remove = []
 			@number_of_backups = 0

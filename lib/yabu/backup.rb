@@ -15,8 +15,8 @@ module Yabu
 		# I set the configuration. Remember you have to edit 'configuration/yabu.conf' and
 		# 'configuration/directories.conf' by hand. With this two config files I know where
 		# and what to backup.
-		# @param [String] yabu_config The 'yabu.conf' file path. Only using during test.
-		# @param [String] dir_config The 'directories.conf' file path. Only using during test.
+		# @param [String] yabu_config The 'yabu.conf' file path. Only used during testing.
+		# @param [String] dir_config The 'directories.conf' file path. Only used during testing.
 		def initialize yabu_config = '', dir_config = ''
 			@log = Log.instance
 			if yabu_config == ''

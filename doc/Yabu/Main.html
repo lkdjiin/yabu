@@ -205,11 +205,11 @@ Default constructor
       <pre class="code"><span class="info file"># File 'lib/yabu/main.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id initialize'>initialize</span>
-	<span class='id opt'>opt</span> <span class='op'>=</span> <span class='const'>Options</span><span class='period'>.</span><span class='id new'>new</span>
-	<span class='const'>Message</span><span class='period'>.</span><span class='id printLicense'>printLicense</span>
-	<span class='id generalConfig'>generalConfig</span> <span class='op'>=</span> <span class='const'>YabuConfig</span><span class='period'>.</span><span class='id new'>new</span>
-	<span class='ivar'>@log</span> <span class='op'>=</span> <span class='const'>Log</span><span class='period'>.</span><span class='id instance'>instance</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>yabu.log</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id generalConfig'>generalConfig</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>logRotation</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
-	<span class='ivar'>@log</span><span class='period'>.</span><span class='id level'>level</span> <span class='op'>=</span> <span class='const'>Log</span><span class='op'>::</span><span class='const'>INFO</span> <span class='kw'>unless</span> <span class='id opt'>opt</span><span class='lbracket'>[</span><span class='symbol'>:test</span><span class='rbracket'>]</span>
+	<span class='ivar'>@opt</span> <span class='op'>=</span> <span class='const'>Options</span><span class='period'>.</span><span class='id new'>new</span>
+	<span class='id yabu_config'>yabu_config</span> <span class='op'>=</span> <span class='const'>YabuConfig</span><span class='period'>.</span><span class='id new'>new</span>
+	<span class='ivar'>@log</span> <span class='op'>=</span> <span class='const'>Log</span><span class='period'>.</span><span class='id instance'>instance</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>yabu.log</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id yabu_config'>yabu_config</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>logRotation</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='rparen'>)</span>
+	<span class='ivar'>@log</span><span class='period'>.</span><span class='id level'>level</span> <span class='op'>=</span> <span class='const'>Log</span><span class='op'>::</span><span class='const'>INFO</span> <span class='kw'>unless</span> <span class='ivar'>@opt</span><span class='lbracket'>[</span><span class='symbol'>:test</span><span class='rbracket'>]</span>
+	<span class='id check_if_user_seeking_help'>check_if_user_seeking_help</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -253,7 +253,12 @@ Start the backup process or the recover process.
 22
 23
 24
-25</pre>
+25
+26
+27
+28
+29
+30</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/yabu/main.rb', line 19</span>
@@ -261,8 +266,13 @@ Start the backup process or the recover process.
 <span class='kw'>def</span> <span class='id run'>run</span>
 	<span class='kw'>if</span> <span class='const'>ARGV</span><span class='period'>.</span><span class='id size'>size</span> <span class='op'>==</span> <span class='int'>1</span> <span class='kw'>and</span> <span class='const'>ARGV</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>recover</span><span class='tstring_end'>'</span></span>
 		<span class='id startToRecover'>startToRecover</span>
-	<span class='kw'>else</span>
+	<span class='kw'>elsif</span> <span class='const'>ARGV</span><span class='period'>.</span><span class='id size'>size</span> <span class='op'>==</span> <span class='int'>1</span> <span class='kw'>and</span> <span class='const'>ARGV</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>backup</span><span class='tstring_end'>'</span></span>
 		<span class='id startToBackup'>startToBackup</span>
+	<span class='kw'>elsif</span> <span class='const'>ARGV</span><span class='period'>.</span><span class='id size'>size</span> <span class='op'>==</span> <span class='int'>0</span>
+		<span class='id startToBackup'>startToBackup</span>
+	<span class='kw'>else</span>
+		<span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unknown command</span><span class='tstring_end'>&quot;</span></span>
+		<span class='id exit'>exit</span>
 	<span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -275,7 +285,7 @@ Start the backup process or the recover process.
 </div>
     
     <div id="footer">
-  Generated on Mon Jan 31 15:49:43 2011 by 
+  Generated on Thu Feb  3 14:32:33 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.4 (ruby-1.9.2).
 </div>

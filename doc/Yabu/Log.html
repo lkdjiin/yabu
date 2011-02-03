@@ -114,6 +114,32 @@ and exit.
         </dt>
         <dd><pre class="code"><span class='kw'>nil</span></pre></dd>
       
+        <dt id="default_filename-classvariable" class="">@@default_filename =
+          <div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong> 
+    <div class='inline'><p>
+It seems to me that an hidden file in user&#8217;s home folder is currently
+the best idea. Am I right ?
+</p>
+</div>
+  </div>
+
+<p>
+The default path to log file.
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+</div>
+        </dt>
+        <dd><pre class="code"><span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>HOME</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>.yabu.log</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span></pre></dd>
+      
     </dl>
   
 
@@ -131,7 +157,7 @@ and exit.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#instance-class_method" title="instance (class method)">+ (Log) <strong>instance</strong>(fileName = 'yabu.log',, frequencyRotation = 'monthly')) </a>
+      <a href="#instance-class_method" title="instance (class method)">+ (Log) <strong>instance</strong>(fileName = @@default_filename, frequencyRotation = 'monthly')) </a>
     
 
     
@@ -198,13 +224,22 @@ First, I do like Logger#fatal.
       <div class="method_details first">
   <p class="signature first" id="instance-class_method">
   
-    + (<tt><span class='object_link'><a href="" title="Yabu::Log (class)">Log</a></span></tt>) <strong>instance</strong>(fileName = 'yabu.log',, frequencyRotation = 'monthly')) 
+    + (<tt><span class='object_link'><a href="" title="Yabu::Log (class)">Log</a></span></tt>) <strong>instance</strong>(fileName = @@default_filename, frequencyRotation = 'monthly')) 
   
 
   
 </p><div class="docstring">
   <div class="discussion">
-    <p>
+    
+  <div class="note todo">
+    <strong>TODO:</strong> 
+    <div class='inline'><p>
+an options hash would be better than default arguments
+</p>
+</div>
+  </div>
+
+<p>
 Always the same instance.
 </p>
 
@@ -223,7 +258,7 @@ Always the same instance.
         <span class='name'>fileName</span>
       
       
-        <em class="default">(defaults to: <tt>'yabu.log',</tt>)</em>
+        <em class="default">(defaults to: <tt>@@default_filename</tt>)</em>
       
       
         &mdash;
@@ -281,15 +316,15 @@ always the same instance.
       <pre class="lines">
 
 
-17
-18
-19
-20</pre>
+22
+23
+24
+25</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yabu/log.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/yabu/log.rb', line 22</span>
 
-<span class='kw'>def</span> <span class='const'>Log</span><span class='period'>.</span><span class='id instance'>instance</span><span class='lparen'>(</span><span class='id fileName'>fileName</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>yabu.log</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id frequencyRotation'>frequencyRotation</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>monthly</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='const'>Log</span><span class='period'>.</span><span class='id instance'>instance</span><span class='lparen'>(</span><span class='id fileName'>fileName</span> <span class='op'>=</span> <span class='cvar'>@@default_filename</span><span class='comma'>,</span> <span class='id frequencyRotation'>frequencyRotation</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>monthly</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span>
 	<span class='cvar'>@@logger</span> <span class='op'>=</span> <span class='id new'>new</span><span class='lparen'>(</span><span class='id fileName'>fileName</span><span class='comma'>,</span> <span class='id frequencyRotation'>frequencyRotation</span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='cvar'>@@logger</span>
 	<span class='cvar'>@@logger</span>
 <span class='kw'>end</span></pre>
@@ -349,15 +384,15 @@ The message to be logged.
       <pre class="lines">
 
 
-24
-25
-26
-27
-28
-29</pre>
+29
+30
+31
+32
+33
+34</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yabu/log.rb', line 24</span>
+      <pre class="code"><span class="info file"># File 'lib/yabu/log.rb', line 29</span>
 
 <span class='kw'>def</span> <span class='id fatal'>fatal</span> <span class='id message'>message</span>
 	<span class='kw'>super</span> <span class='id message'>message</span>
@@ -375,7 +410,7 @@ The message to be logged.
 </div>
     
     <div id="footer">
-  Generated on Mon Jan 31 15:49:43 2011 by 
+  Generated on Thu Feb  3 14:32:33 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.4 (ruby-1.9.2).
 </div>

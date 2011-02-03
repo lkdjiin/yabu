@@ -118,7 +118,7 @@ How to backup ?
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Backup) <strong>initialize</strong>(generalConfig = '',, dirConfig = ''
+      <a href="#initialize-instance_method" title="#initialize (instance method)">- (Backup) <strong>initialize</strong>(yabu_config = '',, dir_config = ''
 ) </a>
     
 
@@ -145,7 +145,7 @@ I set the configuration.
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#run-instance_method" title="#run (instance method)">- (Object) <strong>run</strong> </a>
+      <a href="#run-instance_method" title="#run (instance method)">- (Fixnum) <strong>run</strong> </a>
     
 
     
@@ -175,7 +175,7 @@ I start the backup process.
     <div class="method_details first">
   <p class="signature first" id="initialize-instance_method">
   
-    - (<tt><span class='object_link'><a href="" title="Yabu::Backup (class)">Backup</a></span></tt>) <strong>initialize</strong>(generalConfig = '',, dirConfig = ''
+    - (<tt><span class='object_link'><a href="" title="Yabu::Backup (class)">Backup</a></span></tt>) <strong>initialize</strong>(yabu_config = '',, dir_config = ''
 ) 
   
 
@@ -201,7 +201,7 @@ files I know where and what to backup.
         <span class='type'>(<tt>String</tt>)</span>
       
       
-        <span class='name'>generalConfig</span>
+        <span class='name'>yabu_config</span>
       
       
         <em class="default">(defaults to: <tt>'',</tt>)</em>
@@ -209,7 +209,7 @@ files I know where and what to backup.
       
         &mdash;
         <div class='inline'><p>
-The &#8216;yabu.conf&#8217; file path. Only using during test.
+The &#8216;yabu.conf&#8217; file path. Only used during testing.
 </p>
 </div>
       
@@ -220,7 +220,7 @@ The &#8216;yabu.conf&#8217; file path. Only using during test.
         <span class='type'>(<tt>String</tt>)</span>
       
       
-        <span class='name'>dirConfig</span>
+        <span class='name'>dir_config</span>
       
       
         <em class="default">(defaults to: <tt>''
@@ -229,7 +229,7 @@ The &#8216;yabu.conf&#8217; file path. Only using during test.
       
         &mdash;
         <div class='inline'><p>
-The &#8216;directories.conf&#8217; file path. Only using during test.
+The &#8216;directories.conf&#8217; file path. Only used during testing.
 </p>
 </div>
       
@@ -261,18 +261,18 @@ The &#8216;directories.conf&#8217; file path. Only using during test.
     <td>
       <pre class="code"><span class="info file"># File 'lib/yabu/backup.rb', line 20</span>
 
-<span class='kw'>def</span> <span class='id initialize'>initialize</span> <span class='id generalConfig'>generalConfig</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id dirConfig'>dirConfig</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+<span class='kw'>def</span> <span class='id initialize'>initialize</span> <span class='id yabu_config'>yabu_config</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span><span class='comma'>,</span> <span class='id dir_config'>dir_config</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
 	<span class='ivar'>@log</span> <span class='op'>=</span> <span class='const'>Log</span><span class='period'>.</span><span class='id instance'>instance</span>
-	<span class='kw'>if</span> <span class='id generalConfig'>generalConfig</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
-		<span class='ivar'>@generalConfig</span> <span class='op'>=</span> <span class='const'>YabuConfig</span><span class='period'>.</span><span class='id new'>new</span>
+	<span class='kw'>if</span> <span class='id yabu_config'>yabu_config</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+		<span class='ivar'>@yabu_config</span> <span class='op'>=</span> <span class='const'>YabuConfig</span><span class='period'>.</span><span class='id new'>new</span>
 	<span class='kw'>else</span>
-		<span class='ivar'>@generalConfig</span> <span class='op'>=</span> <span class='const'>YabuConfig</span><span class='period'>.</span><span class='id new'>new</span> <span class='id generalConfig'>generalConfig</span>
+		<span class='ivar'>@yabu_config</span> <span class='op'>=</span> <span class='const'>YabuConfig</span><span class='period'>.</span><span class='id new'>new</span> <span class='id yabu_config'>yabu_config</span>
 	<span class='kw'>end</span>
-	<span class='ivar'>@savingPath</span> <span class='op'>=</span> <span class='id getSavingPath'>getSavingPath</span>		
-	<span class='kw'>if</span> <span class='id dirConfig'>dirConfig</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
-		<span class='ivar'>@dirConfig</span> <span class='op'>=</span> <span class='const'>DirConfig</span><span class='period'>.</span><span class='id new'>new</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>configuration/directories.conf</span><span class='tstring_end'>'</span></span>
+	<span class='ivar'>@saving_path</span> <span class='op'>=</span> <span class='id get_saving_path'>get_saving_path</span>		
+	<span class='kw'>if</span> <span class='id dir_config'>dir_config</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_end'>'</span></span>
+		<span class='ivar'>@dir_config</span> <span class='op'>=</span> <span class='const'>DirConfig</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='const'>File</span><span class='period'>.</span><span class='id join'>join</span><span class='lparen'>(</span><span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>HOME</span><span class='tstring_end'>'</span></span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>.config/yabu/configuration/directories.conf</span><span class='tstring_end'>'</span></span><span class='rparen'>)</span><span class='rparen'>)</span>
 	<span class='kw'>else</span>
-		<span class='ivar'>@dirConfig</span> <span class='op'>=</span> <span class='const'>DirConfig</span><span class='period'>.</span><span class='id new'>new</span> <span class='id dirConfig'>dirConfig</span>
+		<span class='ivar'>@dir_config</span> <span class='op'>=</span> <span class='const'>DirConfig</span><span class='period'>.</span><span class='id new'>new</span> <span class='id dir_config'>dir_config</span>
 	<span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -290,7 +290,7 @@ The &#8216;directories.conf&#8217; file path. Only using during test.
       <div class="method_details first">
   <p class="signature first" id="run-instance_method">
   
-    - (<tt>Object</tt>) <strong>run</strong> 
+    - (<tt>Fixnum</tt>) <strong>run</strong> 
   
 
   
@@ -304,30 +304,53 @@ I start the backup process.
   </div>
 </div>
 <div class="tags">
+  <h3>Returns:</h3>
+<ul class="return">
   
+    <li>
+      
+        <span class='type'>(<tt>Fixnum</tt>)</span>
+      
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+Number of errors occured
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-36
 37
 38
 39
 40
 41
-42</pre>
+42
+43
+44
+45</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/yabu/backup.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/yabu/backup.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='id run'>run</span>
-	<span class='ivar'>@log</span><span class='period'>.</span><span class='id info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Backup started with </span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='const'>Version</span><span class='period'>.</span><span class='id get'>get</span>
-	<span class='id createSavingDirectory'>createSavingDirectory</span>
-	<span class='id copy'>copy</span>
+	<span class='id puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Backup started</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@log</span><span class='period'>.</span><span class='id info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Backup started with </span><span class='tstring_end'>&quot;</span></span> <span class='op'>+</span> <span class='const'>Yabu</span><span class='period'>.</span><span class='id version'>version</span>
+	<span class='id create_saving_directory'>create_saving_directory</span>
+	<span class='id errors'>errors</span> <span class='op'>=</span> <span class='id copy'>copy</span>
 	<span class='const'>Message</span><span class='period'>.</span><span class='id printEndOfBackup'>printEndOfBackup</span>
-	<span class='ivar'>@log</span><span class='period'>.</span><span class='id info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Backup is in </span><span class='embexpr_beg'>#{</span><span class='ivar'>@savingPath</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+	<span class='ivar'>@log</span><span class='period'>.</span><span class='id info'>info</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Backup is in </span><span class='embexpr_beg'>#{</span><span class='ivar'>@saving_path</span><span class='rbrace'>}</span><span class='tstring_end'>&quot;</span></span>
+	<span class='id errors'>errors</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -339,7 +362,7 @@ I start the backup process.
 </div>
     
     <div id="footer">
-  Generated on Mon Jan 31 15:49:43 2011 by 
+  Generated on Thu Feb  3 14:32:33 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.4 (ruby-1.9.2).
 </div>

@@ -18,7 +18,7 @@ module Yabu
 		
 		# I start the recovery process
 		# @param [Hash] options
-		# @option [Boolean] :force Force to recover all files
+		# @option options [Boolean] :force Force to recover all files
 		def run options={}
 			options = {force: false}.merge(options)
 			log_the_options options

@@ -8,8 +8,9 @@ module Yabu
 	#
 	# @example :
 	#		c = DirConfig.new 'configuration/directories.conf'
-	#		includeList = c.files
-	#		excludeList = c.filesToExclude
+	#		includes = c.files
+	#		excludes = c.filesToExclude
+	# @todo rename method the ruby way
 	class DirConfig
 		attr_reader :files, :filesToExclude
 		

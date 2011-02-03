@@ -43,49 +43,50 @@
     
     <div id="content"><div id='filecontents'><h1>&#8220;Yeah! Another Backup Utility&#8220;</h1>
 <p>
-Copyright 2010, 2011 Xavier Nayrac
+&#8220;Yeah! Another Backup Utility&#8221; (Yabu in short) is a daily
+backup and recover command line utility for linux. It should run on other
+unixes as well.
 </p>
-<h2>OVERVIEW</h2>
 <p>
-&#8220;Yeah! Another Backup Utility&#8221; (Yabu in short) is a backup and
-recovery utility for linux. It maybe works for other systems but I
-don&#8217;t know. Yabu is written in ruby, so you need a ruby interpreter
-to run it.
+Yabu is distributed under the terms of the GPL-3.
 </p>
-<h2>INSTALL</h2>
+<h2>Documentation</h2>
 <p>
-Put all the files somewhere in your PATH.
+Look at <a href="https://github.com/lkdjiin/Yabu/wiki">the wiki</a>.
 </p>
-<h2>BEFORE RUNNING</h2>
+<h2>Dependencies</h2>
 <p>
-Yabu is in it&#8217;s development stage. Try it, hack it, learn from it,
-but DON&#8217;T USE IT right now in a production environment. To try Yabu,
-just edit directories.conf and yabu.conf. But before doing that you really
-should check the documentation. See the wiki on GitHub : <a
-href="https://github.com/lkdjiin/yabu/wiki">github.com/lkdjiin/yabu/wiki</a>.
-You can find user guides (may be not up to date) in english and french at
-this address : <a
-href="http://sources.xavier.free.fr/ruby.php#yabu">sources.xavier.free.fr/ruby.php#yabu</a>
+Yabu is written in ruby, so you need a ruby interpreter to run it.
 </p>
-<h2>RUNNING</h2>
 <p>
-Type yabu.rb from a terminal to start saving your data. Type yabu.rb
---help to view a list of options. Recovery is not yet implemented.
+Ruby >= 1.9.2
 </p>
-<h2>HACKING</h2>
+<h2>Installing Yabu</h2>
 <p>
-You can found developper&#8217;s documentation in doc/. If the YARD gem is
-installed on your computer, run makedoc.sh to be sure the doc is up to
-date. Begin by reading the Yabu class.
+Build a gem and install it:
 </p>
-<h2>CONTACT</h2>
+<pre class="code">
+ <span class='id rake'>rake</span> <span class='id build'>build</span>
+ <span class='id rake'>rake</span> <span class='id install'>install</span>
+</pre>
 <p>
-xavier.nayrac@gmail.com
+TODO write more stuff.
+</p>
+<h2>Hacking</h2>
+<p>
+You can find developper&#8217;s documentation in doc folder. If the YARD
+gem is installed on your computer, run <tt>rake doc</tt> to be sure the
+documentation is up to date. Begin reading in the Main class.
+</p>
+<h2>Questions and/or Comments</h2>
+<p>
+Feel free to email <a href="mailto:xavier.nayrac@gmail.com">Xavier
+Nayrac</a> with any questions.
 </p>
 </div></div>
     
     <div id="footer">
-  Generated on Mon Jan 31 15:49:41 2011 by 
+  Generated on Thu Feb  3 14:32:31 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.6.4 (ruby-1.9.2).
 </div>
