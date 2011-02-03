@@ -21,7 +21,7 @@ module Yabu
 		# @param [String] dest the destination file or directory
 		def copy src, dest
 			create_if_needed dest if File.directory? src
-			if File.directory? src
+			if File.directory?(src)
 				copy_directory src, dest
 			else
 				copy_file src, dest
@@ -52,15 +52,21 @@ module Yabu
 			false
 		end
 		
-		# Copy one file, not a directory.
+		# Copy one regular file, not a directory, not a symbolic link, etc.
 		# @param [String] source the source path
 		# @param [String] dest the destination path
 		def copy_file source, dest
-			begin
-				FileUtils.cp(source, dest)
-				@log.debug "Copied #{source} to #{dest}"
-			rescue
-				record_error "Cannot copy #{source} to #{dest}"
+			if File.symlink?(source)
+				@log.warn "Yabu do not backup symbolic link: #{source}"
+			elsif File.file?(source)
+				begin
+					FileUtils.cp(source, dest)
+					@log.debug "Copied #{source} to #{dest}"
+				rescue
+					record_error "Cannot copy #{source} to #{dest}"
+				end
+			else
+				record_error "Yabu do not know what to do with #{source}"
 			end
 		end
 		
