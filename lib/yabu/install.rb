@@ -2,12 +2,28 @@ require 'fileutils'
 
 module Yabu
 	
-	# Install config files in user's home
+	# Install config files and version file in user's home
+	# @since 0.6
 	module Install
 	
 		# Do we need to install some config files in the user's home folder ? 
 		def Install.needed?
 			not File.exists?(File.join(ENV['HOME'], '.config/yabu'))
+		end
+		
+		# @return true if version installed is different of this version of Yabu.
+		# @since 0.7
+		# @note I don't take any account of higher or lower version, just difference.
+		def Install.upgrade?
+			my_version = Yabu.version
+			installed_version = File.read(File.join(ENV['HOME'], '.config/yabu/VERSION')).strip
+			my_version != installed_version
+		end
+		
+		# Copy file version in yabu hidden config folder.
+		# @since 0.7
+		def Install.upgrade
+			FileUtils.cp(File.join($YABU_PATH}, 'VERSION'), File.join(ENV['HOME'], '.config/yabu'))
 		end
 		
 		# Install config files in user's home folder

@@ -28,6 +28,8 @@ if Yabu::Install.needed?
 	Yabu::Install.run
 	Yabu::Install.message
 	exit
+elsif Yabu::Install.upgrade?
+	Yabu::Install.upgrade
 end
 
 # time of program start
