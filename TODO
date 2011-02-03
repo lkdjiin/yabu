@@ -1,16 +1,20 @@
-
-* Assert that there is enough space in repository before starting backup
 * incremental backup
-* recover from a given backup
+  + backup part
+	+ recovery part
+* Assert that there is enough space in repository before starting backup
+* include/exclude files AND directories with globbing/regex (example /home/user/dir/*.pdf)
+* recover from a given date
   + missing files
+	+ choosen files (how to simply select files without GUI ? this is certainly easier to di this by hand)
   + force to restore all files
 * record modification time of all backed-up files in a file along with the backup. That will
-  allow us to restore such files when strange things had happen.
-* background task ?
+  allow us to restore such files when strange things had happen. Example : I have restored some
+	files from a given date and now, I want return with the most recent files.
+* validate each files with checksum (or hash)
+* schedulding
 * compression ?
 * remote backup ?
-* schedulding
 * encryption ?
-* transaction
+* transaction ?
 * GUI or curses ? (for the restoring part ?)
-* include/exclude files AND directories with globbing/regex ???
+
