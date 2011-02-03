@@ -26,11 +26,11 @@ class TC_Backup < Test::Unit::TestCase
 		
 		name = File.join('temp', name)
 		
-		toCheck = File.join(name, 'home/xavier/local/test')
-		assert_equal(true, File.exist?(toCheck))
+		to_check = File.join(name, 'home/xavier/local/test')
+		assert_equal(true, File.exist?(to_check))
 		
-		fichier1 = File.join(toCheck, 'fichier1')
-		fichier2 = File.join(toCheck, 'fichier2')
+		fichier1 = File.join(to_check, 'fichier1')
+		fichier2 = File.join(to_check, 'fichier2')
 		
 		assert_equal(true, File.exist?(fichier2))
 		assert_equal(false, File.exist?(fichier1))
@@ -67,8 +67,8 @@ class TC_Backup < Test::Unit::TestCase
 		
 		name = File.join('temp', name)
 		
-		toCheck = File.join(name, 'home/xavier/local/wallpaper')
-		assert_equal(true, File.directory?(toCheck))
+		to_check = File.join(name, 'home/xavier/local/wallpaper')
+		assert_equal(true, File.directory?(to_check))
 		
 		# finally clean the backup
 		FileUtils.remove_dir name, true

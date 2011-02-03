@@ -1,6 +1,6 @@
-# You cannot test the Backup class (tests in tc-backup.rb)
-# because this test refers on some files on my local computer.
-# Hack it if you wish (and have time) : this is free software !
+# You cannot test some classes
+# because they refer on some files on my local computer.
+# Please improve this if you wish and have time : this is free software !
 
 
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../lib'
