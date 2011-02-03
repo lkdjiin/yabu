@@ -23,7 +23,7 @@ module Yabu
 		# Copy file version in yabu hidden config folder.
 		# @since 0.7
 		def Install.upgrade
-			FileUtils.cp(File.join($YABU_PATH}, 'VERSION'), File.join(ENV['HOME'], '.config/yabu'))
+			FileUtils.cp(File.join($YABU_PATH, 'VERSION'), File.join(ENV['HOME'], '.config/yabu'))
 		end
 		
 		# Install config files in user's home folder
