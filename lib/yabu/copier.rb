@@ -20,10 +20,11 @@ module Yabu
 		# @param [String] source Full path name of the file (or directory) on the computer
 		# @param [String] dest Full path name of the future file (or directory) in the repository
 		def copy source, dest
-			create_if_needed dest if File.directory? source
-			if File.directory?(source)
+			if File.directory? source
+				create_if_needed dest 
 				copy_directory source, dest
 			else
+				create_if_needed File.dirname(dest) if File.directory?(File.dirname(source))
 				copy_file source, dest
 			end
 		end
