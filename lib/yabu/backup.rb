@@ -32,9 +32,14 @@ module Yabu
 			end
 		end
 		
-		# I start the backup process.
-		# @return [Fixnum] Number of errors occured
+		# @deprecated use full		
 		def run
+			full
+		end
+		
+		# I start the full backup process.
+		# @return [Fixnum] Number of errors occured
+		def full
 			puts "Backup started"
 			@log.info "Backup started with " + Yabu.version
 			create_saving_directory
