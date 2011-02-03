@@ -1,12 +1,4 @@
---- v0.7 ---
 
-ok* command : help command
-ok* recover from the most recent backup: force to restore all files
-ok* display number of copy errors
-ok* log recovery options
-ok* Log file now live in the user's home folder
-
---- next ---
 * Assert that there is enough space in repository before starting backup
 * incremental backup
 * recover from a given backup
