@@ -21,12 +21,17 @@ module Yabu
 		# @option [Boolean] :force Force to recover all files
 		def run options={}
 			options = {force: false}.merge(options)
+			log_the_options options
 			find_newest_backup
 			# @todo diplay message and exit if there is no backup
 			restore options
 		end
 		
 	private
+	
+		def log_the_options options
+			@log.info "Recover mode with following options: force=#{options[:force]}"
+		end
 
 		# Find the newest backup in the repository.
 		def find_newest_backup

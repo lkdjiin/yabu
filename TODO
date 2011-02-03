@@ -3,12 +3,11 @@
 ok* command : help command
 ok* recover from the most recent backup: force to restore all files
 ok* display number of copy errors
-* log recovery options
+ok* log recovery options
 * Where to put the log file ?
 
 --- next ---
-
-* Voir si il y a assez de place avant de commencer
+* Assert that there is enough space in repository before starting backup
 * incremental backup
 * recover from a given backup
   + missing files
