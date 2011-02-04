@@ -26,7 +26,7 @@ module Yabu
 		File.read($YABU_PATH + '/VERSION').strip
 	end
 	
-	class NoRootFullBackupError < StandardError
+	class NoFullBackupMarkError < StandardError
 	end
 	
 end

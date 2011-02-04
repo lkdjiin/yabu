@@ -69,18 +69,28 @@ module Yabu
 			errors
 		end
 		
+		# @since 0.15
+		def incremental
+			full_marks = Dir.glob(File.join(@yabu_config['path'], '*.full'))
+			raise NoFullBackupMarkError if full_marks.empty?
+		end
+		
+		# @return nil if there is no full backup in the repository, otherwise returns
+		#   the most recent full backup folder name
+		# @since 0.15
+		def most_recent_full?
+			full_marks = Dir.glob(File.join(@yabu_config['path'], '*.full'))
+			return nil if full_marks.empty?
+			name = full_marks.sort!.reverse!.first
+			File.basename name, '.full'
+		end
+		
+	private #####################################################################
+		
 		def log_info_and_display message
 			@log.info message
 			puts message
 		end
-		private :log_info_and_display
-		
-		# @since 0.15
-		def incremental
-		
-		end
-		
-	private #####################################################################
 		
 		# @return [String] Full path name of the backup folder in the repository.
 		#		Example : '/media/usb-disk/20101231-1438'

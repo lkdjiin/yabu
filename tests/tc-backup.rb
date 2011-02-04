@@ -87,15 +87,49 @@ class TC_Backup < Test::Unit::TestCase
 	
 	### INCREMENTAL BACKUP ###############
 	
-	#~ def test_incremental_without_root_full
-		#~ bk = Backup.new(CONF_TEST_1, DIR_TEST)
-		#~ assert_raise(NoRootFullBackupError) do
-			#~ bk.incremental
-		#~ end
-	#~ end
-	#~ 
-	#~ def test_incremental
-		#~ 
-	#~ end
+	def test_incremental_without_full_mark
+		bk = Backup.new(CONF_TEST_1, DIR_TEST)
+		assert_raise(NoFullBackupMarkError) do
+			bk.incremental
+		end
+	end
+	
+	def test_most_recent_full_returns_nil_when_no_full_exist
+		bk = Backup.new(CONF_TEST_1, DIR_TEST)
+		assert_equal nil, bk.most_recent_full?
+	end
+	
+	def test_incremental_must_use_most_recent_full
+		FileUtils.touch TEST_DIR + '20110101-1234.full'
+		FileUtils.touch TEST_DIR + '20110122-1234.full'
+		bk = Backup.new(CONF_TEST_1, DIR_TEST)
+		assert_equal '20110122-1234', bk.most_recent_full?
+	ensure
+		delete_temp_content
+	end
+	
+	def test_first_incremental_with_nothing_changed
+		assert false
+	end
+	
+	def test_first_incremental_with_one_file_added
+		assert false
+	end
+	
+	def test_first_incremental_with_one_file_modified
+		assert false
+	end
+	
+	def test_first_incremental_with_one_folder_added
+		assert false
+	end
+	
+	def test_first_incremental_with_one_file_deleted
+		assert false
+	end
+	
+	def test_first_incremental_with_one_folder_deleted
+		assert false
+	end
 	
 end
