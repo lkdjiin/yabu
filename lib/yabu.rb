@@ -26,7 +26,17 @@ module Yabu
 		File.read($YABU_PATH + '/VERSION').strip
 	end
 	
-	class NoFullBackupMarkError < StandardError
+	# A backup folder name is made by the concatenation of date and time.
+	# The pattern is 'YYYYmmdd-hhmm' : year, month, day, hours and minutes.
+	# @return [String] the backup folder name. Example : '20101231-1438'
+	def Yabu.backup_folder_name
+		time = Time.now
+		time.strftime("%Y%m%d-%H%M")
+	end
+	
+	# Raised when we try to do an incremental backup without having a full backup.
+	# @since 0.6
+	class NoFullBackupError < StandardError
 	end
 	
 end

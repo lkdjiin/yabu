@@ -4,7 +4,7 @@ module Yabu
 	class Message
 
 		# I print a little banner that state I'm a free software.
-		def Message.printLicense
+		def Message.print_license
 			license = <<END_OF_LICENSE
 
 "Yeah! Another Backup Utility" Copyright (C) 2010, 2011 Xavier Nayrac

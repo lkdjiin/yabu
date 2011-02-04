@@ -17,10 +17,10 @@ module Yabu
 		end
 		
 		# Get a value from the config.
-		# @param [String] k the key in the config file
+		# @param [String] key the key in the config file
 		# @return [Object]
-		def [](k)
-			@dico[k]
+		def [](key)
+			@dico[key]
 		end
 		
 	end

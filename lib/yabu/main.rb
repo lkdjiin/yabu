@@ -18,11 +18,11 @@ module Yabu
 		# Start the backup process or the recover process.
 		def run
 			if ARGV.size == 1 and ARGV[0] == 'recover'
-				startToRecover
+				start_to_recover
 			elsif ARGV.size == 1 and ARGV[0] == 'backup'
-				startToBackup
+				start_to_backup
 			elsif ARGV.size == 0
-				startToBackup
+				start_to_backup
 			else
 				puts "Unknown command"
 				exit
@@ -35,28 +35,27 @@ module Yabu
 			return if ARGV.empty?
 			if ARGV[0] == 'help'
 				case ARGV[1]
-					when nil then exit
 					when 'help' then puts Help.help
 					when 'recover' then puts Help.recover
 					when 'backup' then puts Help.backup
 					else
-						puts "Unknown command #{ARGV[1]}"
+						puts "yabu: unknown command #{ARGV[1]}"
 				end
 				exit
 			end
 		end
 
 		# Start the backup process.
-		def startToBackup
+		def start_to_backup
 			errors = backup
-			deleteOldBackup
+			delete_old_backup
 			unless errors.zero?
 				puts "!!! #{errors} error(s) during copy process. See the log file !!!"
 			end
 		end
 		
 		# Start the recovery process.
-		def startToRecover
+		def start_to_recover
 			Recovery.new.run @opt.options
 		end
 
@@ -66,7 +65,7 @@ module Yabu
 		end
 		
 		# Remove the oldest backups if they exist.
-		def deleteOldBackup
+		def delete_old_backup
 			BackupDeletor.new.run
 		end
 	end

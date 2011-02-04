@@ -36,8 +36,8 @@ module Yabu
 				next if (file == ".") or (file == "..")
 				@number_of_backups += 1
 				filedate = Date.new file[0, 4].to_i, file[4, 2].to_i, file[6, 2].to_i
-				x = Date.today - filedate
-				@backups_to_remove.push(file) if x > @yabu_config['removeAfterXDays']
+				days = Date.today - filedate
+				@backups_to_remove.push(file) if days > @yabu_config['removeAfterXDays']
 			end
 		end
 		
@@ -57,9 +57,9 @@ module Yabu
 		# I try to remove the oldest backups. But I always keep a number of backup in the repository.
 		def try_to_remove
 			@backups_to_remove.sort!
-			numberOfBackupToKeep = @yabu_config['savesToKeep']
+			number_of_backup_to_keep = @yabu_config['savesToKeep']
 			@backups_to_remove.each do |file|
-				remove file if @number_of_backups > numberOfBackupToKeep
+				remove file if @number_of_backups > number_of_backup_to_keep
 			end
 			Message.end_of_removing_old_backups
 		end

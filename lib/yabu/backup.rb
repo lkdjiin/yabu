@@ -72,7 +72,7 @@ module Yabu
 		# @since 0.15
 		def incremental
 			full_marks = Dir.glob(File.join(@yabu_config['path'], '*.full'))
-			raise NoFullBackupMarkError if full_marks.empty?
+			raise NoFullBackupError if full_marks.empty?
 		end
 		
 		# @return nil if there is no full backup in the repository, otherwise returns
@@ -96,19 +96,16 @@ module Yabu
 		#		Example : '/media/usb-disk/20101231-1438'
 		def build_backup_folder_name
 			repository_path = @yabu_config['path']
-			@log.fatal "#{repository_path} doesnt exist" if not File.exist?(repository_path)
-			@log.fatal "#{repository_path} is not writable" if not File.stat(repository_path).writable?
-			backup_folder = File.join(repository_path, folder_name_from_time)
+			ensure_we_have_full_access_to(repository_path)
+			backup_folder = File.join(repository_path, Yabu.backup_folder_name)
 			@log.fatal "#{backup_folder} exist" if File.exist?(backup_folder)
 			backup_folder
 		end
 		
-		# The backup folder name is made by the concatenation of date and time.
-		# The pattern is 'YYYYmmdd-hhmm' : year, month, day, hours and minutes.
-		# @return [String] the backup folder name. Example : '20101231-1438'
-		def folder_name_from_time
-			t = Time.now
-			t.strftime("%Y%m%d-%H%M")
+		# Fatal error if repository doesn't exist or if we can't write to it.
+		def ensure_we_have_full_access_to repository_path
+			@log.fatal "#{repository_path} doesnt exist" if not File.exist?(repository_path)
+			@log.fatal "#{repository_path} is not writable" if not File.stat(repository_path).writable?
 		end
 		
 		# I am trying to create the backup folder in the repository.
@@ -134,7 +131,7 @@ module Yabu
 		# I do the effective backup.
 		# @return [Fixnum] Number of errors occured
 		def copy
-			copier = Copier.new @dir_config.filesToExclude
+			copier = Copier.new @dir_config.files_to_exclude
 			@dir_config.files.each do |item_on_computer| 
 				copier.copy(item_on_computer, File.join(@backup_folder, item_on_computer))
 			end

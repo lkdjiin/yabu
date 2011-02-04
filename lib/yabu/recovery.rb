@@ -35,14 +35,19 @@ module Yabu
 
 		# Find the newest backup in the repository.
 		def find_newest_backup
+			backups = get_all_backups
+			return false if backups.empty?
+			backups.sort!.reverse!
+			@backup = backups[0]
+		end
+		
+		def get_all_backups
 			backups = []
 			Dir.foreach(@yabu_config['path']) do |file|
 				next if (file == ".") or (file == "..")
 				backups.push(file)
 			end
-			return false if backups.empty?
-			backups.sort!.reverse!
-			@backup = backups[0]
+			backups
 		end
 		
 		def restore options

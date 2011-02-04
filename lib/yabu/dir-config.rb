@@ -9,10 +9,10 @@ module Yabu
 	# @example :
 	#		c = DirConfig.new 'configuration/directories.conf'
 	#		includes = c.files
-	#		excludes = c.filesToExclude
+	#		excludes = c.files_to_exclude
 	# @todo rename method the ruby way
 	class DirConfig
-		attr_reader :files, :filesToExclude
+		attr_reader :files, :files_to_exclude
 		
 		# @param [String] name The name of the configuration file
 		# @param [true|false] test Set to true when testing this class
@@ -21,8 +21,8 @@ module Yabu
 			@test = test
 			@log = Log.instance
 			@files = []
-			@filesToExclude = []
-			fillArrays
+			@files_to_exclude = []
+			fill_arrays
 			@log.debug "Parsed #{@name}"
 		end
 		
@@ -30,11 +30,11 @@ module Yabu
 
 		# My job is to parse the configuration file to fill some lists with information found
 		# in that file.
-		def fillArrays
+		def fill_arrays
 			begin
 				IO.foreach(@name) { |line| 
 					line.strip!
-					next if skipLine? line
+					next if skip_line? line
 					parse line
 				}
 			rescue
@@ -44,7 +44,7 @@ module Yabu
 		
 		# @return [true] if the line is a commentary or is empty.
 		# @return [false] in other cases.
-		def skipLine? line
+		def skip_line? line
 			return true if (line =~ /^#/) or (line =~ /^$/)
 			false
 		end
@@ -75,16 +75,16 @@ module Yabu
 		# @param [String] filename name of file to include/exclude
 		def dispatch action, filename
 			if action == "+"
-				includeFile filename 
+				include_file filename 
 			elsif action == "-"
-				excludeFile filename
+				exclude_file filename
 			else
 				@log.error "bad action in #{@name}. Not archived. action is <#{action}> and file is <#{filename}>"
 			end
 		end
 		
 		# Add +filename+ to the list of files to include.
-		def includeFile filename
+		def include_file filename
 			if File.exist? filename or @test
 				@files.push filename
 			else
@@ -93,9 +93,9 @@ module Yabu
 		end
 		
 		# Add +filename+ to the list of files to exclude.
-		def excludeFile filename
+		def exclude_file filename
 			if File.exist? filename or @test
-				@filesToExclude.push filename
+				@files_to_exclude.push filename
 			else
 				@log.error "when parsing #{@name} file <#{filename}> doesn't exist"
 			end

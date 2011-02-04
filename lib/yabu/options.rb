@@ -57,23 +57,23 @@ class Options
 			puts e.to_s
 			exit 1
 		end
-		printVersion if @options[:version]
-		printLicense if @options[:license]
+		print_version if @options[:version]
+		print_license if @options[:license]
 	end
 	
-	def [](k)
-		@options[k]
+	def [](key)
+		@options[key]
 	end
 	
 private
 
-	def printVersion
+	def print_version
 		puts Yabu.version
 		exit
 	end
 	
-	def printLicense
-		puts "\"Yeah! Another Backup Utility\" is licensed under the GPL 3. See the COPYING's file."
+	def print_license
+		Yabu::Message.print_license
 		exit
 	end
 end

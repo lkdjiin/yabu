@@ -89,7 +89,7 @@ class TC_Backup < Test::Unit::TestCase
 	
 	def test_incremental_without_full_mark
 		bk = Backup.new(CONF_TEST_1, DIR_TEST)
-		assert_raise(NoFullBackupMarkError) do
+		assert_raise(NoFullBackupError) do
 			bk.incremental
 		end
 	end
