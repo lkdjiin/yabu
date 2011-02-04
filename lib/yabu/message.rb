@@ -15,20 +15,16 @@ See COPYING for license details.
 END_OF_LICENSE
 			puts license
 		end
-
-		def Message.printEndOfBackup
-			puts "Backup is done."
-		end
 		
-		def Message.searchingOldBackups
+		def Message.searching_old_backups
 			puts "Searching for old backups to remove."
 		end
 		
-		def Message.endOfRemovingOldBackups
+		def Message.end_of_removing_old_backups
 			puts "Old backups removed."
 		end
 		
-		def Message.noBackupsToRemove
+		def Message.no_backups_to_remove
 			puts "No backup to remove."
 		end
 		

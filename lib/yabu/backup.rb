@@ -5,11 +5,16 @@ require "date"
 module Yabu
 
 	# I know how to do backups of your data !
-	# I initialize all the stuff on instanciation and start the backup with my run method.
+	# I initialize all the stuff on instanciation and start the backup with one of this two methods:
+	# * #full
+	# * #incremental
 	# It's really simple to doing backup :
-	# @example How to backup ?
+	# @example
 	#		backup = Backup.new
-	#		backup.run
+	#   # Do a full backup
+	#		backup.full
+	#   # Or do an incremental backup
+	#		backup.incremental
 	class Backup
 
 		# I set the configuration. Remember you have to edit 'configuration/yabu.conf' and
@@ -19,66 +24,101 @@ module Yabu
 		# @param [String] dir_config The 'directories.conf' file path. Only used during testing.
 		def initialize yabu_config = '', dir_config = ''
 			@log = Log.instance
-			if yabu_config == ''
-				@yabu_config = YabuConfig.new
-			else
-				@yabu_config = YabuConfig.new yabu_config
-			end
-			@saving_path = get_saving_path		
-			if dir_config == ''
-				@dir_config = DirConfig.new(File.join(ENV['HOME'], '.config/yabu/configuration/directories.conf'))
-			else
-				@dir_config = DirConfig.new dir_config
-			end
+			load_config(yabu_config, dir_config)
+			@backup_folder = build_backup_folder_name		
 		end
 		
-		# @deprecated use full		
+		def load_config yabu_config, dir_config
+			load_yabu_config(yabu_config)
+			load_dir_config(dir_config)
+		end
+		private :load_config
+		
+		def load_yabu_config conf
+			if conf.empty?
+				@yabu_config = YabuConfig.new
+			else
+				@yabu_config = YabuConfig.new conf
+			end
+		end
+		private :load_yabu_config
+		
+		def load_dir_config conf
+			if conf.empty?
+				@dir_config = DirConfig.new(DIR_CONFIG_FILE_PATH)
+			else
+				@dir_config = DirConfig.new conf
+			end
+		end
+		private :load_dir_config
+		
+		# @deprecated Since 0.15, use full instead.
 		def run
 			full
 		end
 		
 		# I start the full backup process.
 		# @return [Fixnum] Number of errors occured
+		# @since 0.15
 		def full
-			puts "Backup started"
-			@log.info "Backup started with " + Yabu.version
-			create_saving_directory
+			log_info_and_display "Full backup started with #{Yabu.version}"
+			create_backup_folder
+			create_full_backup_mark
 			errors = copy
-			Message.printEndOfBackup
-			@log.info "Backup is in #{@saving_path}"
+			log_info_and_display "Full backup done in #{@backup_folder}"
 			errors
 		end
 		
-	private
+		def log_info_and_display message
+			@log.info message
+			puts message
+		end
+		private :log_info_and_display
 		
-		# @return [String] the backup sub-directory full path.
-		#		Example : '/media/usb-disk/20101231-1438'
-		def get_saving_path
-			base_saving_path = @yabu_config['path']
-			@log.fatal "#{base_saving_path} doesnt exist" if not File.exist?(base_saving_path)
-			@log.fatal "#{base_saving_path} is not writable" if not File.stat(base_saving_path).writable?
-			@saving_path = File.join(base_saving_path, get_saving_name)
-			@log.fatal "#{@saving_path} exist" if File.exist?(@saving_path)
-			@saving_path
+		# @since 0.15
+		def incremental
+		
 		end
 		
-		# The backup sub-directory name is made by the concatenation of date and time.
+	private #####################################################################
+		
+		# @return [String] Full path name of the backup folder in the repository.
+		#		Example : '/media/usb-disk/20101231-1438'
+		def build_backup_folder_name
+			repository_path = @yabu_config['path']
+			@log.fatal "#{repository_path} doesnt exist" if not File.exist?(repository_path)
+			@log.fatal "#{repository_path} is not writable" if not File.stat(repository_path).writable?
+			backup_folder = File.join(repository_path, folder_name_from_time)
+			@log.fatal "#{backup_folder} exist" if File.exist?(backup_folder)
+			backup_folder
+		end
+		
+		# The backup folder name is made by the concatenation of date and time.
 		# The pattern is 'YYYYmmdd-hhmm' : year, month, day, hours and minutes.
-		# @return [String] the backup sub-directory name. Example : '20101231-1438'
-		def get_saving_name
+		# @return [String] the backup folder name. Example : '20101231-1438'
+		def folder_name_from_time
 			t = Time.now
 			t.strftime("%Y%m%d-%H%M")
 		end
 		
-		# I am trying to create the backup sub-directory.
+		# I am trying to create the backup folder in the repository.
 		# If I can't do this, the program will terminate.
-		def create_saving_directory
+		def create_backup_folder
 			begin
-				Dir.mkdir @saving_path
+				Dir.mkdir @backup_folder
+				@log.debug "Created #{@backup_folder}"
 			rescue SystemCallError
-				@log.fatal "Cannot create #{@saving_path}"
+				@log.fatal "Cannot create #{@backup_folder}"
 			end
-			@log.debug "Created #{@saving_path}"
+		end
+		
+		def create_full_backup_mark
+			begin
+				FileUtils.touch "#{@backup_folder}.full"
+				@log.debug "Created #{@backup_folder}.full"
+			rescue SystemCallError
+				@log.fatal "Cannot create #{@backup_folder}.full"
+			end
 		end
 		
 		# I do the effective backup.
@@ -86,7 +126,7 @@ module Yabu
 		def copy
 			copier = Copier.new @dir_config.filesToExclude
 			@dir_config.files.each do |item_on_computer| 
-				copier.copy(item_on_computer, File.join(@saving_path, item_on_computer))
+				copier.copy(item_on_computer, File.join(@backup_folder, item_on_computer))
 			end
 			copier.errors
 		end

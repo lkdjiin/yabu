@@ -31,7 +31,7 @@ module Yabu
 		# I look in the backup directory to find all the backups older than X days.
 		# X is given by the 'removeAfterXDays' key in the config file.
 		def search_old_backup
-			Message.searchingOldBackups
+			Message.searching_old_backups
 			Dir.foreach(@yabu_config['path']) do |file|
 				next if (file == ".") or (file == "..")
 				@number_of_backups += 1
@@ -50,7 +50,7 @@ module Yabu
 		end
 		
 		def dont_remove
-			Message.noBackupsToRemove
+			Message.no_backups_to_remove
 			@log.debug "No old backup to remove"
 		end
 		
@@ -61,7 +61,7 @@ module Yabu
 			@backups_to_remove.each do |file|
 				remove file if @number_of_backups > numberOfBackupToKeep
 			end
-			Message.endOfRemovingOldBackups
+			Message.end_of_removing_old_backups
 		end
 		
 		# Remove one backup directory and its content.

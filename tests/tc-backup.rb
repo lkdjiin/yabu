@@ -4,27 +4,62 @@ require "fileutils"
 # on my local computer.
 # Hack it, this is free software !
 class TC_Backup < Test::Unit::TestCase
-
+	include Yabu
+	
 	CONF_TEST_1 = 'configuration/yabu.conf.test1'
 	DIR_TEST = 'configuration/directories.conf.test'
-	DIR_TEST_2 = 'configuration/directories.conf.test2'
+	DIR_WITH_TILDE_TEST = 'configuration/directories.conf.test2'
+	
+	TEST_DIR = '/home/xavier/devel/ruby/yabu/tests/temp/'
+	
+	### FULL BACKUP ######################
+	
+	# Find name of the just created backup folder. Assume there is only one folder in TEST_DIR.
+	# @return [String] name of the backup folder
+	def find_name_of_just_created_backup
+		name = ''
+		Dir.foreach(TEST_DIR) do |file|
+			next if (file == ".") or (file == "..")
+			name = file if File.directory?(TEST_DIR + file)
+		end
+		name
+	end
+	
+	# Delete content of temp folder
+	def delete_temp_content
+		Dir.foreach(TEST_DIR) do |file|
+			next if (file == ".") or (file == "..")
+			filename = TEST_DIR + file
+			FileUtils.remove_dir(filename) if File.directory?(filename)
+			FileUtils.remove_file(filename) if File.file?(filename)
+		end
+	end
+	
+	def test_full_create_one_and_only_one_folder
+		Backup.new(CONF_TEST_1, DIR_TEST).full
+		number = 0
+		Dir.foreach(TEST_DIR) do |file|
+			next if (file == ".") or (file == "..")
+			number += 1 if File.directory?(TEST_DIR + file)
+		end
+		assert_equal 1, number, "must be only one backup folder at this point"
+	ensure
+		delete_temp_content
+	end
+	
+	def test_full_backup_mark
+		Backup.new(CONF_TEST_1, DIR_TEST).full
+		name = TEST_DIR + find_name_of_just_created_backup
+		assert_equal true, File.exist?(name +  '.full'), 'A xxxxx.full file must exist'
+	ensure
+		delete_temp_content
+	end
 	
 	def test_full_backup
-		bk = Yabu::Backup.new(CONF_TEST_1, DIR_TEST)
+		bk = Backup.new(CONF_TEST_1, DIR_TEST)
 		bk.full
 		
-		# Find name of the just created repository and count # of dir/files
-		name = ''
-		number = 0
-		Dir.foreach('temp') do |file|
-			next if (file == ".") or (file == "..")
-			name = file
-			number += 1
-		end
-		# There must be only one directory created
-		assert_equal(1, number)
-		
-		name = File.join('temp', name)
+		name = TEST_DIR + find_name_of_just_created_backup
 		
 		to_check = File.join(name, 'home/xavier/local/test')
 		assert_equal(true, File.exist?(to_check))
@@ -34,53 +69,33 @@ class TC_Backup < Test::Unit::TestCase
 		
 		assert_equal(true, File.exist?(fichier2))
 		assert_equal(false, File.exist?(fichier1))
-		
-		# finally clean the backup
-		FileUtils.remove_dir name, true
-		
-		number = 0
-		Dir.foreach('temp') do |file|
-			next if (file == ".") or (file == "..")
-			name = file
-			number += 1
-		end
-		# It must remains nothing
-		assert_equal(0, number)
-
+	ensure
+		delete_temp_content
 	end
 	
-	# Test of expand_path
-	def test_full_backup2
-		bk = Yabu::Backup.new(CONF_TEST_1, DIR_TEST_2)
+	def test_full_backup_with_tilde_in_directories_conf
+		bk = Backup.new(CONF_TEST_1, DIR_WITH_TILDE_TEST)
 		bk.full
 		
-		# Find name of the just created repository and count # of dir/files
-		name = ''
-		number = 0
-		Dir.foreach('temp') do |file|
-			next if (file == ".") or (file == "..")
-			name = file
-			number += 1
-		end
-		# There must be only one directory created
-		assert_equal(1, number)
-		
-		name = File.join('temp', name)
+		name = TEST_DIR + find_name_of_just_created_backup
 		
 		to_check = File.join(name, 'home/xavier/local/wallpaper')
 		assert_equal(true, File.directory?(to_check))
-		
-		# finally clean the backup
-		FileUtils.remove_dir name, true
-		
-		number = 0
-		Dir.foreach('temp') do |file|
-			next if (file == ".") or (file == "..")
-			name = file
-			number += 1
-		end
-		# It must remains nothing
-		assert_equal(0, number)
+	ensure
+		delete_temp_content
 	end
+	
+	### INCREMENTAL BACKUP ###############
+	
+	#~ def test_incremental_without_root_full
+		#~ bk = Backup.new(CONF_TEST_1, DIR_TEST)
+		#~ assert_raise(NoRootFullBackupError) do
+			#~ bk.incremental
+		#~ end
+	#~ end
+	#~ 
+	#~ def test_incremental
+		#~ 
+	#~ end
 	
 end
