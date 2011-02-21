@@ -12,6 +12,12 @@ class TC_Copier < Test::Unit::TestCase
 	
 	### BUGS #########
 	
+  # Bug 5
+  #
+  # in 0.6, cannot save:
+  #   /home/USER/folder/file
+  # if this line comes before a line like:
+  #   /home/USER/folder
 	def test_bug5
 		filename = 'configuration/yabu.conf'
 		c = Yabu::Copier.new([])
