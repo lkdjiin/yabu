@@ -1,4 +1,3 @@
 .yardoc/
 yabu.log*
 *.gem
-reek.sed
