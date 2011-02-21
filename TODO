@@ -1,6 +1,7 @@
 * rewrite tests
   + use rspec
   + don't refer to local paths !
+  + install coverage
   
 * incremental backup
   + backup part
