@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 desc 'Unit tests'
 task :default => :unit
 
@@ -7,9 +9,12 @@ task :unit do
 	exec "ruby test.rb"
 end
 
-desc 'Run Yabu'
-task :run do
-  exec "./bin/yabu"
+
+
+desc 'Test Yabu'
+task :test do 
+  puts 'Testing Yabu...'
+  sh "rspec --color --format documentation spec"
 end
 
 desc 'Generate yard documentation'
