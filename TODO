@@ -1,3 +1,7 @@
+* rewrite tests
+  + use rspec
+  + don't refer to local paths !
+  
 * incremental backup
   + backup part
 	+ recovery part
