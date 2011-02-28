@@ -25,9 +25,6 @@ end
 desc 'Check for code smells'
 task :reek do
   puts 'Checking for code smells...'
-  files = Dir.glob 'lib/**/*.rb'
-  files.delete 'lib/prunille/prunille.rb'
-  args = files.join(' ')
   sh "reek --quiet lib | ./reek.sed"
 end
 
