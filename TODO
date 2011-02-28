@@ -1,3 +1,4 @@
+* change dir-config to dir_config
 * rewrite tests
   + use rspec
   + don't refer to local paths !
