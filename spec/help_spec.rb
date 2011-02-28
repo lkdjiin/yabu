@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
-require './lib/yabu'
+require './spec/helper'
 
-describe Yabu::Help do
+describe Help do
 
   before :all do
     @commands = ['help', 'recover', 'backup']
@@ -9,13 +9,13 @@ describe Yabu::Help do
   
   it "should respond to each command" do
     @commands.each do |cmd|
-      Yabu::Help.respond_to?(cmd).should == true
+      Help.respond_to?(cmd).should == true
 		end
   end
   
   it "should return string" do
 		@commands.each do |cmd|
-      Yabu::Help.send(cmd).class.should == String
+      Help.send(cmd).class.should == String
 		end
 	end
   

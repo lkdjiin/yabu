@@ -14,7 +14,7 @@ end
 desc 'Test Yabu'
 task :test do 
   puts 'Testing Yabu...'
-  sh "rspec --color --format documentation spec"
+  sh "rspec --color spec"
 end
 
 desc 'Generate yard documentation'

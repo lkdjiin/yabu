@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
-require './lib/yabu'
+require './spec/helper'
 
-describe Yabu::Copier do
+describe Copier do
 
   DEST_CONFIGURATION = File.expand_path 'tests/temp/configuration'
   DEST_FOLDER = File.expand_path 'tests/temp/folder'
   
   before :all do
-    @copier = Yabu::Copier.new([])
+    @copier = Copier.new([])
   end
   
   after :each do
@@ -27,7 +27,7 @@ describe Yabu::Copier do
     exclude = File.expand_path 'tests/configuration/yabu.conf'
     must_exist = File.join(DEST_CONFIGURATION, 'directories.conf.test')
     must_not_exist = File.join(DEST_CONFIGURATION, 'yabu.conf')
-    copier = Yabu::Copier.new([exclude])
+    copier = Copier.new([exclude])
     
     copier.copy(source, DEST_CONFIGURATION)
     

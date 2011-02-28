@@ -58,16 +58,8 @@ module Yabu
 				return false
 			end
 			filename.strip!
-			return false if not legal? filename
-			filename = File.expand_path(filename) if filename[0, 1] == '~'
+			filename = File.expand_path(filename)
 			dispatch action, filename
-		end
-		
-		# Be sure that filename begins by a slash
-		def legal? filename
-			return true if filename[0, 1] == "/" or filename[0, 1] == '~'
-			@log.error "Bad file name <#{filename}> in #{@name}. Not archived"
-			false
 		end
 		
 		# Decide if this is a file to include or to exclude.
