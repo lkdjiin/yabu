@@ -21,7 +21,7 @@ module Yabu
 		def run options={}
 			options = {force: false}.merge(options)
 			log_the_options options
-			find_newest_backup
+      @backup = BackupFinder.new(@yabu_config['path']).newest
 			# @todo diplay message and exit if there is no backup
 			restore options
 		end
@@ -30,23 +30,6 @@ module Yabu
 	
 		def log_the_options options
 			@log.info "Recover mode with following options: force=#{options[:force]}"
-		end
-
-		# Find the newest backup in the repository.
-		def find_newest_backup
-			backups = get_all_backups
-			return false if backups.empty?
-			backups.sort!.reverse!
-			@backup = backups[0]
-		end
-		
-		def get_all_backups
-			backups = []
-			Dir.foreach(@yabu_config['path']) do |file|
-				next if (file == ".") or (file == "..")
-				backups.push(file)
-			end
-			backups
 		end
 		
 		def restore options
