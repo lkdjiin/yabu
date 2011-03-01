@@ -1,15 +1,7 @@
 # -*- encoding: utf-8 -*-
 
-desc 'Unit tests'
-task :default => :unit
-
-desc 'Unit tests'
-task :unit do 
-	Dir.chdir 'tests'
-	exec "ruby test.rb"
-end
-
-
+desc 'Tests'
+task :default => :test
 
 desc 'Test Yabu'
 task :test do 
