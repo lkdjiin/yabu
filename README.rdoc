@@ -18,6 +18,11 @@ Yabu is written in ruby, so you need a ruby interpreter to run it.
 Ruby >= 1.9.2
 
 
+=== Developpers dependencies
+* rspec (tests)
+* reek (code smells)
+* coco (code coverage)
+
 == Installing Yabu
 
 Build a gem and install it:

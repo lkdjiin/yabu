@@ -25,6 +25,10 @@ describe Backup do
 		name
 	end
   
+  it "must exit when cannot create backup folder" do
+    lambda {Backup.new('tests/configuration/yabu.conf.test2')}.should raise_error(SystemExit)
+  end
+  
   it "must create one and only one folder for a full backup" do
 		Backup.new(YABU_CONF, DIR_CONF).full
     

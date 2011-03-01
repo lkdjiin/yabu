@@ -1,0 +1,304 @@
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>/home/xavier/devel/ruby/yabu/lib/yabu/main.rb</title>
+    <link rel="stylesheet" href="css/coco.css" type="text/css" />
+  </head>
+  <body>
+    <p class="menu">
+      <a href="index.html">Index</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco/wiki">Wiki</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="https://github.com/lkdjiin/coco">Source</a> <img src="img/coconut16.png" width="16" height="16" />
+      <a href="http://lkdjiin.github.com/coco/">Web site</a>
+    </p>
+    <h2>/home/xavier/devel/ruby/yabu/lib/yabu/main.rb</h2>
+    <p class="date">2011-03-01 17:38:30 +0100</p>
+    
+    <table class="source">
+      
+                    <tr class="hit" %>      
+      <td><pre>1 </pre></td><td><pre>module Yabu</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>2 </pre></td><td><pre>	</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>3 </pre></td><td><pre>	# I am the main class of the Yabu application.</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>4 </pre></td><td><pre>	# @example Start the application</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>5 </pre></td><td><pre>	#		main = Main.new</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>6 </pre></td><td><pre>	#		main.run</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>7 </pre></td><td><pre>	class Main</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>8 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>9 </pre></td><td><pre>		# Default constructor</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>10 </pre></td><td><pre>		def initialize</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>11 </pre></td><td><pre>			@opt = Options.new</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>12 </pre></td><td><pre>			yabu_config = YabuConfig.new</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>13 </pre></td><td><pre>			@log = Log.instance('yabu.log', yabu_config['logRotation'])</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>14 </pre></td><td><pre>			@log.level = Log::INFO unless @opt[:test]</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>15 </pre></td><td><pre>			check_if_user_seeking_help</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>16 </pre></td><td><pre>		end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>17 </pre></td><td><pre>		</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>18 </pre></td><td><pre>		# Start the backup process or the recover process.</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>19 </pre></td><td><pre>		def run</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>20 </pre></td><td><pre>			if ARGV.size == 1 and ARGV[0] == 'recover'</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>21 </pre></td><td><pre>				start_to_recover</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>22 </pre></td><td><pre>			elsif ARGV.size == 1 and ARGV[0] == 'backup'</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>23 </pre></td><td><pre>				start_to_backup</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>24 </pre></td><td><pre>			elsif ARGV.size == 0</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>25 </pre></td><td><pre>				start_to_backup</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>26 </pre></td><td><pre>			else</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>27 </pre></td><td><pre>				puts "Unknown command"</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>28 </pre></td><td><pre>				exit</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>29 </pre></td><td><pre>			end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>30 </pre></td><td><pre>		end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>31 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>32 </pre></td><td><pre>	private</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>33 </pre></td><td><pre>	</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>34 </pre></td><td><pre>		def check_if_user_seeking_help</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>35 </pre></td><td><pre>			return if ARGV.empty?</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>36 </pre></td><td><pre>			if ARGV[0] == 'help'</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>37 </pre></td><td><pre>				case ARGV[1]</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>38 </pre></td><td><pre>					when 'help' then puts Help.help</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>39 </pre></td><td><pre>					when 'recover' then puts Help.recover</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>40 </pre></td><td><pre>					when 'backup' then puts Help.backup</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>41 </pre></td><td><pre>					else</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>42 </pre></td><td><pre>						puts "yabu: unknown command #{ARGV[1]}"</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>43 </pre></td><td><pre>				end</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>44 </pre></td><td><pre>				exit</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>45 </pre></td><td><pre>			end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>46 </pre></td><td><pre>		end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>47 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>48 </pre></td><td><pre>		# Start the backup process.</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>49 </pre></td><td><pre>		def start_to_backup</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>50 </pre></td><td><pre>			errors = backup</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>51 </pre></td><td><pre>			delete_old_backup</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>52 </pre></td><td><pre>			unless errors.zero?</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>53 </pre></td><td><pre>				puts "!!! #{errors} error(s) during copy process. See the log file !!!"</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>54 </pre></td><td><pre>			end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>55 </pre></td><td><pre>		end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>56 </pre></td><td><pre>		</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>57 </pre></td><td><pre>		# Start the recovery process.</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>58 </pre></td><td><pre>		def start_to_recover</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>59 </pre></td><td><pre>			Recovery.new.run @opt.options</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>60 </pre></td><td><pre>		end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>61 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>62 </pre></td><td><pre>		# Do the backup.</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>63 </pre></td><td><pre>		def backup</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>64 </pre></td><td><pre>			Backup.new.run</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>65 </pre></td><td><pre>		end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>66 </pre></td><td><pre>		</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>67 </pre></td><td><pre>		# Remove the oldest backups if they exist.</pre></td>
+        </tr>
+                    <tr class="hit" %>      
+      <td><pre>68 </pre></td><td><pre>		def delete_old_backup</pre></td>
+        </tr>
+                    <tr class="miss">
+      
+      <td><pre>69 </pre></td><td><pre>			BackupDeletor.new.run</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>70 </pre></td><td><pre>		end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>71 </pre></td><td><pre>	end</pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>72 </pre></td><td><pre></pre></td>
+        </tr>
+                    <tr class="never">
+      
+      <td><pre>73 </pre></td><td><pre>end</pre></td>
+        </tr>
+            
+    </table>
+  </body>
+</html>

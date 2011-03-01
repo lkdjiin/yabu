@@ -25,4 +25,8 @@ describe DirConfig do
     @config.files_to_exclude.include?(part_expected).should == true
   end
   
+  it "must not crash on bad written config files" do
+    lambda{DirConfig.new("tests/configuration/directories.conf.test3", true)}.should_not raise_error
+  end
+  
 end

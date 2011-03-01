@@ -21,6 +21,10 @@ describe BackupDeletor do
 		end
   end
   
+  it "must be created with a default config" do
+    BackupDeletor.new.is_a?(BackupDeletor).should == true
+  end
+  
   # removeAfterXDays = 10
 	# savesToKeep = 3
 	it "must delete backups given rules" do

@@ -22,6 +22,11 @@ describe Copier do
     File.exist?(target).should == true
   end
   
+  it "must raise error if dest is unwrittable" do
+    source = File.expand_path 'tests/configuration'
+		lambda{@copier.copy(source, '/unknown/path')}.should raise_error(SystemExit)
+  end
+  
   it "must exclude the given list from copy" do
     source = File.expand_path 'tests/configuration'
     exclude = File.expand_path 'tests/configuration/yabu.conf'
