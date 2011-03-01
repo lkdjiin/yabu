@@ -7,3 +7,4 @@ include Yabu
 
 YABU_CONF = 'tests/configuration/yabu.conf.test1'
 TEST_REPOSITORY = 'tests/temp'
+BACKED_UP_DIR = 'tests/backed_up'
