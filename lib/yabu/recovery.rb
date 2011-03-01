@@ -1,7 +1,6 @@
 module Yabu
 
 	# I restore your data
-	# @since 0.6
 	class Recovery
 
 		# Default constructor.
