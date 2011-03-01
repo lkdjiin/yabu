@@ -62,8 +62,7 @@ module Yabu
 		# @since 0.15
 		def full
 			log_info_and_display "Full backup started with #{Yabu.version}"
-			create_backup_folder
-			create_full_backup_mark
+			create_backup_environ
 			errors = copy
 			log_info_and_display "Full backup done in #{@backup_folder}"
 			errors
@@ -107,6 +106,11 @@ module Yabu
 			@log.fatal "#{repository_path} doesnt exist" if not File.exist?(repository_path)
 			@log.fatal "#{repository_path} is not writable" if not File.stat(repository_path).writable?
 		end
+    
+    def create_backup_environ
+      create_backup_folder
+      create_full_backup_mark
+    end
 		
 		# I am trying to create the backup folder in the repository.
 		# If I can't do this, the program will terminate.

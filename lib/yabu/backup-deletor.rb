@@ -34,12 +34,16 @@ module Yabu
 			Message.searching_old_backups
 			Dir.foreach(@yabu_config['path']) do |file|
 				next if (file == ".") or (file == "..")
-				@number_of_backups += 1
-				filedate = Date.new file[0, 4].to_i, file[4, 2].to_i, file[6, 2].to_i
-				days = Date.today - filedate
-				@backups_to_remove.push(file) if days > @yabu_config['removeAfterXDays']
+				add_an_old_backup file
 			end
 		end
+    
+    def add_an_old_backup file
+      @number_of_backups += 1
+      filedate = Date.new file[0, 4].to_i, file[4, 2].to_i, file[6, 2].to_i
+      days = Date.today - filedate
+      @backups_to_remove.push(file) if days > @yabu_config['removeAfterXDays']
+    end
 		
 		def remove_old_backup
 			if @backups_to_remove == []
