@@ -15,6 +15,7 @@ module Yabu
 			@exclude = exclude_files
 			@errors = 0
       @directory = Directory.new
+      @file_copier = FileCopier.new
 		end
 
 		# I try to recursively copy source to dest.
@@ -26,7 +27,7 @@ module Yabu
 				copy_directory source, dest
 			else
 				@directory.create_if_needed File.dirname(dest) if File.directory?(File.dirname(source))
-				copy_file source, dest
+				@errors += 1 unless @file_copier.copy source, dest
 			end
 		end
 
@@ -40,24 +41,6 @@ module Yabu
 				return true if file.match(/#{element}/)
 			end
 			false
-		end
-		
-		# Copy one regular file, not a directory, not a symbolic link, etc.
-		# @param [String] source the source path
-		# @param [String] dest the destination path
-		def copy_file source, dest
-			if File.symlink?(source)
-				@log.warn "Yabu do not backup symbolic link: #{source}"
-			elsif File.file?(source)
-				begin
-					FileUtils.cp(source, dest)
-					@log.debug "Copied #{source} to #{dest}"
-				rescue
-					record_error "Cannot copy #{source} to #{dest}"
-				end
-			else
-				record_error "Yabu do not know what to do with #{source}"
-			end
 		end
 		
 		# Copy a directory and its content (recursive).
@@ -89,7 +72,7 @@ module Yabu
 				mkdir dest
 				copy source, dest
 			else
-				copy_file source, dest
+				@errors += 1 unless @file_copier.copy source, dest
 			end
 		end
 		

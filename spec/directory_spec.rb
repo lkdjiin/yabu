@@ -8,7 +8,7 @@ describe Directory do
   end
   
   after :each do
-    FileUtils.remove_dir DEST_CONFIGURATION if File.exist? DEST_CONFIGURATION
+    FileUtils.remove_dir @dir_name if File.exist? @dir_name
   end
   
   it "must create a dir if it doesnt exist" do

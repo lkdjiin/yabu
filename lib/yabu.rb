@@ -9,6 +9,7 @@ require "yabu/message"
 
 require "yabu/copier/copier"
 require "yabu/copier/directory"
+require "yabu/copier/file_copier"
 
 require "yabu/config/yabu_config"
 require "yabu/config/dir_config"
