@@ -1,13 +1,19 @@
 require "yabu/options"
+
 require "yabu/backup/backup"
 require "yabu/backup/backup_deletor"
 require "yabu/backup/backup_finder"
+
 require "yabu/log"
 require "yabu/message"
 require "yabu/copier"
+
 require "yabu/config/yabu_config"
 require "yabu/config/dir_config"
-require "yabu/recovery"
+
+require "yabu/recovery/recovery"
+require "yabu/recovery/files_restorer"
+
 require "yabu/main"
 require "yabu/install"
 require "yabu/help"
