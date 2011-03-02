@@ -9,11 +9,11 @@ module Yabu
       @backup_dir = backup_dir
       @log = Log.instance
       @options = {force: false}.merge(options)
+      @files = File.join(@backup_dir, "**", "*")
     end
     
     def run
-      files = File.join(@backup_dir, "**", "*")
-      Dir.glob(files).each do |file_in_repo|
+      Dir.glob(@files).each do |file_in_repo|
 				file_on_computer = file_in_repo.sub(Regexp.new(@backup_dir), '')
 				putc(?.)
 				if @options[:force]
