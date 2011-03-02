@@ -6,7 +6,9 @@ require "yabu/backup/backup_finder"
 
 require "yabu/log"
 require "yabu/message"
-require "yabu/copier"
+
+require "yabu/copier/copier"
+require "yabu/copier/directory"
 
 require "yabu/config/yabu_config"
 require "yabu/config/dir_config"
@@ -17,6 +19,7 @@ require "yabu/recovery/files_restorer"
 require "yabu/main"
 require "yabu/install"
 require "yabu/help"
+
 
 # Main module of the Yabu application.
 # I contain (or will contain):

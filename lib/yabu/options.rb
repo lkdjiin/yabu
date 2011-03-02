@@ -53,8 +53,8 @@ class Options
 		end
 		begin
 			optparse.parse!
-		rescue OptionParser::InvalidOption => e
-			puts e.to_s
+		rescue OptionParser::InvalidOption => ex
+			puts ex.to_s
 			exit 1
 		end
 		print_version if @options[:version]

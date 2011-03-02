@@ -14,6 +14,7 @@ module Yabu
 			@log = Log.instance
 			@exclude = exclude_files
 			@errors = 0
+      @directory = Directory.new
 		end
 
 		# I try to recursively copy source to dest.
@@ -21,27 +22,15 @@ module Yabu
 		# @param [String] dest Full path name of the future file (or directory) in the repository
 		def copy source, dest
 			if File.directory? source
-				create_if_needed dest 
+				@directory.create_if_needed dest 
 				copy_directory source, dest
 			else
-				create_if_needed File.dirname(dest) if File.directory?(File.dirname(source))
+				@directory.create_if_needed File.dirname(dest) if File.directory?(File.dirname(source))
 				copy_file source, dest
 			end
 		end
 
 	private
-
-		# I am trying to create the dest directory, along with its parent's directories if they doesn't
-		# exist.
-		def create_if_needed dest
-			return if File.exist?(dest)
-			begin
-				FileUtils.makedirs dest
-				@log.debug "Created #{dest}"
-			rescue SystemCallError
-				@log.fatal "Cannot create #{dest}"
-			end
-		end
 
 		# Find if a file is part of the list of files to exclude.
 		# @param [String] file a filename to check against the exclude list
@@ -105,12 +94,13 @@ module Yabu
 		end
 		
 		# Do we have to skip a file ?
-		# @param [String] dir path of the directory file
+		# @param [String] dir path of the directory
 		# @param [String] file the filename
 		# @return [true|false] true if the file is part of the exclude list
 		def skip? dir, file
-			if exclude?(File.join(dir, file))
-				@log.debug("Exclude from saving : " + File.join(dir, file))
+      full_name = File.join(dir, file)
+			if exclude?(full_name)
+				@log.debug("Exclude from saving : " + full_name)
 				return true
 			end
 			return true if (file == ".") or (file == "..")
