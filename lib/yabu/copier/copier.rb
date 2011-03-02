@@ -33,7 +33,21 @@ module Yabu
 
 	private
 
-		# Find if a file is part of the list of files to exclude.
+		# Copy a directory and its content (recursive).
+		# @param [String] source the source path
+		# @param [String] dest the destination path
+		def copy_directory source, dest
+			begin
+        Dir.foreach(source) do |file|
+          next if skip? source, file
+          decide_how_to_copy(File.join(source, file), File.join(dest, file))
+        end
+			rescue SystemCallError
+				record_error "Cannot read #{source}"
+			end
+		end
+    
+    # Find if a file is part of the list of files to exclude.
 		# @param [String] file a filename to check against the exclude list
 		# @return [true | false]
 		def exclude? file
@@ -43,37 +57,17 @@ module Yabu
 			false
 		end
 		
-		# Copy a directory and its content (recursive).
-		# @param [String] source the source path
-		# @param [String] dest the destination path
-		def copy_directory source, dest
-			begin
-				loop_copy source, dest
-			rescue SystemCallError
-				record_error "Cannot read #{source}"
-			end
-		end
-		
-		# Copy a directory and its content (recursive). Compare the files to the list of exclusions.
-		# @param [String] source the source path
-		# @param [String] dest the destination path
-		def loop_copy source, dest
-			Dir.foreach(source) do |file|
-				next if skip? source, file
-				decide_how_to_copy(File.join(source, file), File.join(dest, file))
-			end
-		end
-		
 		# If +source+ is a file, copy this file. If +source+ is a directory, copy this directory.
 		# @param [String] source the source path
 		# @param [String] dest the destination path
 		def decide_how_to_copy source, dest
 			if File.directory?(source)
-				mkdir dest
+				success = @directory.create dest
 				copy source, dest
 			else
-				@errors += 1 unless @file_copier.copy source, dest
+				success = @file_copier.copy source, dest
 			end
+      @errors += 1 unless success
 		end
 		
 		# Do we have to skip a file ?
@@ -88,17 +82,6 @@ module Yabu
 			end
 			return true if (file == ".") or (file == "..")
 			false
-		end
-		
-		# Create a directory.
-		# @param [String] dir the path
-		def mkdir dir
-			begin
-				FileUtils.mkdir(dir)
-				@log.debug "Created " + dir
-			rescue SystemCallError
-				record_error "Cannot create directory #{dir}"
-			end
 		end
 		
 		def record_error message

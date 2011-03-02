@@ -4,7 +4,7 @@ require './spec/helper'
 describe DirConfig do
 
   before :all do
-    @config = DirConfig.new("tests/configuration/directories.conf.test", true)
+    @config = DirConfig.new("tests/configuration/directories.conf.test")
   end
   
   it "must return an array of files to backup" do
@@ -26,7 +26,7 @@ describe DirConfig do
   end
   
   it "must not crash on bad written config files" do
-    lambda{DirConfig.new("tests/configuration/directories.conf.test3", true)}.should_not raise_error
+    lambda{DirConfig.new("tests/configuration/directories.conf.test3")}.should_not raise_error
   end
   
 end

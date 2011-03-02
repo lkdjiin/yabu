@@ -2,7 +2,7 @@ module Yabu
 
 	# I'm parsing the 'configuration/directories.conf' which contains files and directories
 	# to add (or remove) to the backups.
-	# From me you can get two lists :
+  # My job is to dispatch that files/directories in two lists :
 	# 1. files/directories to include to the backup
 	# 2. files/directories to exclude from the backup
 	#
@@ -15,22 +15,13 @@ module Yabu
 		attr_reader :files, :files_to_exclude
 		
 		# @param [String] name The name of the configuration file
-		# @param [true|false] test Set to true when testing this class
-		def initialize(name, test = false)
+		def initialize(name)
 			@name = name
-			@test = test
 			@log = Log.instance
 			@files = []
 			@files_to_exclude = []
-			fill_arrays
-			@log.debug "Parsed #{@name}"
-		end
-		
-	private
-
-		# My job is to parse the configuration file to fill some lists with information found
-		# in that file.
-		def fill_arrays
+      @parser = LineParser.new
+      
 			begin
 				IO.foreach(@name) { |line| 
 					line.strip!
@@ -40,7 +31,11 @@ module Yabu
 			rescue
 				@log.fatal "Cannot parse #{@name}"
 			end
+      
+			@log.debug "Parsed #{@name}"
 		end
+		
+	private
 		
 		# @return [true] if the line is a commentary or is empty.
 		# @return [false] in other cases.
@@ -51,24 +46,25 @@ module Yabu
 		
 		# I parse a line of the config file.
 		def parse line
-			action, filename = line.split(' ', 2)
-			action.strip!
-			if filename == nil # could be nil if user forgot to write + or -.
-				@log.error "file name missing when parsing #{@name}"
-				return false
-			end
-			filename.strip!
-			filename = File.expand_path(filename)
+      action, filename = @parser.parse line
+      return false if missing_filename? filename
 			dispatch action, filename
 		end
+    
+    def missing_filename? filename
+      if filename == nil # could happen if user forgot to write + or -.
+				@log.error "file name missing when parsing #{@name}"
+				true
+			end
+    end
 		
 		# Decide if this is a file to include or to exclude.
 		# @param [String] action can be "+" or "-"
 		# @param [String] filename name of file to include/exclude
 		def dispatch action, filename
-			if action == "+"
+			if action == :include
 				include_file filename 
-			elsif action == "-"
+			elsif action == :exclude
 				exclude_file filename
 			else
 				@log.error "bad action in #{@name}. Not archived. action is <#{action}> and file is <#{filename}>"
@@ -77,7 +73,7 @@ module Yabu
 		
 		# Add +filename+ to the list of files to include.
 		def include_file filename
-			if File.exist? filename or @test
+			if File.exist? filename
 				@files.push filename
 			else
 				@log.error "when parsing #{@name} file <#{filename}> doesn't exist"
@@ -86,7 +82,7 @@ module Yabu
 		
 		# Add +filename+ to the list of files to exclude.
 		def exclude_file filename
-			if File.exist? filename or @test
+			if File.exist? filename
 				@files_to_exclude.push filename
 			else
 				@log.error "when parsing #{@name} file <#{filename}> doesn't exist"

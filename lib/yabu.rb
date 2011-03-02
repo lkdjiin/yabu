@@ -13,6 +13,7 @@ require "yabu/copier/file_copier"
 
 require "yabu/config/yabu_config"
 require "yabu/config/dir_config"
+require "yabu/config/line_parser"
 
 require "yabu/recovery/recovery"
 require "yabu/recovery/files_restorer"
