@@ -24,12 +24,11 @@ require 'yabu'
 
 # Install configuration files in user's home if there is the first
 # run of Yabu.
-if Yabu::Install.needed?
-	Yabu::Install.run
-	Yabu::Install.message
-	exit
-elsif Yabu::Install.upgrade?
-	Yabu::Install.upgrade
+installer = Yabu::Installer.new
+if installer.install_needed?
+	installer.install
+elsif installer.upgrade_needed?
+	installer.upgrade
 end
 
 # time of program start
