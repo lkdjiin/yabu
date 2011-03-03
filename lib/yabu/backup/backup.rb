@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 
 require "fileutils"
 require "date"
@@ -52,39 +53,22 @@ module Yabu
 		end
 		private :load_dir_config
 		
-		# @deprecated Since 0.15, use full instead.
-		def run
-			full
-		end
-		
 		# I start the full backup process.
 		# @return [Fixnum] Number of errors occured
-		# @since 0.15
 		def full
 			log_info_and_display "Full backup started with #{Yabu.version}"
-			create_backup_environ
-			errors = copy
+			create_backup_folder
+      errors = FullBackup.new(@backup_folder, @dir_config).backup
 			log_info_and_display "Full backup done in #{@backup_folder}"
 			errors
 		end
 		
-		# @since 0.15
 		def incremental
 			full_marks = Dir.glob(File.join(@yabu_config['path'], '*.full'))
 			raise NoFullBackupError if full_marks.empty?
 		end
 		
-		# @return nil if there is no full backup in the repository, otherwise returns
-		#   the most recent full backup folder name
-		# @since 0.15
-		def most_recent_full?
-			full_marks = Dir.glob(File.join(@yabu_config['path'], '*.full'))
-			return nil if full_marks.empty?
-			name = full_marks.sort!.reverse!.first
-			File.basename name, '.full'
-		end
-		
-	private #####################################################################
+	private
 		
 		# @return [String] Full path name of the backup folder in the repository.
 		#		Example : '/media/usb-disk/20101231-1438'
@@ -101,11 +85,6 @@ module Yabu
 			log_fatal "#{repository_path} doesnt exist" if not File.exist?(repository_path)
 			log_fatal "#{repository_path} is not writable" if not File.stat(repository_path).writable?
 		end
-    
-    def create_backup_environ
-      create_backup_folder
-      create_full_backup_mark
-    end
 		
 		# I am trying to create the backup folder in the repository.
 		# If I can't do this, the program will terminate.
@@ -116,25 +95,6 @@ module Yabu
 			rescue SystemCallError
 				log_fatal "Cannot create #{@backup_folder}"
 			end
-		end
-		
-		def create_full_backup_mark
-			begin
-				FileUtils.touch "#{@backup_folder}.full"
-				log_debug "Created #{@backup_folder}.full"
-			rescue SystemCallError
-				log_fatal "Cannot create #{@backup_folder}.full"
-			end
-		end
-		
-		# I do the effective backup.
-		# @return [Fixnum] Number of errors occured
-		def copy
-			copier = Copier.new @dir_config.files_to_exclude
-			@dir_config.files.each do |item_on_computer| 
-				copier.copy(item_on_computer, File.join(@backup_folder, item_on_computer))
-			end
-			copier.errors
 		end
 		
 	end

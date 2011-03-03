@@ -3,15 +3,8 @@ require './spec/helper'
 
 describe Backup do
   
-	DIR_CONF = 'tests/configuration/directories.conf.test'
-  
   after :each do
-		Dir.foreach(TEST_REPOSITORY) do |file|
-			next if (file == ".") or (file == "..")
-			filename = File.join(TEST_REPOSITORY, file)
-			FileUtils.remove_dir(filename) if File.directory?(filename)
-			FileUtils.remove_file(filename) if File.file?(filename)
-		end
+		clean_test_repository
   end
   
   # Find name of the just created backup folder. Assume there is only one folder in TEST_REPOSITORY.
@@ -66,18 +59,6 @@ describe Backup do
 	it "must not create incremental without full mark" do
 		bk = Backup.new(YABU_CONF, DIR_CONF)
     lambda { bk.incremental }.should raise_error(NoFullBackupError)
-	end
-	
-	it "must return nil when no full exist" do
-		bk = Backup.new(YABU_CONF, DIR_CONF)
-		bk.most_recent_full?.should == nil
-	end
-	
-	it "must use most recent full" do
-		FileUtils.touch File.join(TEST_REPOSITORY, '20110101-1234.full')
-		FileUtils.touch File.join(TEST_REPOSITORY, '20110122-1234.full')
-		bk = Backup.new(YABU_CONF, DIR_CONF)
-		bk.most_recent_full?.should == '20110122-1234'
 	end
 	
 	#~ def test_first_incremental_with_nothing_changed

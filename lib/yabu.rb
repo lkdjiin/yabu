@@ -5,7 +5,7 @@ require "yabu/options"
 require "yabu/backup/backup"
 require "yabu/backup/backup_deletor"
 require "yabu/backup/backup_finder"
-
+require "yabu/backup/full_backup"
 
 
 require "yabu/copier/copier"
