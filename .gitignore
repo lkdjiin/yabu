@@ -2,3 +2,4 @@
 yabu.log*
 *.gem
 coverage/
+doc/
