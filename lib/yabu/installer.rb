@@ -2,28 +2,29 @@ require 'fileutils'
 
 module Yabu
   
-  # Install config files and version file in user's home
-  # @since 0.6
-  module Installer
+  # Install config files and version file
+  class Installer
   
-    # Do we need to install some config files in the user's home folder ? 
-    def Install.needed?
-      not File.exists?(File.join(ENV['HOME'], '.config/yabu'))
+    def initialize base_dir = ENV['HOME']
+      @yabu_dir = File.join(base_dir, '.config/yabu')
+      @configuration_dir = File.join(base_dir, '.config/yabu/configuration')
+    end
+  
+    def install_needed?
+      not File.exists?(@yabu_dir)
     end
     
     # @return true if version installed is different of this version of Yabu.
-    # @since 0.7
     # @note I don't take any account of higher or lower version, just difference.
-    def Install.upgrade?
+    def upgrade_needed?
       my_version = Yabu.version
-      installed_version = File.read(File.join(ENV['HOME'], '.config/yabu/VERSION')).strip
+      installed_version = File.read(File.join(@yabu_dir, 'VERSION')).strip
       my_version != installed_version
     end
     
-    # Copy file version in yabu hidden config folder.
-    # @since 0.7
-    def Install.upgrade
-      FileUtils.cp(File.join($YABU_PATH, 'VERSION'), File.join(ENV['HOME'], '.config/yabu'))
+    # Copy version file in yabu hidden config folder.
+    def upgrade
+      FileUtils.cp(File.join($YABU_PATH, 'VERSION'), @yabu_dir)
     end
     
     # Install config files in user's home folder
@@ -31,18 +32,32 @@ module Yabu
     # * VERSION
     # * configuration/directories.conf
     # * configuration/yabu.conf
-    def Install.run
-      conf = File.join(ENV['HOME'], '.config/yabu/configuration')
-      yab = File.join(ENV['HOME'], '.config/yabu')
-      FileUtils.makedirs(conf)
-      FileUtils.cp("#{$YABU_PATH}/VERSION", yab)
-      FileUtils.cp("#{$YABU_PATH}/configuration/directories.conf", conf)
-      FileUtils.cp("#{$YABU_PATH}/configuration/yabu.conf", conf)
+    def install
+      copy_files
+      display_message
+      exit
     end
     
-    def Install.message
+    private
+    
+    def copy_files
+      FileUtils.makedirs(@configuration_dir)
+      copy_version
+      copy_config
+    end
+    
+    def copy_version
+      FileUtils.cp("#{$YABU_PATH}/VERSION", @yabu_dir)
+    end
+    
+    def copy_config
+      FileUtils.cp("#{$YABU_PATH}/configuration/directories.conf", @configuration_dir)
+      FileUtils.cp("#{$YABU_PATH}/configuration/yabu.conf", @configuration_dir)
+    end
+    
+    def display_message
       puts "This is your first installation of yabu."
-      puts "Some files have been copied in #{ENV['HOME']}/.config/yabu/"
+      puts "Some files have been copied in #{@yabu_dir}"
       puts "Please, look at the documentation to modify those files, in order to suit your needs."
       puts "Restart yabu when you are ready."
     end
