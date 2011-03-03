@@ -4,9 +4,9 @@ module Yabu
 
   # Directory maker
 	class Directory
-  
+    include Loggable
+    
     def initialize
-      @log = Log.instance
     end
     
     # I am trying to create the +dir+ directory, along with its parent's directories if they doesn't
@@ -15,9 +15,9 @@ module Yabu
 			return if File.exist?(dir)
 			begin
 				FileUtils.makedirs dir
-				@log.debug "Created #{dir}"
+				log_debug "Created #{dir}"
 			rescue SystemCallError
-				@log.fatal "Cannot create #{dir}"
+				log_fatal "Cannot create #{dir}"
 			end
 		end
     
@@ -27,10 +27,10 @@ module Yabu
 		def create dir
 			begin
 				FileUtils.mkdir(dir)
-				@log.debug "Created " + dir
+				log_debug "Created " + dir
         true
 			rescue SystemCallError
-				@log.error "Cannot create directory #{dir}"
+				log_error "Cannot create directory #{dir}"
         false
 			end
 		end

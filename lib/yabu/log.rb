@@ -33,5 +33,34 @@ module Yabu
 			exit 1
 		end
 	end
+  
+  module Loggable
+    Uniq_log = Log.instance
+    
+    def log_info_and_display message
+			Uniq_log.info message
+			puts message
+		end
+    
+    def log_info message
+			Uniq_log.info message
+		end
+    
+    def log_debug message
+      Uniq_log.debug message
+    end
+    
+    def log_warn message
+      Uniq_log.warn message
+    end
+    
+    def log_error message
+      Uniq_log.error message
+    end
+    
+    def log_fatal message
+      Uniq_log.fatal message
+    end
+  end
 
 end

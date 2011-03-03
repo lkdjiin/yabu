@@ -5,13 +5,13 @@ module Yabu
 	# I'm doing the hard work of copying recursivly the files and directories to backup.
 	# I'm hacked from an article found on http://iamneato.com/2009/07/28/copy-folders-recursively
 	class Copier
+    include Loggable
 		# Get the number of non-fatal errors occured during copy
 		attr_reader :errors
 
 		# @param [Array<String>] exclude_files List of directories and files 
 		#		to exclude from the backups.
 		def initialize(exclude_files)
-			@log = Log.instance
 			@exclude = exclude_files
 			@errors = 0
       @directory = Directory.new
@@ -77,7 +77,7 @@ module Yabu
 		def skip? dir, file
       full_name = File.join(dir, file)
 			if exclude?(full_name)
-				@log.debug("Exclude from saving : " + full_name)
+				log_debug("Exclude from saving : " + full_name)
 				return true
 			end
 			return true if (file == ".") or (file == "..")
@@ -85,7 +85,7 @@ module Yabu
 		end
 		
 		def record_error message
-			@log.error message
+			log_error message
 			@errors += 1
 		end
 		

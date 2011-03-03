@@ -9,8 +9,8 @@ module Yabu
 		# Default constructor
 		def initialize
 			@opt = Options.new
+      @log = Log.instance('yabu.log', yabu_config['logRotation'])
 			yabu_config = YabuConfig.new
-			@log = Log.instance('yabu.log', yabu_config['logRotation'])
 			@log.level = Log::INFO unless @opt[:test]
 			check_if_user_seeking_help
 		end

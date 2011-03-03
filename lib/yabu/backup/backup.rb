@@ -16,6 +16,7 @@ module Yabu
 	#   # Or do an incremental backup
 	#		backup.incremental
 	class Backup
+    include Loggable
 
 		# I set the configuration. Remember you have to edit 'configuration/yabu.conf' and
 		# 'configuration/directories.conf' by hand. With this two config files I know where
@@ -23,7 +24,6 @@ module Yabu
 		# @param [String] yabu_config The 'yabu.conf' file path. Only used during testing.
 		# @param [String] dir_config The 'directories.conf' file path. Only used during testing.
 		def initialize yabu_config = '', dir_config = ''
-			@log = Log.instance
 			load_config(yabu_config, dir_config)
 			@backup_folder = build_backup_folder_name		
 		end
@@ -86,25 +86,20 @@ module Yabu
 		
 	private #####################################################################
 		
-		def log_info_and_display message
-			@log.info message
-			puts message
-		end
-		
 		# @return [String] Full path name of the backup folder in the repository.
 		#		Example : '/media/usb-disk/20101231-1438'
 		def build_backup_folder_name
 			repository_path = @yabu_config['path']
 			ensure_we_have_full_access_to(repository_path)
 			backup_folder = File.join(repository_path, Yabu.backup_folder_name)
-			@log.fatal "#{backup_folder} exist" if File.exist?(backup_folder)
+			log_fatal "#{backup_folder} exist" if File.exist?(backup_folder)
 			backup_folder
 		end
 		
 		# Fatal error if repository doesn't exist or if we can't write to it.
 		def ensure_we_have_full_access_to repository_path
-			@log.fatal "#{repository_path} doesnt exist" if not File.exist?(repository_path)
-			@log.fatal "#{repository_path} is not writable" if not File.stat(repository_path).writable?
+			log_fatal "#{repository_path} doesnt exist" if not File.exist?(repository_path)
+			log_fatal "#{repository_path} is not writable" if not File.stat(repository_path).writable?
 		end
     
     def create_backup_environ
@@ -117,18 +112,18 @@ module Yabu
 		def create_backup_folder
 			begin
 				Dir.mkdir @backup_folder
-				@log.debug "Created #{@backup_folder}"
+				log_debug "Created #{@backup_folder}"
 			rescue SystemCallError
-				@log.fatal "Cannot create #{@backup_folder}"
+				log_fatal "Cannot create #{@backup_folder}"
 			end
 		end
 		
 		def create_full_backup_mark
 			begin
 				FileUtils.touch "#{@backup_folder}.full"
-				@log.debug "Created #{@backup_folder}.full"
+				log_debug "Created #{@backup_folder}.full"
 			rescue SystemCallError
-				@log.fatal "Cannot create #{@backup_folder}.full"
+				log_fatal "Cannot create #{@backup_folder}.full"
 			end
 		end
 		

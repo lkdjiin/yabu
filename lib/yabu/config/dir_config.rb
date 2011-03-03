@@ -12,12 +12,12 @@ module Yabu
 	#		excludes = c.files_to_exclude
 	# @todo rename method the ruby way
 	class DirConfig
+    include Loggable
 		attr_reader :files, :files_to_exclude
 		
 		# @param [String] name The name of the configuration file
 		def initialize(name)
 			@name = name
-			@log = Log.instance
 			@files = []
 			@files_to_exclude = []
       @parser = LineParser.new
@@ -29,10 +29,10 @@ module Yabu
 					parse line
 				}
 			rescue
-				@log.fatal "Cannot parse #{@name}"
+				log_fatal "Cannot parse #{@name}"
 			end
       
-			@log.debug "Parsed #{@name}"
+			log_debug "Parsed #{@name}"
 		end
 		
 	private
@@ -53,7 +53,7 @@ module Yabu
     
     def missing_filename? filename
       if filename == nil # could happen if user forgot to write + or -.
-				@log.error "file name missing when parsing #{@name}"
+				log_error "file name missing when parsing #{@name}"
 				true
 			end
     end
@@ -67,7 +67,7 @@ module Yabu
 			elsif action == :exclude
 				exclude_file filename
 			else
-				@log.error "bad action in #{@name}. Not archived. action is <#{action}> and file is <#{filename}>"
+				log_error "bad action in #{@name}. Not archived. action is <#{action}> and file is <#{filename}>"
 			end
 		end
 		
@@ -76,7 +76,7 @@ module Yabu
 			if File.exist? filename
 				@files.push filename
 			else
-				@log.error "when parsing #{@name} file <#{filename}> doesn't exist"
+				log_error "when parsing #{@name} file <#{filename}> doesn't exist"
 			end
 		end
 		
@@ -85,7 +85,7 @@ module Yabu
 			if File.exist? filename
 				@files_to_exclude.push filename
 			else
-				@log.error "when parsing #{@name} file <#{filename}> doesn't exist"
+				log_error "when parsing #{@name} file <#{filename}> doesn't exist"
 			end
 		end
 		

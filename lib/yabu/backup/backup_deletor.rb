@@ -7,12 +7,12 @@ module Yabu
 	# My job is to delete old backups according to certain rules.
 	# See the rules in the user guide.
 	class BackupDeletor
+    include Loggable
 
 		# @param [String] yabu_conf The 'yabu.conf' file path. Only used during testing.
 		def initialize yabu_conf = ''
 			@backups_to_remove = []
 			@number_of_backups = 0
-			@log = Log.instance
 			if yabu_conf.empty?
 				@yabu_config = YabuConfig.new
 			else
@@ -55,7 +55,7 @@ module Yabu
 		
 		def dont_remove
 			Message.no_backups_to_remove
-			@log.debug "No old backup to remove"
+			log_debug "No old backup to remove"
 		end
 		
 		# I try to remove the oldest backups. But I always keep a number of backup in the repository.
@@ -73,11 +73,11 @@ module Yabu
 		# @param [String] a_backup Path of the backup to remove
 		def remove a_backup
 			a_directory = File.join(@yabu_config['path'], a_backup)
-			@log.info "Removing backup #{a_directory}"
+			log_info "Removing backup #{a_directory}"
 			begin
 				FileUtils.remove_dir a_directory, true
 			rescue
-				@log.warn "Old backup <#{a_directory}> maybe not removed"
+				log_warn "Old backup <#{a_directory}> maybe not removed"
 			end
 			@number_of_backups -= 1
 		end

@@ -2,12 +2,12 @@ module Yabu
 
   # Copy files from repository to local folders given user's options
 	class FilesRestorer
+    include Loggable
   
     def initialize backup_dir, options={}
       backup_dir = File.expand_path backup_dir
       raise ArgumentError unless File.directory? backup_dir
       @backup_dir = backup_dir
-      @log = Log.instance
       @options = {force: false}.merge(options)
       @files = File.join(@backup_dir, "**", "*")
     end
@@ -36,12 +36,12 @@ module Yabu
 		
 		def copy_file_to_computer from, to
 			FileUtils.cp from, to
-			@log.info "Restored #{to}"
+			log_info "Restored #{to}"
 		end
 		
 		def create_dir_on_computer name
 			FileUtils.mkdir name
-			@log.info "Created dir #{name}"
+			log_info "Created dir #{name}"
 		end
     
   end

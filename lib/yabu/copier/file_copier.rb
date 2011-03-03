@@ -4,9 +4,9 @@ module Yabu
 
 	# Copy one regular file, not a directory, not a symbolic link, etc.
 	class FileCopier
-  
+    include Loggable
+    
     def initialize
-			@log = Log.instance
     end
     
 		# @param [String] source the source path
@@ -15,7 +15,7 @@ module Yabu
 			if File.file?(source)
 				copy_regular source, dest
 			else
-				@log.error "Yabu do not know what to do with #{source}"
+				log_error "Yabu do not know what to do with #{source}"
         false
 			end
 		end
@@ -25,10 +25,10 @@ module Yabu
     def copy_regular source, dest
       begin
         FileUtils.cp(source, dest)
-        @log.debug "Copied #{source} to #{dest}"
+        log_debug "Copied #{source} to #{dest}"
         true
       rescue
-        @log.error "Cannot copy #{source} to #{dest}"
+        log_error "Cannot copy #{source} to #{dest}"
         false
       end
     end
