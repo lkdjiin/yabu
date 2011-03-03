@@ -4,7 +4,7 @@ module Yabu
   
   # Install config files and version file in user's home
   # @since 0.6
-  module Install
+  module Installer
   
     # Do we need to install some config files in the user's home folder ? 
     def Install.needed?

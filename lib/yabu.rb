@@ -20,7 +20,7 @@ require "yabu/recovery/recovery"
 require "yabu/recovery/files_restorer"
 
 require "yabu/main"
-require "yabu/install"
+require "yabu/installer"
 require "yabu/help"
 
 
