@@ -45,18 +45,10 @@ module Yabu
   private
 
     def define_switches opts
-      opts.on( '-v', '--version', 'Print version number and exit' ) do
-        @options[:version] = true
-      end
-      opts.on( '-l', '--license', 'Print program\'s license and exit' ) do
-        @options[:license] = true
-      end
-      opts.on( '-t', '--test', 'Log all' ) do
-        @options[:test] = true
-      end
-      opts.on( '-f', '--force', 'Force to recover ALL files' ) do
-        @options[:force] = true
-      end
+      opts.on( '-v', '--version', 'Print version number and exit' ) { @options[:version] = true }
+      opts.on( '-l', '--license', 'Print program\'s license and exit' ) { @options[:license] = true }
+      opts.on( '-t', '--test', 'Log all' ) { @options[:test] = true }
+      opts.on( '-f', '--force', 'Force to recover ALL files' ) { @options[:force] = true }
       opts.on( '-h', '--help', 'Display this screen' ) do
         puts opts
         exit

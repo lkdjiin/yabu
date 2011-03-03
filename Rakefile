@@ -17,7 +17,10 @@ end
 desc 'Check for code smells'
 task :reek do
   puts 'Checking for code smells...'
-  sh "reek --quiet lib | ./reek.sed"
+  files = Dir.glob 'lib/**/*.rb'
+  files.delete "lib/yabu/options.rb"
+  args = files.join(' ')
+  sh "reek --quiet #{args} | ./reek.sed"
 end
 
 # Build & Install
