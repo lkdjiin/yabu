@@ -1,7 +1,11 @@
 module Yabu
 	
 	# I am the main class of the Yabu application.
-  # @todo define better the goal of this class
+  # @todo define better the goal of this class.
+  #   Currently Main does 2 things:
+  #   - configure the log
+  #   - launch a command
+  #   It's too much !
 	class Main
 
 		# Default constructor
@@ -43,7 +47,7 @@ module Yabu
 
 		# Start the backup process.
 		def start_to_backup
-			errors = Backup.new.run
+			errors = Backup.new.full
 			BackupDeletor.new.run
 			unless errors.zero?
 				puts "!!! #{errors} error(s) during copy process. See the log file !!!"
