@@ -6,20 +6,19 @@ module Yabu
 	# I do what the Logger class do, with two more things :
 	# * singleton pattern
 	# * fatal level of logging acts normaly but then puts its message to the screen and exit. 
+  #
+  # @note It seems to me that an hidden file in
+  #   user's home folder is currently the best idea
+  #   for the log file. Am I right ?
 	class Log < Logger
 		private_class_method :new
 		
 		@@logger = nil
-		# The default path to log file.
-		# @note It seems to me that an hidden file in
-		#   user's home folder is currently the best idea. Am I right ?
-		@@default_filename = File.join(ENV['HOME'], '.yabu.log')
-		
-		# @param [String] filename (Optional) log's file name
-		# @param [String] frequency_rotation (Optional) 'daily', 'weekly' or 'monthly'
+
+		# @param [String] frequency_rotation 'daily', 'weekly' or 'monthly'
 		# @return [Log] always the same instance.
 		# @todo an options hash would be better than default arguments
-		def Log.instance(filename = @@default_filename, frequency_rotation = 'weekly')
+		def Log.instance(filename = File.join(ENV['HOME'], '.yabu.log'), frequency_rotation = 'weekly')
 			@@logger = new(filename, frequency_rotation) unless @@logger
 			@@logger
 		end
