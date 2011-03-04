@@ -6,7 +6,6 @@ module Yabu
 
   # I parse the command line.
   class Options
-    attr_reader :options
     # Here is a list of command line options :
     # * --force
     # * --version

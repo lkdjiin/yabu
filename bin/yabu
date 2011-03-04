@@ -35,7 +35,9 @@ end
 t1 = Time.now
 
 # Backup (or recover)
-main = Yabu::Main.new
+options = Options.new
+Log.instance.level = Log::INFO unless options[:test]
+main = Yabu::Main.new(options, CommandParser.new)
 main.run
 
 # End of program, calculate and write elapsed time.

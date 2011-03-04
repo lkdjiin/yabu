@@ -2,26 +2,19 @@ module Yabu
 	
 	# I am the main class of the Yabu application.
   # @todo define better the goal of this class.
-  #   Currently Main does 2 things:
-  #   - configure the log
-  #   - launch a command
-  #   It's too much !
 	class Main
 
 		# Default constructor
-		def initialize
-			@opt = Options.new
-			yabu_config = YabuConfig.new
-      @log = Log.instance('yabu.log', yabu_config['logRotation'])
-			@log.level = Log::INFO unless @opt[:test]
-      @command = CommandParser.new
-			check_if_user_seeking_help
+		def initialize options, command
+			@options = options
+      @command = command
+			check_if_user_want_help
 		end
 		
 		# Start the backup process or the recover process.
 		def run
 			if @command.recover?
-				start_to_recover
+				Recovery.new.run @options
 			elsif @command.backup?
 				start_to_backup
 			else
@@ -32,7 +25,7 @@ module Yabu
 
 	private
 	
-		def check_if_user_seeking_help
+		def check_if_user_want_help
       if @command.help?
         case @command.sub_command
           when :help then puts Help.help
@@ -52,11 +45,6 @@ module Yabu
 			unless errors.zero?
 				puts "!!! #{errors} error(s) during copy process. See the log file !!!"
 			end
-		end
-		
-		# Start the recovery process.
-		def start_to_recover
-			Recovery.new.run @opt.options
 		end
 
 	end

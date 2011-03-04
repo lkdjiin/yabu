@@ -19,7 +19,7 @@ module Yabu
 		# @param [String] frequency_rotation (Optional) 'daily', 'weekly' or 'monthly'
 		# @return [Log] always the same instance.
 		# @todo an options hash would be better than default arguments
-		def Log.instance(filename = @@default_filename, frequency_rotation = 'monthly')
+		def Log.instance(filename = @@default_filename, frequency_rotation = 'weekly')
 			@@logger = new(filename, frequency_rotation) unless @@logger
 			@@logger
 		end
