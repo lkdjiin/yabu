@@ -1,6 +1,8 @@
 require "yabu/log"
 require "yabu/message"
-require "yabu/options"
+
+require "yabu/cmd_line/options"
+require "yabu/cmd_line/command_parser"
 
 require "yabu/backup/backup"
 require "yabu/backup/backup_deletor"

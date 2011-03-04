@@ -1,22 +1,24 @@
 module Yabu
 	
 	# I am the main class of the Yabu application.
+  # @todo define better the goal of this class
 	class Main
 
 		# Default constructor
 		def initialize
 			@opt = Options.new
-      @log = Log.instance('yabu.log', yabu_config['logRotation'])
 			yabu_config = YabuConfig.new
+      @log = Log.instance('yabu.log', yabu_config['logRotation'])
 			@log.level = Log::INFO unless @opt[:test]
+      @command = CommandParser.new
 			check_if_user_seeking_help
 		end
 		
 		# Start the backup process or the recover process.
 		def run
-			if command_recover?
+			if @command.recover?
 				start_to_recover
-			elsif command_backup?
+			elsif @command.backup?
 				start_to_backup
 			else
 				puts "Unknown command"
@@ -25,29 +27,18 @@ module Yabu
 		end
 
 	private
-  
-    def command_recover?
-      ARGV.size == 1 and ARGV[0] == 'recover'
-    end
-    
-    def command_backup?
-      size = ARGV.size
-      (size == 0) or (size == 1 and ARGV[0] == 'backup')
-    end
 	
 		def check_if_user_seeking_help
-			return if ARGV.empty?
-      which_cmd = ARGV[1]
-			if ARGV[0] == 'help'
-				case which_cmd
-					when 'help' then puts Help.help
-					when 'recover' then puts Help.recover
-					when 'backup' then puts Help.backup
+      if @command.help?
+        case @command.sub_command
+          when :help then puts Help.help
+					when :recover then puts Help.recover
+					when :backup then puts Help.backup
 					else
-						puts "yabu: unknown command #{which_cmd}"
-				end
-				exit
-			end
+						puts "yabu: unknown sub-command"
+        end
+        exit
+      end
 		end
 
 		# Start the backup process.
